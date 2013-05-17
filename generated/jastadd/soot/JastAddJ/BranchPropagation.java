@@ -19,9 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
-  * @ast interface
- * 
+ * @ast interface
+ * @declaredat :0
  */
 public interface BranchPropagation {
 public void collectBranches(Collection c);

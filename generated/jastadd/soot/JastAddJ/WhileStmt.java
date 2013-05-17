@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production WhileStmt : {@link BranchTargetStmt} ::= <span class="component">Condition:{@link Expr}</span> <span class="component">{@link Stmt}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:208
+ * @declaredat java.ast:205
  */
 public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
@@ -86,33 +85,18 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public WhileStmt fullCopy() {
-    try {
-      WhileStmt tree = (WhileStmt) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    WhileStmt res = (WhileStmt)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -157,7 +141,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public WhileStmt() {
     super();
@@ -165,19 +149,8 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public WhileStmt(Expr p0, Stmt p1) {
     setChild(p0, 0);
@@ -186,7 +159,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   protected int numChildren() {
     return 2;
@@ -194,69 +167,59 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Condition child.
-   * @param node The new node to replace the Condition child.
+   * Setter for Condition
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setCondition(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Condition child.
-   * @return The current node used as the Condition child.
+   * Getter for Condition
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getCondition() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the Condition child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Condition child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getConditionNoTransform() {
     return (Expr)getChildNoTransform(0);
   }
   /**
-   * Replaces the Stmt child.
-   * @param node The new node to replace the Stmt child.
+   * Setter for Stmt
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setStmt(Stmt node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the Stmt child.
-   * @return The current node used as the Stmt child.
+   * Getter for Stmt
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Stmt getStmt() {
     return (Stmt)getChild(1);
   }
   /**
-   * Retrieves the Stmt child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Stmt child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Stmt getStmtNoTransform() {
     return (Stmt)getChildNoTransform(1);
@@ -274,11 +237,11 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(targetOf_ContinueStmt_values.containsKey(_parameters)) {
       return ((Boolean)targetOf_ContinueStmt_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean targetOf_ContinueStmt_value = targetOf_compute(stmt);
-      if(isFinal && num == state().boundariesCrossed) targetOf_ContinueStmt_values.put(_parameters, Boolean.valueOf(targetOf_ContinueStmt_value));
+if(isFinal && num == state().boundariesCrossed) targetOf_ContinueStmt_values.put(_parameters, Boolean.valueOf(targetOf_ContinueStmt_value));
     return targetOf_ContinueStmt_value;
   }
   /**
@@ -298,11 +261,11 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(targetOf_BreakStmt_values.containsKey(_parameters)) {
       return ((Boolean)targetOf_BreakStmt_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean targetOf_BreakStmt_value = targetOf_compute(stmt);
-      if(isFinal && num == state().boundariesCrossed) targetOf_BreakStmt_values.put(_parameters, Boolean.valueOf(targetOf_BreakStmt_value));
+if(isFinal && num == state().boundariesCrossed) targetOf_BreakStmt_values.put(_parameters, Boolean.valueOf(targetOf_BreakStmt_value));
     return targetOf_BreakStmt_value;
   }
   /**
@@ -313,7 +276,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:576
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:575
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafter(Variable v) {
@@ -322,11 +285,11 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(isDAafter_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDAafter_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDAafter_Variable_value = isDAafter_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDAafter_Variable_values.put(_parameters, Boolean.valueOf(isDAafter_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDAafter_Variable_values.put(_parameters, Boolean.valueOf(isDAafter_Variable_value));
     return isDAafter_Variable_value;
   }
   /**
@@ -346,7 +309,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1032
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1031
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafter(Variable v) {
@@ -355,11 +318,11 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(isDUafter_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDUafter_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDUafter_Variable_value = isDUafter_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDUafter_Variable_values.put(_parameters, Boolean.valueOf(isDUafter_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDUafter_Variable_values.put(_parameters, Boolean.valueOf(isDUafter_Variable_value));
     return isDUafter_Variable_value;
   }
   /**
@@ -381,7 +344,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1049
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1048
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUbeforeCondition(Variable v) {
@@ -417,7 +380,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
         }
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
         isDUbeforeCondition_Variable_values.put(_parameters, new_isDUbeforeCondition_Variable_value);
       }
       else {
@@ -464,14 +427,18 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:401
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:403
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean continueLabel() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean continueLabel_value = continueLabel_compute();
+    return continueLabel_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean continueLabel_compute() {  return true;  }
   /**
    * @apilevel internal
    */
@@ -490,11 +457,11 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(canCompleteNormally_computed) {
       return canCompleteNormally_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     canCompleteNormally_value = canCompleteNormally_compute();
-      if(isFinal && num == state().boundariesCrossed) canCompleteNormally_computed = true;
+if(isFinal && num == state().boundariesCrossed) canCompleteNormally_computed = true;
     return canCompleteNormally_value;
   }
   /**
@@ -504,14 +471,18 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect BooleanExpressions
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:21
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:33
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean definesLabel() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean definesLabel_value = definesLabel_compute();
+    return definesLabel_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean definesLabel_compute() {  return true;  }
   /**
    * @apilevel internal
    */
@@ -530,11 +501,11 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(cond_label_computed) {
       return cond_label_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     cond_label_value = cond_label_compute();
-      if(isFinal && num == state().boundariesCrossed) cond_label_computed = true;
+if(isFinal && num == state().boundariesCrossed) cond_label_computed = true;
     return cond_label_value;
   }
   /**
@@ -559,11 +530,11 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(end_label_computed) {
       return end_label_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     end_label_value = end_label_compute();
-      if(isFinal && num == state().boundariesCrossed) end_label_computed = true;
+if(isFinal && num == state().boundariesCrossed) end_label_computed = true;
     return end_label_value;
   }
   /**
@@ -588,11 +559,11 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(stmt_label_computed) {
       return stmt_label_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     stmt_label_value = stmt_label_compute();
-      if(isFinal && num == state().boundariesCrossed) stmt_label_computed = true;
+if(isFinal && num == state().boundariesCrossed) stmt_label_computed = true;
     return stmt_label_value;
   }
   /**
@@ -602,63 +573,58 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect Statements
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:200
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:204
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public soot.jimple.Stmt break_label() {
-    ASTNode$State state = state();
-    try {  return end_label();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    soot.jimple.Stmt break_label_value = break_label_compute();
+    return break_label_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private soot.jimple.Stmt break_label_compute() {  return end_label();  }
   /**
    * @attribute syn
    * @aspect Statements
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:225
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:229
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public soot.jimple.Stmt continue_label() {
-    ASTNode$State state = state();
-    try {  return cond_label();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    soot.jimple.Stmt continue_label_value = continue_label_compute();
+    return continue_label_value;
   }
   /**
-   * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/PreciseRethrow.jrag:55
+   * @apilevel internal
    */
-  public boolean modifiedInScope(Variable var) {
-    ASTNode$State state = state();
-    try {  return getStmt().modifiedInScope(var);  }
-    finally {
-    }
-  }
+  private soot.jimple.Stmt continue_label_compute() {  return cond_label();  }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:587
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:586
    * @apilevel internal
    */
   public boolean Define_boolean_isDAbefore(ASTNode caller, ASTNode child, Variable v) {
     if(caller == getStmtNoTransform()) {
       return getCondition().isDAafterTrue(v);
     }
-    else if(caller == getConditionNoTransform()) {
+    if(caller == getConditionNoTransform()) {
       return isDAbefore(v);
     }
-    else {      return getParent().Define_boolean_isDAbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDAbefore(this, caller, v);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1066
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1065
    * @apilevel internal
    */
   public boolean Define_boolean_isDUbefore(ASTNode caller, ASTNode child, Variable v) {
     if(caller == getStmtNoTransform()) {
       return getCondition().isDUafterTrue(v);
     }
-    else if(caller == getConditionNoTransform()) {
+    if(caller == getConditionNoTransform()) {
       return isDUbeforeCondition(v);
     }
-    else {      return getParent().Define_boolean_isDUbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDUbefore(this, caller, v);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:371
@@ -668,8 +634,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(caller == getStmtNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_insideLoop(this, caller);
-    }
+    return getParent().Define_boolean_insideLoop(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/UnreachableStatements.jrag:86
@@ -679,8 +644,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(caller == getStmtNoTransform()) {
       return reachable() && !getCondition().isFalse();
     }
-    else {      return getParent().Define_boolean_reachable(this, caller);
-    }
+    return getParent().Define_boolean_reachable(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/UnreachableStatements.jrag:153
@@ -690,8 +654,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(caller == getStmtNoTransform()) {
       return reachable();
     }
-    else {      return getParent().Define_boolean_reportUnreachable(this, caller);
-    }
+    return getParent().Define_boolean_reportUnreachable(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:40
@@ -701,8 +664,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(caller == getConditionNoTransform()) {
       return end_label();
     }
-    else {      return getParent().Define_soot_jimple_Stmt_condition_false_label(this, caller);
-    }
+    return getParent().Define_soot_jimple_Stmt_condition_false_label(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:41
@@ -712,8 +674,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     if(caller == getConditionNoTransform()) {
       return stmt_label();
     }
-    else {      return getParent().Define_soot_jimple_Stmt_condition_true_label(this, caller);
-    }
+    return getParent().Define_soot_jimple_Stmt_condition_true_label(this, caller);
   }
   /**
    * @apilevel internal

@@ -18,9 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
-  * @ast interface
- * 
+ * @ast interface
+ * @declaredat :0
  */
 public interface ParTypeDecl extends Parameterization {
 
@@ -55,35 +56,35 @@ public void transformation();
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:244
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:224
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isParameterizedType();
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:245
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:225
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isRawType();
   /**
    * @attribute syn
    * @aspect GenericsTypeCheck
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:380
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:353
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean sameArgument(ParTypeDecl decl);
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:577
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:550
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean sameSignature(Access a);
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:612
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:585
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean sameSignature(ArrayList list);

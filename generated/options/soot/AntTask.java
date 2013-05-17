@@ -152,23 +152,6 @@ public class AntTask extends MatchingTask {
             if(arg) addArg("-whole-shimple");
         }
   
-        public void setrbclassload(boolean arg) {
-            if(arg) addArg("-rbclassload");
-        }
-  
-        public void setrbclassload_buildcg(boolean arg) {
-            if(arg) addArg("-rbclassload-buildcg");
-        }
-  
-        public void setrbcl_remap_all(boolean arg) {
-            if(arg) addArg("-rbcl-remap-all");
-        }
-  
-        public void setrbcl_remap_prefix(String arg) {
-            addArg("-rbcl-remap-prefix");
-            addArg(arg);
-        }
-  
         public void setvalidate(boolean arg) {
             if(arg) addArg("-validate");
         }

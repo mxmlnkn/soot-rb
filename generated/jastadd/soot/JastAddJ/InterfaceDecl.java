@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production InterfaceDecl : {@link ReferenceType} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">SuperInterfaceId:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:67
+ * @declaredat java.ast:64
  */
 public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
@@ -98,33 +97,18 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public InterfaceDecl fullCopy() {
-    try {
-      InterfaceDecl tree = (InterfaceDecl) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    InterfaceDecl res = (InterfaceDecl)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect AccessControl
@@ -180,7 +164,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @ast method 
    * @aspect SuperClasses
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:644
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:641
    */
   public Iterator superinterfacesIterator() {
     return new Iterator() {
@@ -241,7 +225,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @ast method 
    * @aspect Generics
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:213
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:193
    */
   public TypeDecl makeGeneric(Signatures.ClassSignature s) {
     if(s.hasFormalTypeParameters()) {
@@ -268,14 +252,14 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @ast method 
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1336
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1230
    */
   public InterfaceDecl substitutedInterfaceDecl(Parameterization parTypeDecl) {
     InterfaceDecl c = new InterfaceDeclSubstituted(
       (Modifiers)getModifiers().fullCopy(),
       getID(),
       getSuperInterfaceIdList().substitute(parTypeDecl),
-     // ES:  new List(),
+      new List(),
       this
     );
     return c;
@@ -350,29 +334,18 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public InterfaceDecl() {
     super();
 
+    setChild(new List(), 1);
+    setChild(new List(), 2);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[3];
-    setChild(new List(), 1);
-    setChild(new List(), 2);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:9
    */
   public InterfaceDecl(Modifiers p0, String p1, List<Access> p2, List<BodyDecl> p3) {
     setChild(p0, 0);
@@ -382,7 +355,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:15
    */
   public InterfaceDecl(Modifiers p0, beaver.Symbol p1, List<Access> p2, List<BodyDecl> p3) {
     setChild(p0, 0);
@@ -393,7 +366,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:24
    */
   protected int numChildren() {
     return 3;
@@ -401,57 +374,49 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:30
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Modifiers child.
-   * @param node The new node to replace the Modifiers child.
+   * Setter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setModifiers(Modifiers node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * @return The current node used as the Modifiers child.
+   * Getter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Modifiers getModifiers() {
     return (Modifiers)getChild(0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Modifiers child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Modifiers getModifiersNoTransform() {
     return (Modifiers)getChildNoTransform(0);
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -461,64 +426,47 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the SuperInterfaceId list.
-   * @param list The new list node to be used as the SuperInterfaceId list.
+   * Setter for SuperInterfaceIdList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setSuperInterfaceIdList(List<Access> list) {
     setChild(list, 1);
   }
   /**
-   * Retrieves the number of children in the SuperInterfaceId list.
-   * @return Number of children in the SuperInterfaceId list.
+   * @return number of children in SuperInterfaceIdList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumSuperInterfaceId() {
     return getSuperInterfaceIdList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the SuperInterfaceId list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the SuperInterfaceId list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumSuperInterfaceIdNoTransform() {
-    return getSuperInterfaceIdListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the SuperInterfaceId list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the SuperInterfaceId list.
+   * Getter for child in list SuperInterfaceIdList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Access getSuperInterfaceId(int i) {
     return (Access)getSuperInterfaceIdList().getChild(i);
   }
   /**
-   * Append an element to the SuperInterfaceId list.
-   * @param node The element to append to the SuperInterfaceId list.
+   * Add element to list SuperInterfaceIdList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addSuperInterfaceId(Access node) {
     List<Access> list = (parent == null || state == null) ? getSuperInterfaceIdListNoTransform() : getSuperInterfaceIdList();
@@ -527,51 +475,44 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addSuperInterfaceIdNoTransform(Access node) {
     List<Access> list = getSuperInterfaceIdListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the SuperInterfaceId list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list SuperInterfaceIdList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setSuperInterfaceId(Access node, int i) {
     List<Access> list = getSuperInterfaceIdList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the SuperInterfaceId list.
-   * @return The node representing the SuperInterfaceId list.
+   * Getter for SuperInterfaceId list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<Access> getSuperInterfaceIds() {
     return getSuperInterfaceIdList();
   }
   /**
-   * Retrieves the SuperInterfaceId list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the SuperInterfaceId list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<Access> getSuperInterfaceIdsNoTransform() {
     return getSuperInterfaceIdListNoTransform();
   }
   /**
-   * Retrieves the SuperInterfaceId list.
-   * @return The node representing the SuperInterfaceId list.
+   * Getter for list SuperInterfaceIdList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getSuperInterfaceIdList() {
@@ -580,66 +521,47 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the SuperInterfaceId list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the SuperInterfaceId list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getSuperInterfaceIdListNoTransform() {
     return (List<Access>)getChildNoTransform(1);
   }
   /**
-   * Replaces the BodyDecl list.
-   * @param list The new list node to be used as the BodyDecl list.
+   * Setter for BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setBodyDeclList(List<BodyDecl> list) {
     setChild(list, 2);
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * @return Number of children in the BodyDecl list.
+   * @return number of children in BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumBodyDecl() {
     return getBodyDeclList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the BodyDecl list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumBodyDeclNoTransform() {
-    return getBodyDeclListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the BodyDecl list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the BodyDecl list.
+   * Getter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BodyDecl getBodyDecl(int i) {
     return (BodyDecl)getBodyDeclList().getChild(i);
   }
   /**
-   * Append an element to the BodyDecl list.
-   * @param node The element to append to the BodyDecl list.
+   * Add element to list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addBodyDecl(BodyDecl node) {
     List<BodyDecl> list = (parent == null || state == null) ? getBodyDeclListNoTransform() : getBodyDeclList();
@@ -648,51 +570,44 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addBodyDeclNoTransform(BodyDecl node) {
     List<BodyDecl> list = getBodyDeclListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the BodyDecl list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setBodyDecl(BodyDecl node, int i) {
     List<BodyDecl> list = getBodyDeclList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for BodyDecl list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<BodyDecl> getBodyDecls() {
     return getBodyDeclList();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<BodyDecl> getBodyDeclsNoTransform() {
     return getBodyDeclListNoTransform();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclList() {
@@ -701,12 +616,9 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclListNoTransform() {
@@ -715,7 +627,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @ast method 
    * @aspect Generics
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:73
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:53
    */
   private boolean refined_Generics_InterfaceDecl_castingConversionTo_TypeDecl(TypeDecl type)
 {
@@ -733,14 +645,18 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructScope
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupConstructor.jrag:21
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupConstructor.jrag:23
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public Collection lookupSuperConstructor() {
-    ASTNode$State state = state();
-    try {  return typeObject().constructors();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    Collection lookupSuperConstructor_value = lookupSuperConstructor_compute();
+    return lookupSuperConstructor_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private Collection lookupSuperConstructor_compute() {  return typeObject().constructors();  }
   /**
    * @apilevel internal
    */
@@ -759,11 +675,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(methodsSignatureMap_computed) {
       return methodsSignatureMap_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     methodsSignatureMap_value = methodsSignatureMap_compute();
-      if(isFinal && num == state().boundariesCrossed) methodsSignatureMap_computed = true;
+if(isFinal && num == state().boundariesCrossed) methodsSignatureMap_computed = true;
     return methodsSignatureMap_value;
   }
   /**
@@ -800,11 +716,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(ancestorMethods_String_values.containsKey(_parameters)) {
       return (SimpleSet)ancestorMethods_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet ancestorMethods_String_value = ancestorMethods_compute(signature);
-      if(isFinal && num == state().boundariesCrossed) ancestorMethods_String_values.put(_parameters, ancestorMethods_String_value);
+if(isFinal && num == state().boundariesCrossed) ancestorMethods_String_values.put(_parameters, ancestorMethods_String_value);
     return ancestorMethods_String_value;
   }
   /**
@@ -832,7 +748,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:520
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:432
    */
   @SuppressWarnings({"unchecked", "cast"})
   public SimpleSet memberTypes(String name) {
@@ -841,11 +757,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(memberTypes_String_values.containsKey(_parameters)) {
       return (SimpleSet)memberTypes_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet memberTypes_String_value = memberTypes_compute(name);
-      if(isFinal && num == state().boundariesCrossed) memberTypes_String_values.put(_parameters, memberTypes_String_value);
+if(isFinal && num == state().boundariesCrossed) memberTypes_String_values.put(_parameters, memberTypes_String_value);
     return memberTypes_String_value;
   }
   /**
@@ -882,11 +798,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(memberFieldsMap_computed) {
       return memberFieldsMap_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     memberFieldsMap_value = memberFieldsMap_compute();
-      if(isFinal && num == state().boundariesCrossed) memberFieldsMap_computed = true;
+if(isFinal && num == state().boundariesCrossed) memberFieldsMap_computed = true;
     return memberFieldsMap_value;
   }
   /**
@@ -918,11 +834,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(memberFields_String_values.containsKey(_parameters)) {
       return (SimpleSet)memberFields_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet memberFields_String_value = memberFields_compute(name);
-      if(isFinal && num == state().boundariesCrossed) memberFields_String_values.put(_parameters, memberFields_String_value);
+if(isFinal && num == state().boundariesCrossed) memberFields_String_values.put(_parameters, memberFields_String_value);
     return memberFields_String_value;
   }
   /**
@@ -946,14 +862,18 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/Modifiers.jrag:204
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/Modifiers.jrag:205
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isAbstract() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isAbstract_value = isAbstract_compute();
+    return isAbstract_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isAbstract_compute() {  return true;  }
   /**
    * @apilevel internal
    */
@@ -972,11 +892,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(isStatic_computed) {
       return isStatic_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     isStatic_value = isStatic_compute();
-      if(isFinal && num == state().boundariesCrossed) isStatic_computed = true;
+if(isFinal && num == state().boundariesCrossed) isStatic_computed = true;
     return isStatic_value;
   }
   /**
@@ -996,11 +916,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(castingConversionTo_TypeDecl_values.containsKey(_parameters)) {
       return ((Boolean)castingConversionTo_TypeDecl_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean castingConversionTo_TypeDecl_value = castingConversionTo_compute(type);
-      if(isFinal && num == state().boundariesCrossed) castingConversionTo_TypeDecl_values.put(_parameters, Boolean.valueOf(castingConversionTo_TypeDecl_value));
+if(isFinal && num == state().boundariesCrossed) castingConversionTo_TypeDecl_values.put(_parameters, Boolean.valueOf(castingConversionTo_TypeDecl_value));
     return castingConversionTo_TypeDecl_value;
   }
   /**
@@ -1023,14 +943,18 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:211
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:212
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isInterfaceDecl() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isInterfaceDecl_value = isInterfaceDecl_compute();
+    return isInterfaceDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isInterfaceDecl_compute() {  return true;  }
   protected java.util.Map instanceOf_TypeDecl_values;
   /**
    * @attribute syn
@@ -1044,11 +968,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(instanceOf_TypeDecl_values.containsKey(_parameters)) {
       return ((Boolean)instanceOf_TypeDecl_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean instanceOf_TypeDecl_value = instanceOf_compute(type);
-      if(isFinal && num == state().boundariesCrossed) instanceOf_TypeDecl_values.put(_parameters, Boolean.valueOf(instanceOf_TypeDecl_value));
+if(isFinal && num == state().boundariesCrossed) instanceOf_TypeDecl_values.put(_parameters, Boolean.valueOf(instanceOf_TypeDecl_value));
     return instanceOf_TypeDecl_value;
   }
   /**
@@ -1058,11 +982,18 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:423
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:429
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isSupertypeOfClassDecl(ClassDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean isSupertypeOfClassDecl_ClassDecl_value = isSupertypeOfClassDecl_compute(type);
+    return isSupertypeOfClassDecl_ClassDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isSupertypeOfClassDecl_compute(ClassDecl type) {
     if(super.isSupertypeOfClassDecl(type))
       return true;
     for(Iterator iter = type.interfacesIterator(); iter.hasNext(); ) {
@@ -1072,17 +1003,21 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     }
     return type.hasSuperclass() && type.superclass() != null && type.superclass().instanceOf(this);
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:440
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:442
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isSupertypeOfInterfaceDecl(InterfaceDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean isSupertypeOfInterfaceDecl_InterfaceDecl_value = isSupertypeOfInterfaceDecl_compute(type);
+    return isSupertypeOfInterfaceDecl_InterfaceDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isSupertypeOfInterfaceDecl_compute(InterfaceDecl type) {
     if(super.isSupertypeOfInterfaceDecl(type))
       return true;
     for(Iterator iter = type.superinterfacesIterator(); iter.hasNext(); ) {
@@ -1092,17 +1027,21 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     }
     return false;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:453
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:459
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isSupertypeOfArrayDecl(ArrayDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean isSupertypeOfArrayDecl_ArrayDecl_value = isSupertypeOfArrayDecl_compute(type);
+    return isSupertypeOfArrayDecl_ArrayDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isSupertypeOfArrayDecl_compute(ArrayDecl type) {
     if(super.isSupertypeOfArrayDecl(type))
       return true;
     for(Iterator iter = type.interfacesIterator(); iter.hasNext(); ) {
@@ -1111,9 +1050,6 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
         return true;
     }
     return false;
-  }
-    finally {
-    }
   }
   /**
    * @apilevel internal
@@ -1134,7 +1070,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect Circularity
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:696
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:693
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isCircular() {
@@ -1159,7 +1095,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
         isCircular_value = new_isCircular_value; 
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
       isCircular_computed = true;
       }
       else {
@@ -1213,18 +1149,18 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsTypeCheck
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:411
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:384
    */
   @SuppressWarnings({"unchecked", "cast"})
   public HashSet implementedInterfaces() {
     if(implementedInterfaces_computed) {
       return implementedInterfaces_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     implementedInterfaces_value = implementedInterfaces_compute();
-      if(isFinal && num == state().boundariesCrossed) implementedInterfaces_computed = true;
+if(isFinal && num == state().boundariesCrossed) implementedInterfaces_computed = true;
     return implementedInterfaces_value;
   }
   /**
@@ -1280,7 +1216,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
         }
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
         subtype_TypeDecl_values.put(_parameters, new_subtype_TypeDecl_value);
       }
       else {
@@ -1313,11 +1249,18 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:421
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:426
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeClassDecl(ClassDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean supertypeClassDecl_ClassDecl_value = supertypeClassDecl_compute(type);
+    return supertypeClassDecl_ClassDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeClassDecl_compute(ClassDecl type) {
     if(super.supertypeClassDecl(type))
       return true;
     for(Iterator iter = type.interfacesIterator(); iter.hasNext(); ) {
@@ -1327,17 +1270,21 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     }
     return type.hasSuperclass() && type.superclass() != null && type.superclass().subtype(this);
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:437
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:439
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeInterfaceDecl(InterfaceDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean supertypeInterfaceDecl_InterfaceDecl_value = supertypeInterfaceDecl_compute(type);
+    return supertypeInterfaceDecl_InterfaceDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeInterfaceDecl_compute(InterfaceDecl type) {
     if(super.supertypeInterfaceDecl(type))
       return true;
     for(Iterator iter = type.superinterfacesIterator(); iter.hasNext(); ) {
@@ -1347,17 +1294,21 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     }
     return false;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:450
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:456
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeArrayDecl(ArrayDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean supertypeArrayDecl_ArrayDecl_value = supertypeArrayDecl_compute(type);
+    return supertypeArrayDecl_ArrayDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeArrayDecl_compute(ArrayDecl type) {
     if(super.supertypeArrayDecl(type))
       return true;
     for(Iterator iter = type.interfacesIterator(); iter.hasNext(); ) {
@@ -1366,9 +1317,6 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
         return true;
     }
     return false;
-  }
-    finally {
-    }
   }
   /**
    * @apilevel internal
@@ -1388,11 +1336,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     if(sootClass_computed) {
       return sootClass_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     sootClass_value = sootClass_compute();
-      if(isFinal && num == state().boundariesCrossed) sootClass_computed = true;
+if(isFinal && num == state().boundariesCrossed) sootClass_computed = true;
     return sootClass_value;
   }
   /**
@@ -1408,36 +1356,48 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect EmitJimple
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/EmitJimple.jrag:90
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/EmitJimple.jrag:105
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public int sootTypeModifiers() {
-    ASTNode$State state = state();
-    try {  return super.sootTypeModifiers() | soot.Modifier.INTERFACE;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    int sootTypeModifiers_value = sootTypeModifiers_compute();
+    return sootTypeModifiers_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private int sootTypeModifiers_compute() {  return super.sootTypeModifiers() | soot.Modifier.INTERFACE;  }
   /**
    * @attribute syn
    * @aspect AnnotationsCodegen
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/AnnotationsCodegen.jrag:322
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/AnnotationsCodegen.jrag:324
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String typeDescriptor() {
-    ASTNode$State state = state();
-    try {  return "L" + jvmName().replace('.', '/') + ";";  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String typeDescriptor_value = typeDescriptor_compute();
+    return typeDescriptor_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String typeDescriptor_compute() {  return "L" + jvmName().replace('.', '/') + ";";  }
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/GenericsCodegen.jrag:333
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/GenericsCodegen.jrag:334
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public SimpleSet bridgeCandidates(String signature) {
-    ASTNode$State state = state();
-    try {  return ancestorMethods(signature);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    SimpleSet bridgeCandidates_String_value = bridgeCandidates_compute(signature);
+    return bridgeCandidates_String_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private SimpleSet bridgeCandidates_compute(String signature) {  return ancestorMethods(signature);  }
   /**
    * @attribute inh
    * @aspect TypeConversion
@@ -1445,7 +1405,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public MethodDecl unknownMethod() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     MethodDecl unknownMethod_value = getParent().Define_MethodDecl_unknownMethod(this, null);
     return unknownMethod_value;
   }
@@ -1458,11 +1418,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return NameType.TYPE_NAME;
     }
-    else {      return super.Define_NameType_nameType(caller, child);
-    }
+    return super.Define_NameType_nameType(caller, child);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:580
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:577
    * @apilevel internal
    */
   public TypeDecl Define_TypeDecl_hostType(ASTNode caller, ASTNode child) {
@@ -1470,8 +1429,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return hostType();
     }
-    else {      return super.Define_TypeDecl_hostType(caller, child);
-    }
+    return super.Define_TypeDecl_hostType(caller, child);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:278
@@ -1482,8 +1440,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return hasAnnotationSuppressWarnings(s) || withinSuppressWarnings(s);
     }
-    else {      return super.Define_boolean_withinSuppressWarnings(caller, child, s);
-    }
+    return super.Define_boolean_withinSuppressWarnings(caller, child, s);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:378
@@ -1494,20 +1451,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return isDeprecated() || withinDeprecatedAnnotation();
     }
-    else {      return super.Define_boolean_withinDeprecatedAnnotation(caller, child);
-    }
-  }
-  /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:270
-   * @apilevel internal
-   */
-  public boolean Define_boolean_inExtendsOrImplements(ASTNode caller, ASTNode child) {
-    if(caller == getSuperInterfaceIdListNoTransform()) {
-      int childIndex = caller.getIndexOfChild(child);
-      return true;
-    }
-    else {      return getParent().Define_boolean_inExtendsOrImplements(this, caller);
-    }
+    return super.Define_boolean_withinDeprecatedAnnotation(caller, child);
   }
   /**
    * @apilevel internal

@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production PostfixExpr : {@link Unary};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:146
+ * @declaredat java.ast:143
  */
 public abstract class PostfixExpr extends Unary implements Cloneable {
   /**
@@ -63,7 +62,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
   /**
    * @ast method 
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:471
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:470
    */
   protected boolean checkDUeverywhere(Variable v) {
     if(getOperand().isVariable() && getOperand().varDecl() == v)
@@ -84,7 +83,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public PostfixExpr() {
     super();
@@ -92,19 +91,8 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[1];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public PostfixExpr(Expr p0) {
     setChild(p0, 0);
@@ -112,7 +100,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:13
    */
   protected int numChildren() {
     return 1;
@@ -120,38 +108,33 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Operand child.
-   * @param node The new node to replace the Operand child.
+   * Setter for Operand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setOperand(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Operand child.
-   * @return The current node used as the Operand child.
+   * Getter for Operand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getOperand() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the Operand child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Operand child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getOperandNoTransform() {
     return (Expr)getChildNoTransform(0);
@@ -164,8 +147,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     if(caller == getOperandNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_isDest(this, caller);
-    }
+    return getParent().Define_boolean_isDest(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:53
@@ -175,8 +157,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     if(caller == getOperandNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_isIncOrDec(this, caller);
-    }
+    return getParent().Define_boolean_isIncOrDec(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:98
@@ -186,8 +167,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     if(caller == getOperandNoTransform()) {
       return NameType.EXPRESSION_NAME;
     }
-    else {      return getParent().Define_NameType_nameType(this, caller);
-    }
+    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @apilevel internal

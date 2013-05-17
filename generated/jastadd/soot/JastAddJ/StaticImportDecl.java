@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,11 +18,11 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
  * 7.5 Import Declarations
- * @production StaticImportDecl : {@link ImportDecl};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/StaticImports.ast:4
+ * @declaredat StaticImports.ast:4
  */
 public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
   /**
@@ -56,7 +55,7 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat StaticImports.ast:1
    */
   public StaticImportDecl() {
     super();
@@ -64,19 +63,8 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[1];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat StaticImports.ast:7
    */
   public StaticImportDecl(Access p0) {
     setChild(p0, 0);
@@ -84,7 +72,7 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat StaticImports.ast:13
    */
   protected int numChildren() {
     return 1;
@@ -92,38 +80,33 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat StaticImports.ast:19
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Access child.
-   * @param node The new node to replace the Access child.
+   * Setter for Access
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setAccess(Access node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Access child.
-   * @return The current node used as the Access child.
+   * Getter for Access
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Access getAccess() {
     return (Access)getChild(0);
   }
   /**
-   * Retrieves the Access child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Access child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Access getAccessNoTransform() {
     return (Access)getChildNoTransform(0);
@@ -150,11 +133,11 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
     if(importedTypes_String_values.containsKey(_parameters)) {
       return (SimpleSet)importedTypes_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet importedTypes_String_value = importedTypes_compute(name);
-      if(isFinal && num == state().boundariesCrossed) importedTypes_String_values.put(_parameters, importedTypes_String_value);
+if(isFinal && num == state().boundariesCrossed) importedTypes_String_values.put(_parameters, importedTypes_String_value);
     return importedTypes_String_value;
   }
   /**
@@ -182,11 +165,11 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
     if(importedFields_String_values.containsKey(_parameters)) {
       return (SimpleSet)importedFields_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet importedFields_String_value = importedFields_compute(name);
-      if(isFinal && num == state().boundariesCrossed) importedFields_String_values.put(_parameters, importedFields_String_value);
+if(isFinal && num == state().boundariesCrossed) importedFields_String_values.put(_parameters, importedFields_String_value);
     return importedFields_String_value;
   }
   /**
@@ -215,11 +198,11 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
     if(importedMethods_String_values.containsKey(_parameters)) {
       return (Collection)importedMethods_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     Collection importedMethods_String_value = importedMethods_compute(name);
-      if(isFinal && num == state().boundariesCrossed) importedMethods_String_values.put(_parameters, importedMethods_String_value);
+if(isFinal && num == state().boundariesCrossed) importedMethods_String_values.put(_parameters, importedMethods_String_value);
     return importedMethods_String_value;
   }
   /**

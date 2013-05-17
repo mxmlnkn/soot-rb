@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production EnumDecl : {@link ClassDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">[SuperClassAccess:{@link Access}]</span> <span class="component">Implements:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.ast:1
+ * @declaredat Enums.ast:1
  */
 public class EnumDecl extends ClassDecl implements Cloneable {
   /**
@@ -76,38 +75,18 @@ public class EnumDecl extends ClassDecl implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public EnumDecl fullCopy() {
-    try {
-      EnumDecl tree = (EnumDecl) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          switch (i) {
-          case 4:
-            tree.children[i] = new Opt();
-            continue;
-          }
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    EnumDecl res = (EnumDecl)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect Enums
@@ -277,7 +256,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @ast method 
    * @aspect Enums
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:527
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:540
    */
   public void toString(StringBuffer s) {
     getModifiers().toString(s);
@@ -347,7 +326,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * Check that the enum does not contain unimplemented abstract methods.
    * @ast method 
    * @aspect Enums
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:675
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:688
    */
   public void checkModifiers() {
     super.checkModifiers();
@@ -364,51 +343,42 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Enums.ast:1
    */
   public EnumDecl() {
     super();
 
-
-  }
-  /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
-   * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[4];
     setChild(new List(), 1);
     setChild(new List(), 2);
     setChild(new Opt(), 3);
+
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Enums.ast:10
    */
   public EnumDecl(Modifiers p0, String p1, List<Access> p2, List<BodyDecl> p3) {
     setChild(p0, 0);
     setID(p1);
     setChild(p2, 1);
     setChild(p3, 2);
+    setChild(new Opt(), 3);
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Enums.ast:17
    */
   public EnumDecl(Modifiers p0, beaver.Symbol p1, List<Access> p2, List<BodyDecl> p3) {
     setChild(p0, 0);
     setID(p1);
     setChild(p2, 1);
     setChild(p3, 2);
+    setChild(new Opt(), 3);
   }
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:27
    */
   protected int numChildren() {
     return 3;
@@ -416,57 +386,49 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Enums.ast:33
    */
   public boolean mayHaveRewrite() {
     return true;
   }
   /**
-   * Replaces the Modifiers child.
-   * @param node The new node to replace the Modifiers child.
+   * Setter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:5
    */
   public void setModifiers(Modifiers node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * @return The current node used as the Modifiers child.
+   * Getter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:12
    */
   public Modifiers getModifiers() {
     return (Modifiers)getChild(0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Modifiers child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:18
    */
   public Modifiers getModifiersNoTransform() {
     return (Modifiers)getChildNoTransform(0);
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Enums.ast:8
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -476,64 +438,47 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:19
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the Implements list.
-   * @param list The new list node to be used as the Implements list.
+   * Setter for ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:5
    */
   public void setImplementsList(List<Access> list) {
     setChild(list, 1);
   }
   /**
-   * Retrieves the number of children in the Implements list.
-   * @return Number of children in the Implements list.
+   * @return number of children in ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:12
    */
   public int getNumImplements() {
     return getImplementsList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the Implements list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the Implements list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumImplementsNoTransform() {
-    return getImplementsListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the Implements list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the Implements list.
+   * Getter for child in list ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Access getImplements(int i) {
     return (Access)getImplementsList().getChild(i);
   }
   /**
-   * Append an element to the Implements list.
-   * @param node The element to append to the Implements list.
+   * Add element to list ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:27
    */
   public void addImplements(Access node) {
     List<Access> list = (parent == null || state == null) ? getImplementsListNoTransform() : getImplementsList();
@@ -542,51 +487,44 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:34
    */
   public void addImplementsNoTransform(Access node) {
     List<Access> list = getImplementsListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the Implements list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:42
    */
   public void setImplements(Access node, int i) {
     List<Access> list = getImplementsList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the Implements list.
-   * @return The node representing the Implements list.
+   * Getter for Implements list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:50
    */
   public List<Access> getImplementss() {
     return getImplementsList();
   }
   /**
-   * Retrieves the Implements list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Implements list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:56
    */
   public List<Access> getImplementssNoTransform() {
     return getImplementsListNoTransform();
   }
   /**
-   * Retrieves the Implements list.
-   * @return The node representing the Implements list.
+   * Getter for list ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getImplementsList() {
@@ -595,66 +533,47 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the Implements list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Implements list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getImplementsListNoTransform() {
     return (List<Access>)getChildNoTransform(1);
   }
   /**
-   * Replaces the BodyDecl list.
-   * @param list The new list node to be used as the BodyDecl list.
+   * Setter for BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:5
    */
   public void setBodyDeclList(List<BodyDecl> list) {
     setChild(list, 2);
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * @return Number of children in the BodyDecl list.
+   * @return number of children in BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:12
    */
   public int getNumBodyDecl() {
     return getBodyDeclList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the BodyDecl list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumBodyDeclNoTransform() {
-    return getBodyDeclListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the BodyDecl list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the BodyDecl list.
+   * Getter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BodyDecl getBodyDecl(int i) {
     return (BodyDecl)getBodyDeclList().getChild(i);
   }
   /**
-   * Append an element to the BodyDecl list.
-   * @param node The element to append to the BodyDecl list.
+   * Add element to list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:27
    */
   public void addBodyDecl(BodyDecl node) {
     List<BodyDecl> list = (parent == null || state == null) ? getBodyDeclListNoTransform() : getBodyDeclList();
@@ -663,51 +582,44 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:34
    */
   public void addBodyDeclNoTransform(BodyDecl node) {
     List<BodyDecl> list = getBodyDeclListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the BodyDecl list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:42
    */
   public void setBodyDecl(BodyDecl node, int i) {
     List<BodyDecl> list = getBodyDeclList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for BodyDecl list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:50
    */
   public List<BodyDecl> getBodyDecls() {
     return getBodyDeclList();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:56
    */
   public List<BodyDecl> getBodyDeclsNoTransform() {
     return getBodyDeclListNoTransform();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclList() {
@@ -716,76 +628,64 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclListNoTransform() {
     return (List<BodyDecl>)getChildNoTransform(2);
   }
   /**
-   * Replaces the optional node for the SuperClassAccess child. This is the {@code Opt} node containing the child SuperClassAccess, not the actual child!
-   * @param opt The new node to be used as the optional node for the SuperClassAccess child.
+   * Setter for SuperClassAccessOpt
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:5
    */
   public void setSuperClassAccessOpt(Opt<Access> opt) {
     setChild(opt, 3);
   }
   /**
-   * Check whether the optional SuperClassAccess child exists.
-   * @return {@code true} if the optional SuperClassAccess child exists, {@code false} if it does not.
+   * Does this node have a SuperClassAccess child?
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:12
    */
   public boolean hasSuperClassAccess() {
     return getSuperClassAccessOpt().getNumChild() != 0;
   }
   /**
-   * Retrieves the (optional) SuperClassAccess child.
-   * @return The SuperClassAccess child, if it exists. Returns {@code null} otherwise.
-   * @apilevel low-level
+   * Getter for optional child SuperClassAccess
+   * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Access getSuperClassAccess() {
     return (Access)getSuperClassAccessOpt().getChild(0);
   }
   /**
-   * Replaces the (optional) SuperClassAccess child.
-   * @param node The new node to be used as the SuperClassAccess child.
+   * Setter for optional child SuperClassAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:27
    */
   public void setSuperClassAccess(Access node) {
     getSuperClassAccessOpt().setChild(node, 0);
   }
   /**
-   * Retrieves the optional node for child SuperClassAccess. This is the {@code Opt} node containing the child SuperClassAccess, not the actual child!
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The optional node for child SuperClassAccess.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:33
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Access> getSuperClassAccessOptNoTransform() {
     return (Opt<Access>)getChildNoTransform(3);
   }
   /**
-   * Retrieves the child position of the optional child SuperClassAccess.
-   * @return The the child position of the optional child SuperClassAccess.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Enums.ast:40
    */
   protected int getSuperClassAccessOptChildPosition() {
     return 3;
@@ -795,27 +695,35 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   primitive types, String, Class and any invocation of Class, an enum type
   (\u00df8.9), an annotation type, or an array (\u00df10) of one of the preceding types.* @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:121
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:132
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isValidAnnotationMethodReturnType() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isValidAnnotationMethodReturnType_value = isValidAnnotationMethodReturnType_compute();
+    return isValidAnnotationMethodReturnType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isValidAnnotationMethodReturnType_compute() {  return true;  }
   /* 
      1) It is a compile-time error to attempt to explicitly instantiate an enum type
      (\u00d4\u00f8\u03a915.9.1).
   * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:16
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:17
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isEnumDecl() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isEnumDecl_value = isEnumDecl_compute();
+    return isEnumDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isEnumDecl_compute() {  return true;  }
   /**
    * @apilevel internal
    */
@@ -836,11 +744,11 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     if(isStatic_computed) {
       return isStatic_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     isStatic_value = isStatic_compute();
-      if(isFinal && num == state().boundariesCrossed) isStatic_computed = true;
+if(isFinal && num == state().boundariesCrossed) isStatic_computed = true;
     return isStatic_value;
   }
   /**
@@ -866,12 +774,12 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     if(getSuperClassAccessOpt_computed) {
       return (Opt)ASTNode.getChild(this, getSuperClassAccessOptChildPosition());
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     getSuperClassAccessOpt_value = getSuperClassAccessOpt_compute();
     setSuperClassAccessOpt(getSuperClassAccessOpt_value);
-      if(isFinal && num == state().boundariesCrossed) getSuperClassAccessOpt_computed = true;
+if(isFinal && num == state().boundariesCrossed) getSuperClassAccessOpt_computed = true;
     return (Opt)ASTNode.getChild(this, getSuperClassAccessOptChildPosition());
   }
   /**
@@ -888,14 +796,25 @@ public class EnumDecl extends ClassDecl implements Cloneable {
       )
     );
   }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/Modifiers.jrag:209
+  /*
+    7) It is a compile-time error for the class body of an enum constant to declare
+    an abstract method.
+
+    TODO: work on error messages
+  * @attribute syn
+   * @aspect Enums
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:283
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isFinal() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean isFinal_value = isFinal_compute();
+    return isFinal_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isFinal_compute() {
     for(Iterator iter = enumConstants().iterator(); iter.hasNext(); ) {
       EnumConstant c = (EnumConstant)iter.next();
       ClassInstanceExpr e = (ClassInstanceExpr)c.getInit();
@@ -903,9 +822,6 @@ public class EnumDecl extends ClassDecl implements Cloneable {
         return false;
     }
     return true;
-  }
-    finally {
-    }
   }
   /**
    * @apilevel internal
@@ -925,11 +841,11 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     if(enumConstants_computed) {
       return enumConstants_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     enumConstants_value = enumConstants_compute();
-      if(isFinal && num == state().boundariesCrossed) enumConstants_computed = true;
+if(isFinal && num == state().boundariesCrossed) enumConstants_computed = true;
     return enumConstants_value;
   }
   /**
@@ -942,14 +858,25 @@ public class EnumDecl extends ClassDecl implements Cloneable {
         list.add(getBodyDecl(i));
     return list;
   }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/Modifiers.jrag:204
+  /*
+    14) It is a compile-time error to reference a static field of an enum type that
+    is not a compile-time constant (\u00d4\u00f8\u03a915.28) from constructors, instance
+    initializer blocks, or instance variable initializer expressions of that
+    type.
+  * @attribute syn
+   * @aspect Enums
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:433
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isAbstract() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean isAbstract_value = isAbstract_compute();
+    return isAbstract_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isAbstract_compute() {
     for (int i = 0; i < getNumBodyDecl(); i++) {
       if (getBodyDecl(i) instanceof MethodDecl) {
         MethodDecl m = (MethodDecl)getBodyDecl(i);
@@ -958,9 +885,6 @@ public class EnumDecl extends ClassDecl implements Cloneable {
       }
     }
     return false;
-  }
-    finally {
-    }
   }
   /**
    * @apilevel internal
@@ -978,18 +902,18 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * constants have class bodies that provide concrete implementations of m.
    * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:623
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:636
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Collection unimplementedMethods() {
     if(unimplementedMethods_computed) {
       return unimplementedMethods_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     unimplementedMethods_value = unimplementedMethods_compute();
-      if(isFinal && num == state().boundariesCrossed) unimplementedMethods_computed = true;
+if(isFinal && num == state().boundariesCrossed) unimplementedMethods_computed = true;
     return unimplementedMethods_value;
   }
   /**
@@ -1045,15 +969,19 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect EmitJimple
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/EmitJimple.jrag:90
+   * @aspect EnumsCodegen
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/EnumsCodegen.jrag:13
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public int sootTypeModifiers() {
-    ASTNode$State state = state();
-    try {  return super.sootTypeModifiers() | Modifiers.ACC_ENUM;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    int sootTypeModifiers_value = sootTypeModifiers_compute();
+    return sootTypeModifiers_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private int sootTypeModifiers_compute() {  return super.sootTypeModifiers() | Modifiers.ACC_ENUM;  }
   /**
    * @attribute inh
    * @aspect Enums
@@ -1061,7 +989,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeString() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeString_value = getParent().Define_TypeDecl_typeString(this, null);
     return typeString_value;
   }
@@ -1073,8 +1001,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     if(caller == getModifiersNoTransform()) {
       return false;
     }
-    else {      return super.Define_boolean_mayBeAbstract(caller, child);
-    }
+    return super.Define_boolean_mayBeAbstract(caller, child);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:40
@@ -1084,8 +1011,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     if(caller == getModifiersNoTransform()) {
       return isNestedType();
     }
-    else {      return super.Define_boolean_mayBeStatic(caller, child);
-    }
+    return super.Define_boolean_mayBeStatic(caller, child);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Enums.jrag:292
@@ -1095,8 +1021,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     if(caller == getModifiersNoTransform()) {
       return false;
     }
-    else {      return super.Define_boolean_mayBeFinal(caller, child);
-    }
+    return super.Define_boolean_mayBeFinal(caller, child);
   }
   /**
    * @apilevel internal

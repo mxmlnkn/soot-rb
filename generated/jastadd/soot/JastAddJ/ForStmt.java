@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ForStmt : {@link BranchTargetStmt} ::= <span class="component">InitStmt:{@link Stmt}*</span> <span class="component">[Condition:{@link Expr}]</span> <span class="component">UpdateStmt:{@link Stmt}*</span> <span class="component">{@link Stmt}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:210
+ * @declaredat java.ast:207
  */
 public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScope {
   /**
@@ -96,33 +95,18 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ForStmt fullCopy() {
-    try {
-      ForStmt tree = (ForStmt) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ForStmt res = (ForStmt)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -229,30 +213,19 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ForStmt() {
     super();
 
-
-  }
-  /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
-   * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[4];
     setChild(new List(), 0);
     setChild(new Opt(), 1);
     setChild(new List(), 2);
+
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:10
    */
   public ForStmt(List<Stmt> p0, Opt<Expr> p1, List<Stmt> p2, Stmt p3) {
     setChild(p0, 0);
@@ -263,7 +236,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   protected int numChildren() {
     return 4;
@@ -271,60 +244,44 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:25
    */
   public boolean mayHaveRewrite() {
     return true;
   }
   /**
-   * Replaces the InitStmt list.
-   * @param list The new list node to be used as the InitStmt list.
+   * Setter for InitStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setInitStmtList(List<Stmt> list) {
     setChild(list, 0);
   }
   /**
-   * Retrieves the number of children in the InitStmt list.
-   * @return Number of children in the InitStmt list.
+   * @return number of children in InitStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumInitStmt() {
     return getInitStmtList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the InitStmt list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the InitStmt list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumInitStmtNoTransform() {
-    return getInitStmtListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the InitStmt list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the InitStmt list.
+   * Getter for child in list InitStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Stmt getInitStmt(int i) {
     return (Stmt)getInitStmtList().getChild(i);
   }
   /**
-   * Append an element to the InitStmt list.
-   * @param node The element to append to the InitStmt list.
+   * Add element to list InitStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addInitStmt(Stmt node) {
     List<Stmt> list = (parent == null || state == null) ? getInitStmtListNoTransform() : getInitStmtList();
@@ -333,51 +290,44 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addInitStmtNoTransform(Stmt node) {
     List<Stmt> list = getInitStmtListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the InitStmt list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list InitStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setInitStmt(Stmt node, int i) {
     List<Stmt> list = getInitStmtList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the InitStmt list.
-   * @return The node representing the InitStmt list.
+   * Getter for InitStmt list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<Stmt> getInitStmts() {
     return getInitStmtList();
   }
   /**
-   * Retrieves the InitStmt list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the InitStmt list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<Stmt> getInitStmtsNoTransform() {
     return getInitStmtListNoTransform();
   }
   /**
-   * Retrieves the InitStmt list.
-   * @return The node representing the InitStmt list.
+   * Getter for list InitStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Stmt> getInitStmtList() {
@@ -386,130 +336,102 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     return list;
   }
   /**
-   * Retrieves the InitStmt list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the InitStmt list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Stmt> getInitStmtListNoTransform() {
     return (List<Stmt>)getChildNoTransform(0);
   }
   /**
-   * Replaces the optional node for the Condition child. This is the {@code Opt} node containing the child Condition, not the actual child!
-   * @param opt The new node to be used as the optional node for the Condition child.
+   * Setter for ConditionOpt
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setConditionOpt(Opt<Expr> opt) {
     setChild(opt, 1);
   }
   /**
-   * Check whether the optional Condition child exists.
-   * @return {@code true} if the optional Condition child exists, {@code false} if it does not.
+   * Does this node have a Condition child?
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public boolean hasCondition() {
     return getConditionOpt().getNumChild() != 0;
   }
   /**
-   * Retrieves the (optional) Condition child.
-   * @return The Condition child, if it exists. Returns {@code null} otherwise.
-   * @apilevel low-level
+   * Getter for optional child Condition
+   * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Expr getCondition() {
     return (Expr)getConditionOpt().getChild(0);
   }
   /**
-   * Replaces the (optional) Condition child.
-   * @param node The new node to be used as the Condition child.
+   * Setter for optional child Condition
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void setCondition(Expr node) {
     getConditionOpt().setChild(node, 0);
   }
   /**
-   * Retrieves the optional node for the Condition child. This is the {@code Opt} node containing the child Condition, not the actual child!
-   * @return The optional node for child the Condition child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:37
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Expr> getConditionOpt() {
     return (Opt<Expr>)getChild(1);
   }
   /**
-   * Retrieves the optional node for child Condition. This is the {@code Opt} node containing the child Condition, not the actual child!
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The optional node for child Condition.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:44
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Expr> getConditionOptNoTransform() {
     return (Opt<Expr>)getChildNoTransform(1);
   }
   /**
-   * Replaces the UpdateStmt list.
-   * @param list The new list node to be used as the UpdateStmt list.
+   * Setter for UpdateStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setUpdateStmtList(List<Stmt> list) {
     setChild(list, 2);
   }
   /**
-   * Retrieves the number of children in the UpdateStmt list.
-   * @return Number of children in the UpdateStmt list.
+   * @return number of children in UpdateStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumUpdateStmt() {
     return getUpdateStmtList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the UpdateStmt list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the UpdateStmt list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumUpdateStmtNoTransform() {
-    return getUpdateStmtListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the UpdateStmt list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the UpdateStmt list.
+   * Getter for child in list UpdateStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Stmt getUpdateStmt(int i) {
     return (Stmt)getUpdateStmtList().getChild(i);
   }
   /**
-   * Append an element to the UpdateStmt list.
-   * @param node The element to append to the UpdateStmt list.
+   * Add element to list UpdateStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addUpdateStmt(Stmt node) {
     List<Stmt> list = (parent == null || state == null) ? getUpdateStmtListNoTransform() : getUpdateStmtList();
@@ -518,51 +440,44 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addUpdateStmtNoTransform(Stmt node) {
     List<Stmt> list = getUpdateStmtListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the UpdateStmt list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list UpdateStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setUpdateStmt(Stmt node, int i) {
     List<Stmt> list = getUpdateStmtList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the UpdateStmt list.
-   * @return The node representing the UpdateStmt list.
+   * Getter for UpdateStmt list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<Stmt> getUpdateStmts() {
     return getUpdateStmtList();
   }
   /**
-   * Retrieves the UpdateStmt list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the UpdateStmt list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<Stmt> getUpdateStmtsNoTransform() {
     return getUpdateStmtListNoTransform();
   }
   /**
-   * Retrieves the UpdateStmt list.
-   * @return The node representing the UpdateStmt list.
+   * Getter for list UpdateStmtList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Stmt> getUpdateStmtList() {
@@ -571,44 +486,36 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     return list;
   }
   /**
-   * Retrieves the UpdateStmt list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the UpdateStmt list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Stmt> getUpdateStmtListNoTransform() {
     return (List<Stmt>)getChildNoTransform(2);
   }
   /**
-   * Replaces the Stmt child.
-   * @param node The new node to replace the Stmt child.
+   * Setter for Stmt
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setStmt(Stmt node) {
     setChild(node, 3);
   }
   /**
-   * Retrieves the Stmt child.
-   * @return The current node used as the Stmt child.
+   * Getter for Stmt
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Stmt getStmt() {
     return (Stmt)getChild(3);
   }
   /**
-   * Retrieves the Stmt child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Stmt child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Stmt getStmtNoTransform() {
     return (Stmt)getChildNoTransform(3);
@@ -626,11 +533,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(targetOf_ContinueStmt_values.containsKey(_parameters)) {
       return ((Boolean)targetOf_ContinueStmt_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean targetOf_ContinueStmt_value = targetOf_compute(stmt);
-      if(isFinal && num == state().boundariesCrossed) targetOf_ContinueStmt_values.put(_parameters, Boolean.valueOf(targetOf_ContinueStmt_value));
+if(isFinal && num == state().boundariesCrossed) targetOf_ContinueStmt_values.put(_parameters, Boolean.valueOf(targetOf_ContinueStmt_value));
     return targetOf_ContinueStmt_value;
   }
   /**
@@ -650,11 +557,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(targetOf_BreakStmt_values.containsKey(_parameters)) {
       return ((Boolean)targetOf_BreakStmt_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean targetOf_BreakStmt_value = targetOf_compute(stmt);
-      if(isFinal && num == state().boundariesCrossed) targetOf_BreakStmt_values.put(_parameters, Boolean.valueOf(targetOf_BreakStmt_value));
+if(isFinal && num == state().boundariesCrossed) targetOf_BreakStmt_values.put(_parameters, Boolean.valueOf(targetOf_BreakStmt_value));
     return targetOf_BreakStmt_value;
   }
   /**
@@ -665,7 +572,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:612
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:611
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafter(Variable v) {
@@ -674,11 +581,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(isDAafter_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDAafter_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDAafter_Variable_value = isDAafter_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDAafter_Variable_values.put(_parameters, Boolean.valueOf(isDAafter_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDAafter_Variable_values.put(_parameters, Boolean.valueOf(isDAafter_Variable_value));
     return isDAafter_Variable_value;
   }
   /**
@@ -697,19 +604,23 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:625
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:624
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafterInitialization(Variable v) {
-    ASTNode$State state = state();
-    try {  return getNumInitStmt() == 0 ? isDAbefore(v) : getInitStmt(getNumInitStmt()-1).isDAafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDAafterInitialization_Variable_value = isDAafterInitialization_compute(v);
+    return isDAafterInitialization_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDAafterInitialization_compute(Variable v) {  return getNumInitStmt() == 0 ? isDAbefore(v) : getInitStmt(getNumInitStmt()-1).isDAafter(v);  }
   protected java.util.Map isDUafter_Variable_values;
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1096
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1095
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafter(Variable v) {
@@ -718,11 +629,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(isDUafter_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDUafter_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDUafter_Variable_value = isDUafter_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDUafter_Variable_values.put(_parameters, Boolean.valueOf(isDUafter_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDUafter_Variable_values.put(_parameters, Boolean.valueOf(isDUafter_Variable_value));
     return isDUafter_Variable_value;
   }
   /**
@@ -746,19 +657,23 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1116
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1115
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafterInit(Variable v) {
-    ASTNode$State state = state();
-    try {  return getNumInitStmt() == 0 ? isDUbefore(v) : getInitStmt(getNumInitStmt()-1).isDUafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDUafterInit_Variable_value = isDUafterInit_compute(v);
+    return isDUafterInit_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDUafterInit_compute(Variable v) {  return getNumInitStmt() == 0 ? isDUbefore(v) : getInitStmt(getNumInitStmt()-1).isDUafter(v);  }
   protected java.util.Map isDUbeforeCondition_Variable_values;
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1118
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1117
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUbeforeCondition(Variable v) {
@@ -794,7 +709,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
         }
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
         isDUbeforeCondition_Variable_values.put(_parameters, new_isDUbeforeCondition_Variable_value);
       }
       else {
@@ -833,11 +748,18 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1129
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1128
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafterUpdate(Variable v) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean isDUafterUpdate_Variable_value = isDUafterUpdate_compute(v);
+    return isDUafterUpdate_Variable_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDUafterUpdate_compute(Variable v) {
     if(!isDUbeforeCondition(v)) // start a circular evaluation here
       return false;
     if(getNumUpdateStmt() > 0)
@@ -850,9 +772,6 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
         return false;
     }
     return true;
-  }
-    finally {
-    }
   }
   protected java.util.Map localLookup_String_values;
   /**
@@ -867,11 +786,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(localLookup_String_values.containsKey(_parameters)) {
       return (SimpleSet)localLookup_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet localLookup_String_value = localLookup_compute(name);
-      if(isFinal && num == state().boundariesCrossed) localLookup_String_values.put(_parameters, localLookup_String_value);
+if(isFinal && num == state().boundariesCrossed) localLookup_String_values.put(_parameters, localLookup_String_value);
     return localLookup_String_value;
   }
   /**
@@ -895,11 +814,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(localVariableDeclaration_String_values.containsKey(_parameters)) {
       return (VariableDeclaration)localVariableDeclaration_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     VariableDeclaration localVariableDeclaration_String_value = localVariableDeclaration_compute(name);
-      if(isFinal && num == state().boundariesCrossed) localVariableDeclaration_String_values.put(_parameters, localVariableDeclaration_String_value);
+if(isFinal && num == state().boundariesCrossed) localVariableDeclaration_String_values.put(_parameters, localVariableDeclaration_String_value);
     return localVariableDeclaration_String_value;
   }
   /**
@@ -914,14 +833,18 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:401
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:402
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean continueLabel() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean continueLabel_value = continueLabel_compute();
+    return continueLabel_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean continueLabel_compute() {  return true;  }
   /**
    * @apilevel internal
    */
@@ -940,11 +863,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(canCompleteNormally_computed) {
       return canCompleteNormally_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     canCompleteNormally_value = canCompleteNormally_compute();
-      if(isFinal && num == state().boundariesCrossed) canCompleteNormally_computed = true;
+if(isFinal && num == state().boundariesCrossed) canCompleteNormally_computed = true;
     return canCompleteNormally_value;
   }
   /**
@@ -954,14 +877,18 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect BooleanExpressions
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:21
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:35
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean definesLabel() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean definesLabel_value = definesLabel_compute();
+    return definesLabel_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean definesLabel_compute() {  return true;  }
   /**
    * @apilevel internal
    */
@@ -980,11 +907,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(cond_label_computed) {
       return cond_label_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     cond_label_value = cond_label_compute();
-      if(isFinal && num == state().boundariesCrossed) cond_label_computed = true;
+if(isFinal && num == state().boundariesCrossed) cond_label_computed = true;
     return cond_label_value;
   }
   /**
@@ -1009,11 +936,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(begin_label_computed) {
       return begin_label_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     begin_label_value = begin_label_compute();
-      if(isFinal && num == state().boundariesCrossed) begin_label_computed = true;
+if(isFinal && num == state().boundariesCrossed) begin_label_computed = true;
     return begin_label_value;
   }
   /**
@@ -1038,11 +965,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(update_label_computed) {
       return update_label_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     update_label_value = update_label_compute();
-      if(isFinal && num == state().boundariesCrossed) update_label_computed = true;
+if(isFinal && num == state().boundariesCrossed) update_label_computed = true;
     return update_label_value;
   }
   /**
@@ -1067,11 +994,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(end_label_computed) {
       return end_label_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     end_label_value = end_label_compute();
-      if(isFinal && num == state().boundariesCrossed) end_label_computed = true;
+if(isFinal && num == state().boundariesCrossed) end_label_computed = true;
     return end_label_value;
   }
   /**
@@ -1081,44 +1008,33 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect Statements
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:200
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:203
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public soot.jimple.Stmt break_label() {
-    ASTNode$State state = state();
-    try {  return end_label();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    soot.jimple.Stmt break_label_value = break_label_compute();
+    return break_label_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private soot.jimple.Stmt break_label_compute() {  return end_label();  }
   /**
    * @attribute syn
    * @aspect Statements
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:225
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:228
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public soot.jimple.Stmt continue_label() {
-    ASTNode$State state = state();
-    try {  return update_label();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    soot.jimple.Stmt continue_label_value = continue_label_compute();
+    return continue_label_value;
   }
   /**
-   * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/PreciseRethrow.jrag:55
+   * @apilevel internal
    */
-  public boolean modifiedInScope(Variable var) {
-    ASTNode$State state = state();
-    try {
-		for (Stmt stmt : getInitStmtList())
-			if (stmt.modifiedInScope(var))
-				return true;
-		for (Stmt stmt : getUpdateStmtList())
-			if (stmt.modifiedInScope(var))
-				return true;
-		return getStmt().modifiedInScope(var);
-	}
-    finally {
-    }
-  }
+  private soot.jimple.Stmt continue_label_compute() {  return update_label();  }
   protected java.util.Map lookupVariable_String_values;
   /**
    * @attribute inh
@@ -1132,15 +1048,15 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(lookupVariable_String_values.containsKey(_parameters)) {
       return (SimpleSet)lookupVariable_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet lookupVariable_String_value = getParent().Define_SimpleSet_lookupVariable(this, null, name);
-      if(isFinal && num == state().boundariesCrossed) lookupVariable_String_values.put(_parameters, lookupVariable_String_value);
+if(isFinal && num == state().boundariesCrossed) lookupVariable_String_values.put(_parameters, lookupVariable_String_value);
     return lookupVariable_String_value;
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:636
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:635
    * @apilevel internal
    */
   public boolean Define_boolean_isDAbefore(ASTNode caller, ASTNode child, Variable v) {
@@ -1157,25 +1073,24 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     return true;
   }
 }
-    else if(caller == getStmtNoTransform()){
+    if(caller == getStmtNoTransform()){
     if(hasCondition() && getCondition().isDAafterTrue(v))
       return true;
     if(!hasCondition() && isDAafterInitialization(v))
       return true;
     return false;
   }
-    else if(caller == getConditionOptNoTransform()) {
+    if(caller == getConditionOptNoTransform()) {
       return isDAafterInitialization(v);
     }
-    else if(caller == getInitStmtListNoTransform()) {
+    if(caller == getInitStmtListNoTransform()) {
       int i = caller.getIndexOfChild(child);
       return i == 0 ? isDAbefore(v) : getInitStmt(i-1).isDAafter(v);
     }
-    else {      return getParent().Define_boolean_isDAbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDAbefore(this, caller, v);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1145
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1144
    * @apilevel internal
    */
   public boolean Define_boolean_isDUbefore(ASTNode caller, ASTNode child, Variable v) {
@@ -1198,19 +1113,18 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
       return getUpdateStmt(i-1).isDUafter(v);
   }
 }
-    else if(caller == getStmtNoTransform()) {
+    if(caller == getStmtNoTransform()) {
       return isDUbeforeCondition(v) && (hasCondition() ?
     getCondition().isDUafterTrue(v) : isDUafterInit(v));
     }
-    else if(caller == getConditionOptNoTransform()) {
+    if(caller == getConditionOptNoTransform()) {
       return isDUbeforeCondition(v);
     }
-    else if(caller == getInitStmtListNoTransform()) {
+    if(caller == getInitStmtListNoTransform()) {
       int childIndex = caller.getIndexOfChild(child);
       return childIndex == 0 ? isDUbefore(v) : getInitStmt(childIndex-1).isDUafter(v);
     }
-    else {      return getParent().Define_boolean_isDUbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDUbefore(this, caller, v);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupVariable.jrag:90
@@ -1220,19 +1134,18 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(caller == getStmtNoTransform()) {
       return localLookup(name);
     }
-    else if(caller == getUpdateStmtListNoTransform()) {
+    if(caller == getUpdateStmtListNoTransform()) {
       int childIndex = caller.getIndexOfChild(child);
       return localLookup(name);
     }
-    else if(caller == getConditionOptNoTransform()) {
+    if(caller == getConditionOptNoTransform()) {
       return localLookup(name);
     }
-    else if(caller == getInitStmtListNoTransform()) {
+    if(caller == getInitStmtListNoTransform()) {
       int childIndex = caller.getIndexOfChild(child);
       return localLookup(name);
     }
-    else {      return getParent().Define_SimpleSet_lookupVariable(this, caller, name);
-    }
+    return getParent().Define_SimpleSet_lookupVariable(this, caller, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:299
@@ -1242,12 +1155,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(caller == getStmtNoTransform()) {
       return this;
     }
-    else if(caller == getInitStmtListNoTransform()) {
+    if(caller == getInitStmtListNoTransform()) {
       int childIndex = caller.getIndexOfChild(child);
       return this;
     }
-    else {      return getParent().Define_VariableScope_outerScope(this, caller);
-    }
+    return getParent().Define_VariableScope_outerScope(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:370
@@ -1257,8 +1169,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(caller == getStmtNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_insideLoop(this, caller);
-    }
+    return getParent().Define_boolean_insideLoop(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/UnreachableStatements.jrag:103
@@ -1268,8 +1179,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(caller == getStmtNoTransform()) {
       return reachable() && (!hasCondition() || (!getCondition().isConstant() || !getCondition().isFalse()));
     }
-    else {      return getParent().Define_boolean_reachable(this, caller);
-    }
+    return getParent().Define_boolean_reachable(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/UnreachableStatements.jrag:151
@@ -1279,8 +1189,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(caller == getStmtNoTransform()) {
       return reachable();
     }
-    else {      return getParent().Define_boolean_reportUnreachable(this, caller);
-    }
+    return getParent().Define_boolean_reportUnreachable(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:44
@@ -1290,8 +1199,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(caller == getConditionOptNoTransform()) {
       return end_label();
     }
-    else {      return getParent().Define_soot_jimple_Stmt_condition_false_label(this, caller);
-    }
+    return getParent().Define_soot_jimple_Stmt_condition_false_label(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:45
@@ -1301,25 +1209,24 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     if(caller == getConditionOptNoTransform()) {
       return begin_label();
     }
-    else {      return getParent().Define_soot_jimple_Stmt_condition_true_label(this, caller);
-    }
+    return getParent().Define_soot_jimple_Stmt_condition_true_label(this, caller);
   }
   /**
    * @apilevel internal
    */
   public ASTNode rewriteTo() {
-    // Declared in /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag at line 1163
+    // Declared in /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag at line 1162
     if(!hasCondition()) {
-      state().duringDU++;
+      state().duringDefiniteAssignment++;
       ASTNode result = rewriteRule0();
-      state().duringDU--;
+      state().duringDefiniteAssignment--;
       return result;
     }
 
     return super.rewriteTo();
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1163
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1162
    * @apilevel internal
    */  private ForStmt rewriteRule0() {
 {

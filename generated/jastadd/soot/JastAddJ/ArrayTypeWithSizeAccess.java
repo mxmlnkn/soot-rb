@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ArrayTypeWithSizeAccess : {@link ArrayTypeAccess} ::= <span class="component">{@link Expr}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:26
+ * @declaredat java.ast:23
  */
 public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneable {
   /**
@@ -62,33 +61,18 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ArrayTypeWithSizeAccess fullCopy() {
-    try {
-      ArrayTypeWithSizeAccess tree = (ArrayTypeWithSizeAccess) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ArrayTypeWithSizeAccess res = (ArrayTypeWithSizeAccess)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -121,7 +105,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ArrayTypeWithSizeAccess() {
     super();
@@ -129,19 +113,8 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public ArrayTypeWithSizeAccess(Access p0, Expr p1) {
     setChild(p0, 0);
@@ -150,7 +123,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   protected int numChildren() {
     return 2;
@@ -158,89 +131,77 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Access child.
-   * @param node The new node to replace the Access child.
+   * Setter for Access
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setAccess(Access node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Access child.
-   * @return The current node used as the Access child.
+   * Getter for Access
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Access getAccess() {
     return (Access)getChild(0);
   }
   /**
-   * Retrieves the Access child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Access child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Access getAccessNoTransform() {
     return (Access)getChildNoTransform(0);
   }
   /**
-   * Replaces the Expr child.
-   * @param node The new node to replace the Expr child.
+   * Setter for Expr
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setExpr(Expr node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the Expr child.
-   * @return The current node used as the Expr child.
+   * Getter for Expr
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getExpr() {
     return (Expr)getChild(1);
   }
   /**
-   * Retrieves the Expr child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Expr child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getExprNoTransform() {
     return (Expr)getChildNoTransform(1);
   }
   /**
-   * Replaces the lexeme Package.
-   * @param value The new value for the lexeme Package.
+   * Setter for lexeme Package
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setPackage(String value) {
     tokenString_Package = value;
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
@@ -248,25 +209,33 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:235
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:358
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return getExpr().isDAafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDAafter_Variable_value = isDAafter_compute(v);
+    return isDAafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDAafter_compute(Variable v) {  return getExpr().isDAafter(v);  }
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:694
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:837
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return getExpr().isDUafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDUafter_Variable_value = isDUafter_compute(v);
+    return isDUafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDUafter_compute(Variable v) {  return getExpr().isDUafter(v);  }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:36
    * @apilevel internal
@@ -275,8 +244,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     if(caller == getExprNoTransform()) {
       return false;
     }
-    else {      return getParent().Define_boolean_isDest(this, caller);
-    }
+    return getParent().Define_boolean_isDest(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:37
@@ -286,8 +254,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     if(caller == getExprNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_isSource(this, caller);
-    }
+    return getParent().Define_boolean_isSource(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:359
@@ -297,19 +264,17 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     if(caller == getExprNoTransform()) {
       return getAccess().isDAafter(v);
     }
-    else {      return getParent().Define_boolean_isDAbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDAbefore(this, caller, v);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:839
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:838
    * @apilevel internal
    */
   public boolean Define_boolean_isDUbefore(ASTNode caller, ASTNode child, Variable v) {
     if(caller == getExprNoTransform()) {
       return getAccess().isDUafter(v);
     }
-    else {      return getParent().Define_boolean_isDUbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDUbefore(this, caller, v);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupMethod.jrag:31
@@ -319,8 +284,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     if(caller == getExprNoTransform()) {
       return unqualifiedScope().lookupMethod(name);
     }
-    else {      return getParent().Define_Collection_lookupMethod(this, caller, name);
-    }
+    return getParent().Define_Collection_lookupMethod(this, caller, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:91
@@ -330,19 +294,17 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     if(caller == getExprNoTransform()) {
       return unqualifiedScope().hasPackage(packageName);
     }
-    else {      return getParent().Define_boolean_hasPackage(this, caller, packageName);
-    }
+    return getParent().Define_boolean_hasPackage(this, caller, packageName);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:256
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:168
    * @apilevel internal
    */
   public SimpleSet Define_SimpleSet_lookupType(ASTNode caller, ASTNode child, String name) {
     if(caller == getExprNoTransform()) {
       return unqualifiedScope().lookupType(name);
     }
-    else {      return getParent().Define_SimpleSet_lookupType(this, caller, name);
-    }
+    return getParent().Define_SimpleSet_lookupType(this, caller, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupVariable.jrag:136
@@ -352,8 +314,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     if(caller == getExprNoTransform()) {
       return unqualifiedScope().lookupVariable(name);
     }
-    else {      return getParent().Define_SimpleSet_lookupVariable(this, caller, name);
-    }
+    return getParent().Define_SimpleSet_lookupVariable(this, caller, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:123
@@ -363,8 +324,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     if(caller == getExprNoTransform()) {
       return NameType.EXPRESSION_NAME;
     }
-    else {      return getParent().Define_NameType_nameType(this, caller);
-    }
+    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @apilevel internal

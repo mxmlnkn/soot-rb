@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production GLBType : {@link ReferenceType} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link BodyDecl}*</span> <span class="component">TypeBound:{@link Access}*</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.ast:47
+ * @declaredat Generics.ast:39
  */
 public class GLBType extends ReferenceType implements Cloneable {
   /**
@@ -68,37 +67,22 @@ public class GLBType extends ReferenceType implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public GLBType fullCopy() {
-    try {
-      GLBType tree = (GLBType) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    GLBType res = (GLBType)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1482
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1376
    */
   public HashSet implementedInterfaces(){
     HashSet ret = new HashSet();
@@ -109,29 +93,18 @@ public class GLBType extends ReferenceType implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Generics.ast:1
    */
   public GLBType() {
     super();
 
+    setChild(new List(), 1);
+    setChild(new List(), 2);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[3];
-    setChild(new List(), 1);
-    setChild(new List(), 2);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat Generics.ast:9
    */
   public GLBType(Modifiers p0, String p1, List<BodyDecl> p2, List<Access> p3) {
     setChild(p0, 0);
@@ -141,7 +114,7 @@ public class GLBType extends ReferenceType implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Generics.ast:15
    */
   public GLBType(Modifiers p0, beaver.Symbol p1, List<BodyDecl> p2, List<Access> p3) {
     setChild(p0, 0);
@@ -152,7 +125,7 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:24
    */
   protected int numChildren() {
     return 3;
@@ -160,57 +133,49 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Generics.ast:30
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Modifiers child.
-   * @param node The new node to replace the Modifiers child.
+   * Setter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:5
    */
   public void setModifiers(Modifiers node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * @return The current node used as the Modifiers child.
+   * Getter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:12
    */
   public Modifiers getModifiers() {
     return (Modifiers)getChild(0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Modifiers child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:18
    */
   public Modifiers getModifiersNoTransform() {
     return (Modifiers)getChildNoTransform(0);
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Generics.ast:8
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -220,64 +185,47 @@ public class GLBType extends ReferenceType implements Cloneable {
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:19
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the BodyDecl list.
-   * @param list The new list node to be used as the BodyDecl list.
+   * Setter for BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:5
    */
   public void setBodyDeclList(List<BodyDecl> list) {
     setChild(list, 1);
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * @return Number of children in the BodyDecl list.
+   * @return number of children in BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:12
    */
   public int getNumBodyDecl() {
     return getBodyDeclList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the BodyDecl list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumBodyDeclNoTransform() {
-    return getBodyDeclListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the BodyDecl list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the BodyDecl list.
+   * Getter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BodyDecl getBodyDecl(int i) {
     return (BodyDecl)getBodyDeclList().getChild(i);
   }
   /**
-   * Append an element to the BodyDecl list.
-   * @param node The element to append to the BodyDecl list.
+   * Add element to list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:27
    */
   public void addBodyDecl(BodyDecl node) {
     List<BodyDecl> list = (parent == null || state == null) ? getBodyDeclListNoTransform() : getBodyDeclList();
@@ -286,51 +234,44 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:34
    */
   public void addBodyDeclNoTransform(BodyDecl node) {
     List<BodyDecl> list = getBodyDeclListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the BodyDecl list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:42
    */
   public void setBodyDecl(BodyDecl node, int i) {
     List<BodyDecl> list = getBodyDeclList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for BodyDecl list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:50
    */
   public List<BodyDecl> getBodyDecls() {
     return getBodyDeclList();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:56
    */
   public List<BodyDecl> getBodyDeclsNoTransform() {
     return getBodyDeclListNoTransform();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclList() {
@@ -339,66 +280,47 @@ public class GLBType extends ReferenceType implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclListNoTransform() {
     return (List<BodyDecl>)getChildNoTransform(1);
   }
   /**
-   * Replaces the TypeBound list.
-   * @param list The new list node to be used as the TypeBound list.
+   * Setter for TypeBoundList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:5
    */
   public void setTypeBoundList(List<Access> list) {
     setChild(list, 2);
   }
   /**
-   * Retrieves the number of children in the TypeBound list.
-   * @return Number of children in the TypeBound list.
+   * @return number of children in TypeBoundList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:12
    */
   public int getNumTypeBound() {
     return getTypeBoundList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the TypeBound list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the TypeBound list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumTypeBoundNoTransform() {
-    return getTypeBoundListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the TypeBound list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the TypeBound list.
+   * Getter for child in list TypeBoundList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Access getTypeBound(int i) {
     return (Access)getTypeBoundList().getChild(i);
   }
   /**
-   * Append an element to the TypeBound list.
-   * @param node The element to append to the TypeBound list.
+   * Add element to list TypeBoundList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:27
    */
   public void addTypeBound(Access node) {
     List<Access> list = (parent == null || state == null) ? getTypeBoundListNoTransform() : getTypeBoundList();
@@ -407,51 +329,44 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:34
    */
   public void addTypeBoundNoTransform(Access node) {
     List<Access> list = getTypeBoundListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the TypeBound list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list TypeBoundList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:42
    */
   public void setTypeBound(Access node, int i) {
     List<Access> list = getTypeBoundList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the TypeBound list.
-   * @return The node representing the TypeBound list.
+   * Getter for TypeBound list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:50
    */
   public List<Access> getTypeBounds() {
     return getTypeBoundList();
   }
   /**
-   * Retrieves the TypeBound list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the TypeBound list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:56
    */
   public List<Access> getTypeBoundsNoTransform() {
     return getTypeBoundListNoTransform();
   }
   /**
-   * Retrieves the TypeBound list.
-   * @return The node representing the TypeBound list.
+   * Getter for list TypeBoundList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getTypeBoundList() {
@@ -460,12 +375,9 @@ public class GLBType extends ReferenceType implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the TypeBound list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the TypeBound list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getTypeBoundListNoTransform() {
@@ -474,11 +386,18 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1472
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1366
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String typeName() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    String typeName_value = typeName_compute();
+    return typeName_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private String typeName_compute() {
     if(getNumTypeBound() == 0)
       return "<NOTYPE>";
     StringBuffer s = new StringBuffer();
@@ -487,25 +406,26 @@ public class GLBType extends ReferenceType implements Cloneable {
       s.append(" & " + getTypeBound(i).type().typeName());
     return s.toString();
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:347
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:353
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeLUBType(LUBType type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean supertypeLUBType_LUBType_value = supertypeLUBType_compute(type);
+    return supertypeLUBType_LUBType_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeLUBType_compute(LUBType type) {
     ArrayList bounds = new ArrayList(getNumTypeBound());
     for (int i = 0; i < getNumTypeBound(); i++) {
       bounds.add(getTypeBound(i));
     }
     return type == lookupLUBType(bounds);
-  }
-    finally {
-    }
   }
   protected java.util.Map subtype_TypeDecl_values;
   /**
@@ -547,7 +467,7 @@ public class GLBType extends ReferenceType implements Cloneable {
         }
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
         subtype_TypeDecl_values.put(_parameters, new_subtype_TypeDecl_value);
       }
       else {
@@ -580,14 +500,18 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:366
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:374
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeGLBType(GLBType type) {
-    ASTNode$State state = state();
-    try {  return this == type;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeGLBType_GLBType_value = supertypeGLBType_compute(type);
+    return supertypeGLBType_GLBType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeGLBType_compute(GLBType type) {  return this == type;  }
   /**
    * @apilevel internal
    */
@@ -606,11 +530,11 @@ public class GLBType extends ReferenceType implements Cloneable {
     if(getSootClassDecl_computed) {
       return getSootClassDecl_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     getSootClassDecl_value = getSootClassDecl_compute();
-      if(isFinal && num == state().boundariesCrossed) getSootClassDecl_computed = true;
+if(isFinal && num == state().boundariesCrossed) getSootClassDecl_computed = true;
     return getSootClassDecl_value;
   }
   /**

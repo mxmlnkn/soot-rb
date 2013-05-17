@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production AssignSimpleExpr : {@link AssignExpr};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:108
+ * @declaredat java.ast:105
  */
 public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
@@ -62,33 +61,18 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public AssignSimpleExpr fullCopy() {
-    try {
-      AssignSimpleExpr tree = (AssignSimpleExpr) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    AssignSimpleExpr res = (AssignSimpleExpr)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect TypeCheck
@@ -118,16 +102,7 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   }
   /**
    * @ast method 
-   * @aspect UncheckedConversion
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/UncheckedConversion.jrag:30
-   */
-  public void checkWarnings() {
-    if (!withinSuppressWarnings("unchecked"))
-      checkUncheckedConversion(getSource().type(), getDest().type());
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public AssignSimpleExpr() {
     super();
@@ -135,19 +110,8 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public AssignSimpleExpr(Expr p0, Expr p1) {
     setChild(p0, 0);
@@ -156,7 +120,7 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   protected int numChildren() {
     return 2;
@@ -164,69 +128,59 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Dest child.
-   * @param node The new node to replace the Dest child.
+   * Setter for Dest
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setDest(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Dest child.
-   * @return The current node used as the Dest child.
+   * Getter for Dest
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getDest() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the Dest child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Dest child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getDestNoTransform() {
     return (Expr)getChildNoTransform(0);
   }
   /**
-   * Replaces the Source child.
-   * @param node The new node to replace the Source child.
+   * Setter for Source
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setSource(Expr node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the Source child.
-   * @return The current node used as the Source child.
+   * Getter for Source
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getSource() {
     return (Expr)getChild(1);
   }
   /**
-   * Retrieves the Source child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Source child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getSourceNoTransform() {
     return (Expr)getChildNoTransform(1);
@@ -234,36 +188,33 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrint
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:247
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:248
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String printOp() {
-    ASTNode$State state = state();
-    try {  return " = ";  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String printOp_value = printOp_compute();
+    return printOp_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String printOp_compute() {  return " = ";  }
   /**
    * @attribute syn
    * @aspect TypeCheck
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeCheck.jrag:121
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl sourceType() {
-    ASTNode$State state = state();
-    try {  return getSource().type();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    TypeDecl sourceType_value = sourceType_compute();
+    return sourceType_value;
   }
   /**
-   * @attribute inh
-   * @aspect SuppressWarnings
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/SuppressWarnings.jrag:15
+   * @apilevel internal
    */
-  @SuppressWarnings({"unchecked", "cast"})
-  public boolean withinSuppressWarnings(String s) {
-    ASTNode$State state = state();
-    boolean withinSuppressWarnings_String_value = getParent().Define_boolean_withinSuppressWarnings(this, null, s);
-    return withinSuppressWarnings_String_value;
-  }
+  private TypeDecl sourceType_compute() {  return getSource().type();  }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:17
    * @apilevel internal
@@ -272,8 +223,7 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
     if(caller == getDestNoTransform()) {
       return true;
     }
-    else {      return super.Define_boolean_isDest(caller, child);
-    }
+    return super.Define_boolean_isDest(caller, child);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:27
@@ -283,8 +233,7 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
     if(caller == getDestNoTransform()) {
       return false;
     }
-    else {      return super.Define_boolean_isSource(caller, child);
-    }
+    return super.Define_boolean_isSource(caller, child);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericMethodsInference.jrag:36
@@ -294,8 +243,7 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
     if(caller == getSourceNoTransform()) {
       return getDest().type();
     }
-    else {      return getParent().Define_TypeDecl_assignConvertedType(this, caller);
-    }
+    return getParent().Define_TypeDecl_assignConvertedType(this, caller);
   }
   /**
    * @apilevel internal

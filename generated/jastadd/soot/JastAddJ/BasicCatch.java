@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,11 +18,11 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * A catch clause that can catch a single exception type.
- * @production BasicCatch : {@link CatchClause} ::= <span class="component">Parameter:{@link ParameterDeclaration}</span> <span class="component">{@link Block}</span>;
+ * A catch clause which can catch a single exception type.
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/MultiCatch.ast:9
+ * @declaredat CatchClause.ast:9
  */
 public class BasicCatch extends CatchClause implements Cloneable {
   /**
@@ -69,33 +68,18 @@ public class BasicCatch extends CatchClause implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BasicCatch fullCopy() {
-    try {
-      BasicCatch tree = (BasicCatch) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    BasicCatch res = (BasicCatch)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -131,17 +115,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
   }
   /**
    * @ast method 
-   * @aspect PreciseRethrow
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/PreciseRethrow.jrag:198
-   */
-  void checkUnreachableStmt() {
-		if (!getBlock().reachable() && reportUnreachable())
-			error("the exception "+getParameter().type().fullName()+
-			" is not thrown in the body of the try statement");
-	}
-  /**
-   * @ast method 
-   * 
+   * @declaredat CatchClause.ast:1
    */
   public BasicCatch() {
     super();
@@ -149,19 +123,8 @@ public class BasicCatch extends CatchClause implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat CatchClause.ast:7
    */
   public BasicCatch(ParameterDeclaration p0, Block p1) {
     setChild(p0, 0);
@@ -170,7 +133,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat CatchClause.ast:14
    */
   protected int numChildren() {
     return 2;
@@ -178,69 +141,59 @@ public class BasicCatch extends CatchClause implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat CatchClause.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Parameter child.
-   * @param node The new node to replace the Parameter child.
+   * Setter for Parameter
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat CatchClause.ast:5
    */
   public void setParameter(ParameterDeclaration node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Parameter child.
-   * @return The current node used as the Parameter child.
+   * Getter for Parameter
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat CatchClause.ast:12
    */
   public ParameterDeclaration getParameter() {
     return (ParameterDeclaration)getChild(0);
   }
   /**
-   * Retrieves the Parameter child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Parameter child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat CatchClause.ast:18
    */
   public ParameterDeclaration getParameterNoTransform() {
     return (ParameterDeclaration)getChildNoTransform(0);
   }
   /**
-   * Replaces the Block child.
-   * @param node The new node to replace the Block child.
+   * Setter for Block
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat CatchClause.ast:5
    */
   public void setBlock(Block node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the Block child.
-   * @return The current node used as the Block child.
+   * Getter for Block
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat CatchClause.ast:12
    */
   public Block getBlock() {
     return (Block)getChild(1);
   }
   /**
-   * Retrieves the Block child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Block child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat CatchClause.ast:18
    */
   public Block getBlockNoTransform() {
     return (Block)getChildNoTransform(1);
@@ -248,15 +201,19 @@ public class BasicCatch extends CatchClause implements Cloneable {
   /**
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ExceptionHandling.jrag:212
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ExceptionHandling.jrag:199
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean handles(TypeDecl exceptionType) {
-    ASTNode$State state = state();
-    try {  return !getParameter().type().isUnknown()
-    && exceptionType.instanceOf(getParameter().type());  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean handles_TypeDecl_value = handles_compute(exceptionType);
+    return handles_TypeDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean handles_compute(TypeDecl exceptionType) {  return !getParameter().type().isUnknown()
+    && exceptionType.instanceOf(getParameter().type());  }
   protected java.util.Map parameterDeclaration_String_values;
   /**
    * @attribute syn
@@ -270,11 +227,11 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(parameterDeclaration_String_values.containsKey(_parameters)) {
       return (SimpleSet)parameterDeclaration_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet parameterDeclaration_String_value = parameterDeclaration_compute(name);
-      if(isFinal && num == state().boundariesCrossed) parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
+if(isFinal && num == state().boundariesCrossed) parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
     return parameterDeclaration_String_value;
   }
   /**
@@ -299,11 +256,11 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(label_computed) {
       return label_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     label_value = label_compute();
-      if(isFinal && num == state().boundariesCrossed) label_computed = true;
+if(isFinal && num == state().boundariesCrossed) label_computed = true;
     return label_value;
   }
   /**
@@ -318,8 +275,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(caller == getParameterNoTransform()) {
       return parameterDeclaration(name);
     }
-    else {      return super.Define_SimpleSet_lookupVariable(caller, child, name);
-    }
+    return super.Define_SimpleSet_lookupVariable(caller, child, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:295
@@ -329,8 +285,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(caller == getParameterNoTransform()) {
       return this;
     }
-    else {      return getParent().Define_VariableScope_outerScope(this, caller);
-    }
+    return getParent().Define_VariableScope_outerScope(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:86
@@ -340,8 +295,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(caller == getParameterNoTransform()) {
       return NameType.TYPE_NAME;
     }
-    else {      return getParent().Define_NameType_nameType(this, caller);
-    }
+    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/UnreachableStatements.jrag:122
@@ -351,8 +305,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(caller == getBlockNoTransform()) {
       return reachableCatchClause(getParameter().type());
     }
-    else {      return getParent().Define_boolean_reachable(this, caller);
-    }
+    return getParent().Define_boolean_reachable(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/VariableDeclaration.jrag:64
@@ -362,8 +315,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(caller == getParameterNoTransform()) {
       return false;
     }
-    else {      return getParent().Define_boolean_isMethodParameter(this, caller);
-    }
+    return getParent().Define_boolean_isMethodParameter(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/VariableDeclaration.jrag:65
@@ -373,8 +325,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(caller == getParameterNoTransform()) {
       return false;
     }
-    else {      return getParent().Define_boolean_isConstructorParameter(this, caller);
-    }
+    return getParent().Define_boolean_isConstructorParameter(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/VariableDeclaration.jrag:66
@@ -384,8 +335,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(caller == getParameterNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_isExceptionHandlerParameter(this, caller);
-    }
+    return getParent().Define_boolean_isExceptionHandlerParameter(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/VariableArityParameters.jrag:23
@@ -395,30 +345,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
     if(caller == getParameterNoTransform()) {
       return false;
     }
-    else {      return getParent().Define_boolean_variableArityValid(this, caller);
-    }
-  }
-  /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/PreciseRethrow.jrag:52
-   * @apilevel internal
-   */
-  public boolean Define_boolean_inhModifiedInScope(ASTNode caller, ASTNode child, Variable var) {
-    if(caller == getParameterNoTransform()) {
-      return getBlock().modifiedInScope(var);
-    }
-    else {      return getParent().Define_boolean_inhModifiedInScope(this, caller, var);
-    }
-  }
-  /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/PreciseRethrow.jrag:125
-   * @apilevel internal
-   */
-  public boolean Define_boolean_isCatchParam(ASTNode caller, ASTNode child) {
-    if(caller == getParameterNoTransform()) {
-      return true;
-    }
-    else {      return getParent().Define_boolean_isCatchParam(this, caller);
-    }
+    return getParent().Define_boolean_variableArityValid(this, caller);
   }
   /**
    * @apilevel internal

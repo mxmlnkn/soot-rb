@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ArrayCreationExpr : {@link PrimaryExpr} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">[{@link ArrayInit}]</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:133
+ * @declaredat java.ast:130
  */
 public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
@@ -68,33 +67,18 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ArrayCreationExpr fullCopy() {
-    try {
-      ArrayCreationExpr tree = (ArrayCreationExpr) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ArrayCreationExpr res = (ArrayCreationExpr)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -138,28 +122,17 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ArrayCreationExpr() {
     super();
 
+    setChild(new Opt(), 1);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-    setChild(new Opt(), 1);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public ArrayCreationExpr(Access p0, Opt<ArrayInit> p1) {
     setChild(p0, 0);
@@ -168,7 +141,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:15
    */
   protected int numChildren() {
     return 2;
@@ -176,101 +149,87 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:21
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the TypeAccess child.
-   * @param node The new node to replace the TypeAccess child.
+   * Setter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setTypeAccess(Access node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * @return The current node used as the TypeAccess child.
+   * Getter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Access getTypeAccess() {
     return (Access)getChild(0);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the TypeAccess child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Access getTypeAccessNoTransform() {
     return (Access)getChildNoTransform(0);
   }
   /**
-   * Replaces the optional node for the ArrayInit child. This is the {@code Opt} node containing the child ArrayInit, not the actual child!
-   * @param opt The new node to be used as the optional node for the ArrayInit child.
+   * Setter for ArrayInitOpt
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setArrayInitOpt(Opt<ArrayInit> opt) {
     setChild(opt, 1);
   }
   /**
-   * Check whether the optional ArrayInit child exists.
-   * @return {@code true} if the optional ArrayInit child exists, {@code false} if it does not.
+   * Does this node have a ArrayInit child?
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public boolean hasArrayInit() {
     return getArrayInitOpt().getNumChild() != 0;
   }
   /**
-   * Retrieves the (optional) ArrayInit child.
-   * @return The ArrayInit child, if it exists. Returns {@code null} otherwise.
-   * @apilevel low-level
+   * Getter for optional child ArrayInit
+   * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ArrayInit getArrayInit() {
     return (ArrayInit)getArrayInitOpt().getChild(0);
   }
   /**
-   * Replaces the (optional) ArrayInit child.
-   * @param node The new node to be used as the ArrayInit child.
+   * Setter for optional child ArrayInit
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void setArrayInit(ArrayInit node) {
     getArrayInitOpt().setChild(node, 0);
   }
   /**
-   * Retrieves the optional node for the ArrayInit child. This is the {@code Opt} node containing the child ArrayInit, not the actual child!
-   * @return The optional node for child the ArrayInit child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:37
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<ArrayInit> getArrayInitOpt() {
     return (Opt<ArrayInit>)getChild(1);
   }
   /**
-   * Retrieves the optional node for child ArrayInit. This is the {@code Opt} node containing the child ArrayInit, not the actual child!
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The optional node for child ArrayInit.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:44
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<ArrayInit> getArrayInitOptNoTransform() {
@@ -279,47 +238,63 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:432
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:431
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafterCreation(Variable v) {
-    ASTNode$State state = state();
-    try {  return getTypeAccess().isDAafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDAafterCreation_Variable_value = isDAafterCreation_compute(v);
+    return isDAafterCreation_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDAafterCreation_compute(Variable v) {  return getTypeAccess().isDAafter(v);  }
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:235
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:432
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return hasArrayInit() ? getArrayInit().isDAafter(v) : isDAafterCreation(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDAafter_Variable_value = isDAafter_compute(v);
+    return isDAafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDAafter_compute(Variable v) {  return hasArrayInit() ? getArrayInit().isDAafter(v) : isDAafterCreation(v);  }
+  /**
+   * @attribute syn
+   * @aspect DU
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:859
+   */
+  @SuppressWarnings({"unchecked", "cast"})
+  public boolean isDUafterCreation(Variable v) {
+      ASTNode$State state = state();
+    boolean isDUafterCreation_Variable_value = isDUafterCreation_compute(v);
+    return isDUafterCreation_Variable_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDUafterCreation_compute(Variable v) {  return getTypeAccess().isDUafter(v);  }
   /**
    * @attribute syn
    * @aspect DU
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:860
    */
-  public boolean isDUafterCreation(Variable v) {
-    ASTNode$State state = state();
-    try {  return getTypeAccess().isDUafter(v);  }
-    finally {
-    }
+  @SuppressWarnings({"unchecked", "cast"})
+  public boolean isDUafter(Variable v) {
+      ASTNode$State state = state();
+    boolean isDUafter_Variable_value = isDUafter_compute(v);
+    return isDUafter_Variable_value;
   }
   /**
-   * @attribute syn
-   * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:694
+   * @apilevel internal
    */
-  public boolean isDUafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return hasArrayInit() ? getArrayInit().isDUafter(v) : isDUafterCreation(v);  }
-    finally {
-    }
-  }
+  private boolean isDUafter_compute(Variable v) {  return hasArrayInit() ? getArrayInit().isDUafter(v) : isDUafterCreation(v);  }
   /**
    * @apilevel internal
    */
@@ -338,11 +313,11 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     if(type_computed) {
       return type_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     type_value = type_compute();
-      if(isFinal && num == state().boundariesCrossed) type_computed = true;
+if(isFinal && num == state().boundariesCrossed) type_computed = true;
     return type_value;
   }
   /**
@@ -360,18 +335,18 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect InnerClasses
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:72
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:69
    */
   @SuppressWarnings({"unchecked", "cast"})
   public int numArrays() {
     if(numArrays_computed) {
       return numArrays_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     numArrays_value = numArrays_compute();
-      if(isFinal && num == state().boundariesCrossed) numArrays_computed = true;
+if(isFinal && num == state().boundariesCrossed) numArrays_computed = true;
     return numArrays_value;
   }
   /**
@@ -387,26 +362,24 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     return i;
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:434
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:433
    * @apilevel internal
    */
   public boolean Define_boolean_isDAbefore(ASTNode caller, ASTNode child, Variable v) {
     if(caller == getArrayInitOptNoTransform()) {
       return isDAafterCreation(v);
     }
-    else {      return getParent().Define_boolean_isDAbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDAbefore(this, caller, v);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:863
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:862
    * @apilevel internal
    */
   public boolean Define_boolean_isDUbefore(ASTNode caller, ASTNode child, Variable v) {
     if(caller == getArrayInitOptNoTransform()) {
       return isDUafterCreation(v);
     }
-    else {      return getParent().Define_boolean_isDUbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDUbefore(this, caller, v);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:87
@@ -416,8 +389,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     if(caller == getTypeAccessNoTransform()) {
       return NameType.TYPE_NAME;
     }
-    else {      return getParent().Define_NameType_nameType(this, caller);
-    }
+    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:262
@@ -427,19 +399,17 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     if(caller == getArrayInitOptNoTransform()) {
       return type();
     }
-    else {      return getParent().Define_TypeDecl_declType(this, caller);
-    }
+    return getParent().Define_TypeDecl_declType(this, caller);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:66
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:63
    * @apilevel internal
    */
   public TypeDecl Define_TypeDecl_expectedType(ASTNode caller, ASTNode child) {
     if(caller == getArrayInitOptNoTransform()) {
       return type().componentType();
     }
-    else {      return getParent().Define_TypeDecl_expectedType(this, caller);
-    }
+    return getParent().Define_TypeDecl_expectedType(this, caller);
   }
   /**
    * @apilevel internal

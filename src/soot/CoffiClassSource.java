@@ -24,8 +24,6 @@ import soot.options.*;
 import java.io.*;
 import java.util.*;
 
-import soot.rbclassload.References;
-
 /** A class source for resolving from .class files through coffi.
  */
 public class CoffiClassSource extends ClassSource
@@ -37,7 +35,7 @@ public class CoffiClassSource extends ClassSource
     public Dependencies resolve( SootClass sc ) {
         if(Options.v().verbose())
             G.v().out.println("resolving [from .class]: " + className );
-        References references = new References();
+        List references = new ArrayList();
         soot.coffi.Util.v().resolveFromClassFile(sc, classFile, references);
 
         try {
@@ -45,13 +43,7 @@ public class CoffiClassSource extends ClassSource
         } catch (IOException e) { throw new RuntimeException("!?"); }
         
         IInitialResolver.Dependencies deps = new IInitialResolver.Dependencies();
-        if(Options.v().rbclassload() == false){
-          deps.typesToSignature.addAll(references.getAll());
-        } else {        
-          deps.typesToHierarchy.addAll(references.getHierarchy());
-          deps.typesToSignature.addAll(references.getSignatures());
-          deps.typesToBody.addAll(references.getBody());
-        }
+        deps.typesToSignature.addAll(references);
         return deps;
     }
     protected InputStream classFile;

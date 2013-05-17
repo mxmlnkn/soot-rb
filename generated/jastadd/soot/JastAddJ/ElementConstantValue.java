@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ElementConstantValue : {@link ElementValue} ::= <span class="component">{@link Expr}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.ast:11
+ * @declaredat Annotations.ast:11
  */
 public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
@@ -62,33 +61,18 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ElementConstantValue fullCopy() {
-    try {
-      ElementConstantValue tree = (ElementConstantValue) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ElementConstantValue res = (ElementConstantValue)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect Annotations
@@ -145,7 +129,7 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:1
    */
   public ElementConstantValue() {
     super();
@@ -153,19 +137,8 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[1];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat Annotations.ast:7
    */
   public ElementConstantValue(Expr p0) {
     setChild(p0, 0);
@@ -173,7 +146,7 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:13
    */
   protected int numChildren() {
     return 1;
@@ -181,38 +154,33 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:19
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Expr child.
-   * @param node The new node to replace the Expr child.
+   * Setter for Expr
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:5
    */
   public void setExpr(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Expr child.
-   * @return The current node used as the Expr child.
+   * Getter for Expr
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:12
    */
   public Expr getExpr() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the Expr child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Expr child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:18
    */
   public Expr getExprNoTransform() {
     return (Expr)getChildNoTransform(0);
@@ -220,55 +188,74 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:57
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:58
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean validTarget(Annotation a) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean validTarget_Annotation_value = validTarget_compute(a);
+    return validTarget_Annotation_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean validTarget_compute(Annotation a) {
     Variable v = getExpr().varDecl();
     if(v == null) return true;
     return v.hostType().fullName().equals("java.lang.annotation.ElementType") && a.mayUseAnnotationTarget(v.name());
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:181
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:182
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public ElementValue definesElementTypeValue(String name) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    ElementValue definesElementTypeValue_String_value = definesElementTypeValue_compute(name);
+    return definesElementTypeValue_String_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private ElementValue definesElementTypeValue_compute(String name) {
     Variable v = getExpr().varDecl();
     if(v != null && v.hostType().fullName().equals("java.lang.annotation.ElementType") && v.name().equals(name))
       return this;
     return null;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:295
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:296
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean hasValue(String s) {
-    ASTNode$State state = state();
-    try {  return getExpr().type().isString() &&
+      ASTNode$State state = state();
+    boolean hasValue_String_value = hasValue_compute(s);
+    return hasValue_String_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean hasValue_compute(String s) {  return getExpr().type().isString() &&
     getExpr().isConstant() && 
     getExpr().constant().stringValue().equals(s);  }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:475
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:476
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean commensurateWithTypeDecl(TypeDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean commensurateWithTypeDecl_TypeDecl_value = commensurateWithTypeDecl_compute(type);
+    return commensurateWithTypeDecl_TypeDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean commensurateWithTypeDecl_compute(TypeDecl type) {
     Expr v = getExpr();
     if(!v.type().assignConversionTo(type, v))
       return false;
@@ -282,20 +269,21 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
       return false;
     return true;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:510
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:511
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl type() {
-    ASTNode$State state = state();
-    try {  return getExpr().type();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    TypeDecl type_value = type_compute();
+    return type_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private TypeDecl type_compute() {  return getExpr().type();  }
   /**
    * @attribute inh
    * @aspect Annotations
@@ -303,7 +291,7 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ElementValue lookupElementTypeValue(String name) {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     ElementValue lookupElementTypeValue_String_value = getParent().Define_ElementValue_lookupElementTypeValue(this, null, name);
     return lookupElementTypeValue_String_value;
   }
@@ -315,8 +303,7 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
     if(caller == getExprNoTransform()) {
       return NameType.AMBIGUOUS_NAME;
     }
-    else {      return getParent().Define_NameType_nameType(this, caller);
-    }
+    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:555
@@ -326,8 +313,7 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
     if(caller == getExprNoTransform()) {
       return enclosingAnnotationDecl().typeName();
     }
-    else {      return getParent().Define_String_methodHost(this, caller);
-    }
+    return getParent().Define_String_methodHost(this, caller);
   }
   /**
    * @apilevel internal

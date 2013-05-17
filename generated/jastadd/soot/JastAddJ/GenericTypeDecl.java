@@ -18,9 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
-  * @ast interface
- * 
+ * @ast interface
+ * @declaredat :0
  */
 public interface GenericTypeDecl {
 
@@ -50,28 +51,28 @@ public List createArgumentList(ArrayList params);
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:158
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:138
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isGenericType();
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:163
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:143
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl rawType();
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:708
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:681
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl lookupParTypeDecl(ParTypeAccess p);
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:714
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:687
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl lookupParTypeDecl(ArrayList list);

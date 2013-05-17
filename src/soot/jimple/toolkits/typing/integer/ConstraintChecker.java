@@ -225,7 +225,7 @@ class ConstraintChecker extends AbstractStmtSwitch
       {
 	ArrayRef ref = (ArrayRef) l;
 	Type baset = ((Local) ref.getBase()).getType();
-	if(baset instanceof ArrayType)
+	if(!(baset instanceof NullType))
 	{
 	  ArrayType base = (ArrayType) baset;
 	  Value index = ref.getIndex();

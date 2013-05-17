@@ -697,6 +697,9 @@ public abstract class Body extends AbstractHost implements Serializable
         ExceptionalUnitGraph g = new ExceptionalUnitGraph
 	    (this, PedanticThrowAnalysis.v(), false);
 
+	// FIXME: Work around for bug in soot
+	Scene.v().releaseActiveHierarchy();
+
         InitAnalysis analysis=new InitAnalysis(g);
 	Iterator<Unit> it=units.iterator();
 	while(it.hasNext()) {

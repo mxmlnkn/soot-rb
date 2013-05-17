@@ -18,9 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
-  * @ast class
- * 
+ * @ast class
+ * @declaredat :0
  */
 public class CONSTANT_Utf8_Info extends CONSTANT_Info {
 

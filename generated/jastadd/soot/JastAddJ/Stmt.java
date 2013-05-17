@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -20,10 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
- * @production Stmt : {@link ASTNode};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:195
+ * @declaredat java.ast:192
  */
 public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   /**
@@ -74,7 +73,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public Stmt() {
     super();
@@ -82,19 +81,9 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
-   * @ast method 
-   * 
-   */
-  public void init$Children() {
-  }
-  /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:10
    */
   protected int numChildren() {
     return 0;
@@ -102,18 +91,11 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:16
    */
   public boolean mayHaveRewrite() {
     return false;
   }
-  /**
-   * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/PreciseRethrow.jrag:55
-   */
-  @SuppressWarnings({"unchecked", "cast"})
-  public abstract boolean modifiedInScope(Variable var);
   protected java.util.Map isDAafter_Variable_values;
   /**
    * @attribute syn
@@ -127,11 +109,11 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
     if(isDAafter_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDAafter_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDAafter_Variable_value = isDAafter_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDAafter_Variable_values.put(_parameters, Boolean.valueOf(isDAafter_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDAafter_Variable_values.put(_parameters, Boolean.valueOf(isDAafter_Variable_value));
     return isDAafter_Variable_value;
   }
   /**
@@ -142,7 +124,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:777
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:776
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafter(Variable v) {
@@ -151,11 +133,11 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
     if(isDUafter_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDUafter_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDUafter_Variable_value = isDUafter_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDUafter_Variable_values.put(_parameters, Boolean.valueOf(isDUafter_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDUafter_Variable_values.put(_parameters, Boolean.valueOf(isDUafter_Variable_value));
     return isDUafter_Variable_value;
   }
   /**
@@ -169,34 +151,46 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    * @aspect VariableScope
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupVariable.jrag:129
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean declaresVariable(String name) {
-    ASTNode$State state = state();
-    try {  return false;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean declaresVariable_String_value = declaresVariable_compute(name);
+    return declaresVariable_String_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean declaresVariable_compute(String name) {  return false;  }
   /**
    * @attribute syn
    * @aspect NameCheck
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/NameCheck.jrag:401
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean continueLabel() {
-    ASTNode$State state = state();
-    try {  return false;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean continueLabel_value = continueLabel_compute();
+    return continueLabel_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean continueLabel_compute() {  return false;  }
   /**
    * @attribute syn
    * @aspect PrettyPrint
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:758
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:762
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean addsIndentationLevel() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean addsIndentationLevel_value = addsIndentationLevel_compute();
+    return addsIndentationLevel_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean addsIndentationLevel_compute() {  return true;  }
   /**
    * @apilevel internal
    */
@@ -215,11 +209,11 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
     if(canCompleteNormally_computed) {
       return canCompleteNormally_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     canCompleteNormally_value = canCompleteNormally_compute();
-      if(isFinal && num == state().boundariesCrossed) canCompleteNormally_computed = true;
+if(isFinal && num == state().boundariesCrossed) canCompleteNormally_computed = true;
     return canCompleteNormally_value;
   }
   /**
@@ -231,26 +225,34 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    * @aspect Statements
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:200
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public soot.jimple.Stmt break_label() {
-    ASTNode$State state = state();
-    try {
-    throw new UnsupportedOperationException("Can not break at this statement of type " + getClass().getName());
+      ASTNode$State state = state();
+    soot.jimple.Stmt break_label_value = break_label_compute();
+    return break_label_value;
   }
-    finally {
-    }
+  /**
+   * @apilevel internal
+   */
+  private soot.jimple.Stmt break_label_compute() {
+    throw new UnsupportedOperationException("Can not break at this statement of type " + getClass().getName());
   }
   /**
    * @attribute syn
    * @aspect Statements
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/Statements.jrag:225
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public soot.jimple.Stmt continue_label() {
-    ASTNode$State state = state();
-    try {
-    throw new UnsupportedOperationException("Can not continue at this statement");
+      ASTNode$State state = state();
+    soot.jimple.Stmt continue_label_value = continue_label_compute();
+    return continue_label_value;
   }
-    finally {
-    }
+  /**
+   * @apilevel internal
+   */
+  private soot.jimple.Stmt continue_label_compute() {
+    throw new UnsupportedOperationException("Can not continue at this statement");
   }
   /**
    * @attribute inh
@@ -259,18 +261,18 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAbefore(Variable v) {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     boolean isDAbefore_Variable_value = getParent().Define_boolean_isDAbefore(this, null, v);
     return isDAbefore_Variable_value;
   }
   /**
    * @attribute inh
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:691
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:690
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUbefore(Variable v) {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     boolean isDUbefore_Variable_value = getParent().Define_boolean_isDUbefore(this, null, v);
     return isDUbefore_Variable_value;
   }
@@ -281,7 +283,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Collection lookupMethod(String name) {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     Collection lookupMethod_String_value = getParent().Define_Collection_lookupMethod(this, null, name);
     return lookupMethod_String_value;
   }
@@ -292,18 +294,18 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl lookupType(String packageName, String typeName) {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl lookupType_String_String_value = getParent().Define_TypeDecl_lookupType(this, null, packageName, typeName);
     return lookupType_String_String_value;
   }
   /**
    * @attribute inh
    * @aspect TypeScopePropagation
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:262
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:174
    */
   @SuppressWarnings({"unchecked", "cast"})
   public SimpleSet lookupType(String name) {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     SimpleSet lookupType_String_value = getParent().Define_SimpleSet_lookupType(this, null, name);
     return lookupType_String_value;
   }
@@ -314,29 +316,29 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public SimpleSet lookupVariable(String name) {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     SimpleSet lookupVariable_String_value = getParent().Define_SimpleSet_lookupVariable(this, null, name);
     return lookupVariable_String_value;
   }
   /**
    * @attribute inh
    * @aspect NestedTypes
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:511
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:512
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BodyDecl enclosingBodyDecl() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     BodyDecl enclosingBodyDecl_value = getParent().Define_BodyDecl_enclosingBodyDecl(this, null);
     return enclosingBodyDecl_value;
   }
   /**
    * @attribute inh
    * @aspect NestedTypes
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:587
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:584
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl hostType() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl hostType_value = getParent().Define_TypeDecl_hostType(this, null);
     return hostType_value;
   }
@@ -347,7 +349,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean reachable() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     boolean reachable_value = getParent().Define_boolean_reachable(this, null);
     return reachable_value;
   }
@@ -358,7 +360,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean reportUnreachable() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     boolean reportUnreachable_value = getParent().Define_boolean_reportUnreachable(this, null);
     return reportUnreachable_value;
   }
@@ -380,11 +382,11 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
     if(localNum_computed) {
       return localNum_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     localNum_value = getParent().Define_int_localNum(this, null);
-      if(isFinal && num == state().boundariesCrossed) localNum_computed = true;
+if(isFinal && num == state().boundariesCrossed) localNum_computed = true;
     return localNum_value;
   }
   /**
@@ -392,10 +394,11 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    * @apilevel internal
    */
   public String Define_String_typeDeclIndent(ASTNode caller, ASTNode child) {
-     {
+    if(true) {
       int childIndex = this.getIndexOfChild(caller);
       return indent();
     }
+    return getParent().Define_String_typeDeclIndent(this, caller);
   }
   /**
    * @apilevel internal

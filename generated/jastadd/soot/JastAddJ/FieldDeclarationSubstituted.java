@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production FieldDeclarationSubstituted : {@link FieldDeclaration} ::= <span class="component">&lt;Original:FieldDeclaration&gt;</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.ast:32
+ * @declaredat Generics.ast:29
  */
 public class FieldDeclarationSubstituted extends FieldDeclaration implements Cloneable {
   /**
@@ -66,57 +65,31 @@ public class FieldDeclarationSubstituted extends FieldDeclaration implements Clo
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public FieldDeclarationSubstituted fullCopy() {
-    try {
-      FieldDeclarationSubstituted tree = (FieldDeclarationSubstituted) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    FieldDeclarationSubstituted res = (FieldDeclarationSubstituted)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
-   * 
+   * @declaredat Generics.ast:1
    */
   public FieldDeclarationSubstituted() {
     super();
 
+    setChild(new Opt(), 2);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[3];
-    setChild(new Opt(), 2);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat Generics.ast:8
    */
   public FieldDeclarationSubstituted(Modifiers p0, Access p1, String p2, Opt<Expr> p3, FieldDeclaration p4) {
     setChild(p0, 0);
@@ -127,7 +100,7 @@ public class FieldDeclarationSubstituted extends FieldDeclaration implements Clo
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Generics.ast:15
    */
   public FieldDeclarationSubstituted(Modifiers p0, Access p1, beaver.Symbol p2, Opt<Expr> p3, FieldDeclaration p4) {
     setChild(p0, 0);
@@ -139,7 +112,7 @@ public class FieldDeclarationSubstituted extends FieldDeclaration implements Clo
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:25
    */
   protected int numChildren() {
     return 3;
@@ -147,88 +120,75 @@ public class FieldDeclarationSubstituted extends FieldDeclaration implements Clo
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Generics.ast:31
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Modifiers child.
-   * @param node The new node to replace the Modifiers child.
+   * Setter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setModifiers(Modifiers node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * @return The current node used as the Modifiers child.
+   * Getter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Modifiers getModifiers() {
     return (Modifiers)getChild(0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Modifiers child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Modifiers getModifiersNoTransform() {
     return (Modifiers)getChildNoTransform(0);
   }
   /**
-   * Replaces the TypeAccess child.
-   * @param node The new node to replace the TypeAccess child.
+   * Setter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setTypeAccess(Access node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * @return The current node used as the TypeAccess child.
+   * Getter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Access getTypeAccess() {
     return (Access)getChild(1);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the TypeAccess child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Access getTypeAccessNoTransform() {
     return (Access)getChildNoTransform(1);
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -238,105 +198,88 @@ public class FieldDeclarationSubstituted extends FieldDeclaration implements Clo
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the optional node for the Init child. This is the {@code Opt} node containing the child Init, not the actual child!
-   * @param opt The new node to be used as the optional node for the Init child.
+   * Setter for InitOpt
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setInitOpt(Opt<Expr> opt) {
     setChild(opt, 2);
   }
   /**
-   * Check whether the optional Init child exists.
-   * @return {@code true} if the optional Init child exists, {@code false} if it does not.
+   * Does this node have a Init child?
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public boolean hasInit() {
     return getInitOpt().getNumChild() != 0;
   }
   /**
-   * Retrieves the (optional) Init child.
-   * @return The Init child, if it exists. Returns {@code null} otherwise.
-   * @apilevel low-level
+   * Getter for optional child Init
+   * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Expr getInit() {
     return (Expr)getInitOpt().getChild(0);
   }
   /**
-   * Replaces the (optional) Init child.
-   * @param node The new node to be used as the Init child.
+   * Setter for optional child Init
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void setInit(Expr node) {
     getInitOpt().setChild(node, 0);
   }
   /**
-   * Retrieves the optional node for the Init child. This is the {@code Opt} node containing the child Init, not the actual child!
-   * @return The optional node for child the Init child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:37
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Expr> getInitOpt() {
     return (Opt<Expr>)getChild(2);
   }
   /**
-   * Retrieves the optional node for child Init. This is the {@code Opt} node containing the child Init, not the actual child!
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The optional node for child Init.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:44
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Expr> getInitOptNoTransform() {
     return (Opt<Expr>)getChildNoTransform(2);
   }
   /**
-   * Replaces the lexeme Original.
-   * @param value The new value for the lexeme Original.
+   * Setter for lexeme Original
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:5
    */
   public void setOriginal(FieldDeclaration value) {
     tokenFieldDeclaration_Original = value;
   }
-  /**
-   * @apilevel internal
-   * @ast method 
-   * 
+  /**   * @apilevel internal   * @ast method 
+   * @declaredat Generics.ast:8
    */
   
+  /**   * @apilevel internal   */  protected FieldDeclaration tokenFieldDeclaration_Original;
   /**
-   * @apilevel internal
-   */
-  protected FieldDeclaration tokenFieldDeclaration_Original;
-  /**
-   * Retrieves the value for the lexeme Original.
-   * @return The value for the lexeme Original.
+   * Getter for lexeme Original
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:13
    */
   public FieldDeclaration getOriginal() {
     return tokenFieldDeclaration_Original;
@@ -352,18 +295,18 @@ public class FieldDeclarationSubstituted extends FieldDeclaration implements Clo
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1522
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1416
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Variable sourceVariableDecl() {
     if(sourceVariableDecl_computed) {
       return sourceVariableDecl_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     sourceVariableDecl_value = sourceVariableDecl_compute();
-      if(isFinal && num == state().boundariesCrossed) sourceVariableDecl_computed = true;
+if(isFinal && num == state().boundariesCrossed) sourceVariableDecl_computed = true;
     return sourceVariableDecl_value;
   }
   /**
@@ -373,14 +316,18 @@ public class FieldDeclarationSubstituted extends FieldDeclaration implements Clo
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/GenericsCodegen.jrag:31
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/GenericsCodegen.jrag:32
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public FieldDeclaration erasedField() {
-    ASTNode$State state = state();
-    try {  return getOriginal().erasedField();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    FieldDeclaration erasedField_value = erasedField_compute();
+    return erasedField_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private FieldDeclaration erasedField_compute() {  return getOriginal().erasedField();  }
   /**
    * @apilevel internal
    */

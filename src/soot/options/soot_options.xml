@@ -215,51 +215,6 @@ Note that the Whole-Shimple Optimization pack is normally disabled
 specify the Whole Program Optimize option.</p>
       </long_desc>
     </boolopt>
-    <boolopt>
-      <name>Rootbeer Class Loader</name>
-      <alias>rbcl</alias>
-      <alias>rbclassload</alias>
-      <short_desc>Use Rootbeer Sparse Whole Program Class Loader</short_desc>
-      <long_desc>
-<p>
-Use Rootbeer Sparse Whole Program Class Loader. This class loader is used
-for call graph analysis. It uses much less ram and time than the original
-soot whole program class loaders.
-</p>
-      </long_desc>
-    </boolopt>    
-    <boolopt>
-      <name>Rootbeer Class Loader Build Call Graph</name>
-      <alias>rbcl-buildcg</alias>
-      <alias>rbclassload-buildcg</alias>
-      <short_desc>Build Call Graph with Rootbeer Class Loader</short_desc>
-      <long_desc>
-<p>
-Build a call graph inside the Rootbeer Class Loader
-</p>
-      </long_desc>
-    </boolopt>    
-    <boolopt>
-      <name>Rootbeer Class Loader Remap All</name>
-      <alias>rbcl-remap-all</alias>
-      <short_desc>Remap All Library Classes with Rootbeer Class Loader</short_desc>
-      <long_desc>
-<p>
-Remap all library classes to versions that do not have protected prefix (say java.lang).          
-</p>
-      </long_desc>
-    </boolopt>
-
-    <stropt>
-			<name>Rootbeer Class Loader Remap Prefix</name>
-			<alias>rbcl-remap-prefix</alias>
-			<short_desc>The prefix that will be prepended to remapped classes.</short_desc>
-			<long_desc>
-<p>
-The prefix that will be prepended to remapped classes.
-</p>
-</long_desc>
-		</stropt>
                 <boolopt>
 			<name>Validate</name>
 			<alias>validate</alias>
@@ -390,7 +345,7 @@ The Android application must contain the AndroidManifest.xml file.
 			<short_desc>Force Soot to use <use_arg_label/> as the path for the android.jar file.</short_desc>
 			<long_desc>
 Use <use_arg_label/> as the path to the android.jar file Soot should use.
-This option overrides the 'android-jars' option.
+This option overrides the "android-jars" option.
 			</long_desc>
 		</stropt>
 

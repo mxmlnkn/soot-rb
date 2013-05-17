@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production BoundTypeAccess : {@link TypeAccess} ::= <span class="component">&lt;TypeDecl:TypeDecl&gt;</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/BoundNames.ast:8
+ * @declaredat BoundNames.ast:8
  */
 public class BoundTypeAccess extends TypeAccess implements Cloneable {
   /**
@@ -66,44 +65,29 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BoundTypeAccess fullCopy() {
-    try {
-      BoundTypeAccess tree = (BoundTypeAccess) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    BoundTypeAccess res = (BoundTypeAccess)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect GenericsTypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:333
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:306
    */
   public boolean isRaw() {
     return getTypeDecl().isRawType();
   }
   /**
    * @ast method 
-   * 
+   * @declaredat BoundNames.ast:1
    */
   public BoundTypeAccess() {
     super();
@@ -111,18 +95,8 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat BoundNames.ast:7
    */
   public BoundTypeAccess(String p0, String p1, TypeDecl p2) {
     setPackage(p0);
@@ -131,7 +105,7 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat BoundNames.ast:12
    */
   public BoundTypeAccess(beaver.Symbol p0, beaver.Symbol p1, TypeDecl p2) {
     setPackage(p0);
@@ -141,7 +115,7 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat BoundNames.ast:20
    */
   protected int numChildren() {
     return 0;
@@ -149,26 +123,23 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat BoundNames.ast:26
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the lexeme Package.
-   * @param value The new value for the lexeme Package.
+   * Setter for lexeme Package
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setPackage(String value) {
     tokenString_Package = value;
   }
   /**
-   * JastAdd-internal setter for lexeme Package using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public void setPackage(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -178,30 +149,26 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
     Packageend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme Package.
-   * @return The value for the lexeme Package.
+   * Getter for lexeme Package
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public String getPackage() {
     return tokenString_Package != null ? tokenString_Package : "";
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -211,41 +178,33 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the lexeme TypeDecl.
-   * @param value The new value for the lexeme TypeDecl.
+   * Setter for lexeme TypeDecl
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat BoundNames.ast:5
    */
   public void setTypeDecl(TypeDecl value) {
     tokenTypeDecl_TypeDecl = value;
   }
-  /**
-   * @apilevel internal
-   * @ast method 
-   * 
+  /**   * @apilevel internal   * @ast method 
+   * @declaredat BoundNames.ast:8
    */
   
+  /**   * @apilevel internal   */  protected TypeDecl tokenTypeDecl_TypeDecl;
   /**
-   * @apilevel internal
-   */
-  protected TypeDecl tokenTypeDecl_TypeDecl;
-  /**
-   * Retrieves the value for the lexeme TypeDecl.
-   * @return The value for the lexeme TypeDecl.
+   * Getter for lexeme TypeDecl
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat BoundNames.ast:13
    */
   public TypeDecl getTypeDecl() {
     return tokenTypeDecl_TypeDecl;
@@ -268,11 +227,11 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
     if(decls_computed) {
       return decls_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     decls_value = decls_compute();
-      if(isFinal && num == state().boundariesCrossed) decls_computed = true;
+if(isFinal && num == state().boundariesCrossed) decls_computed = true;
     return decls_value;
   }
   /**
@@ -282,14 +241,18 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrint
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:800
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:818
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String dumpString() {
-    ASTNode$State state = state();
-    try {  return getClass().getName() + " [" + getTypeDecl().fullName() + "]";  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String dumpString_value = dumpString_compute();
+    return dumpString_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String dumpString_compute() {  return getClass().getName() + " [" + getTypeDecl().fullName() + "]";  }
   /**
    * @apilevel internal
    */

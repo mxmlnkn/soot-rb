@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ArrayDecl : {@link ClassDecl};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:68
+ * @declaredat java.ast:65
  */
 public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
@@ -112,33 +111,18 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ArrayDecl fullCopy() {
-    try {
-      ArrayDecl tree = (ArrayDecl) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ArrayDecl res = (ArrayDecl)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect Arrays
@@ -150,7 +134,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @ast method 
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:880
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:853
    */
   public Access substitute(Parameterization parTypeDecl) {
     return new ArrayTypeAccess(componentType().substitute(parTypeDecl));
@@ -158,37 +142,26 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @ast method 
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:916
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:889
    */
   public Access substituteReturnType(Parameterization parTypeDecl) {
     return new ArrayTypeAccess(componentType().substituteReturnType(parTypeDecl));
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ArrayDecl() {
     super();
 
-
-  }
-  /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
-   * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[4];
     setChild(new Opt(), 1);
     setChild(new List(), 2);
     setChild(new List(), 3);
+
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:10
    */
   public ArrayDecl(Modifiers p0, String p1, Opt<Access> p2, List<Access> p3, List<BodyDecl> p4) {
     setChild(p0, 0);
@@ -199,7 +172,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:17
    */
   public ArrayDecl(Modifiers p0, beaver.Symbol p1, Opt<Access> p2, List<Access> p3, List<BodyDecl> p4) {
     setChild(p0, 0);
@@ -211,7 +184,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   protected int numChildren() {
     return 4;
@@ -219,57 +192,49 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:33
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Modifiers child.
-   * @param node The new node to replace the Modifiers child.
+   * Setter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setModifiers(Modifiers node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * @return The current node used as the Modifiers child.
+   * Getter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Modifiers getModifiers() {
     return (Modifiers)getChild(0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Modifiers child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Modifiers getModifiersNoTransform() {
     return (Modifiers)getChildNoTransform(0);
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -279,128 +244,102 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the optional node for the SuperClassAccess child. This is the {@code Opt} node containing the child SuperClassAccess, not the actual child!
-   * @param opt The new node to be used as the optional node for the SuperClassAccess child.
+   * Setter for SuperClassAccessOpt
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setSuperClassAccessOpt(Opt<Access> opt) {
     setChild(opt, 1);
   }
   /**
-   * Check whether the optional SuperClassAccess child exists.
-   * @return {@code true} if the optional SuperClassAccess child exists, {@code false} if it does not.
+   * Does this node have a SuperClassAccess child?
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public boolean hasSuperClassAccess() {
     return getSuperClassAccessOpt().getNumChild() != 0;
   }
   /**
-   * Retrieves the (optional) SuperClassAccess child.
-   * @return The SuperClassAccess child, if it exists. Returns {@code null} otherwise.
-   * @apilevel low-level
+   * Getter for optional child SuperClassAccess
+   * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Access getSuperClassAccess() {
     return (Access)getSuperClassAccessOpt().getChild(0);
   }
   /**
-   * Replaces the (optional) SuperClassAccess child.
-   * @param node The new node to be used as the SuperClassAccess child.
+   * Setter for optional child SuperClassAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void setSuperClassAccess(Access node) {
     getSuperClassAccessOpt().setChild(node, 0);
   }
   /**
-   * Retrieves the optional node for the SuperClassAccess child. This is the {@code Opt} node containing the child SuperClassAccess, not the actual child!
-   * @return The optional node for child the SuperClassAccess child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:37
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Access> getSuperClassAccessOpt() {
     return (Opt<Access>)getChild(1);
   }
   /**
-   * Retrieves the optional node for child SuperClassAccess. This is the {@code Opt} node containing the child SuperClassAccess, not the actual child!
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The optional node for child SuperClassAccess.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:44
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Access> getSuperClassAccessOptNoTransform() {
     return (Opt<Access>)getChildNoTransform(1);
   }
   /**
-   * Replaces the Implements list.
-   * @param list The new list node to be used as the Implements list.
+   * Setter for ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setImplementsList(List<Access> list) {
     setChild(list, 2);
   }
   /**
-   * Retrieves the number of children in the Implements list.
-   * @return Number of children in the Implements list.
+   * @return number of children in ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumImplements() {
     return getImplementsList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the Implements list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the Implements list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumImplementsNoTransform() {
-    return getImplementsListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the Implements list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the Implements list.
+   * Getter for child in list ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Access getImplements(int i) {
     return (Access)getImplementsList().getChild(i);
   }
   /**
-   * Append an element to the Implements list.
-   * @param node The element to append to the Implements list.
+   * Add element to list ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addImplements(Access node) {
     List<Access> list = (parent == null || state == null) ? getImplementsListNoTransform() : getImplementsList();
@@ -409,51 +348,44 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addImplementsNoTransform(Access node) {
     List<Access> list = getImplementsListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the Implements list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setImplements(Access node, int i) {
     List<Access> list = getImplementsList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the Implements list.
-   * @return The node representing the Implements list.
+   * Getter for Implements list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<Access> getImplementss() {
     return getImplementsList();
   }
   /**
-   * Retrieves the Implements list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Implements list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<Access> getImplementssNoTransform() {
     return getImplementsListNoTransform();
   }
   /**
-   * Retrieves the Implements list.
-   * @return The node representing the Implements list.
+   * Getter for list ImplementsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getImplementsList() {
@@ -462,66 +394,47 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the Implements list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Implements list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getImplementsListNoTransform() {
     return (List<Access>)getChildNoTransform(2);
   }
   /**
-   * Replaces the BodyDecl list.
-   * @param list The new list node to be used as the BodyDecl list.
+   * Setter for BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setBodyDeclList(List<BodyDecl> list) {
     setChild(list, 3);
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * @return Number of children in the BodyDecl list.
+   * @return number of children in BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumBodyDecl() {
     return getBodyDeclList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the BodyDecl list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumBodyDeclNoTransform() {
-    return getBodyDeclListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the BodyDecl list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the BodyDecl list.
+   * Getter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BodyDecl getBodyDecl(int i) {
     return (BodyDecl)getBodyDeclList().getChild(i);
   }
   /**
-   * Append an element to the BodyDecl list.
-   * @param node The element to append to the BodyDecl list.
+   * Add element to list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addBodyDecl(BodyDecl node) {
     List<BodyDecl> list = (parent == null || state == null) ? getBodyDeclListNoTransform() : getBodyDeclList();
@@ -530,51 +443,44 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addBodyDeclNoTransform(BodyDecl node) {
     List<BodyDecl> list = getBodyDeclListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the BodyDecl list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setBodyDecl(BodyDecl node, int i) {
     List<BodyDecl> list = getBodyDeclList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for BodyDecl list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<BodyDecl> getBodyDecls() {
     return getBodyDeclList();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<BodyDecl> getBodyDeclsNoTransform() {
     return getBodyDeclListNoTransform();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclList() {
@@ -583,12 +489,9 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclListNoTransform() {
@@ -632,11 +535,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(accessibleFrom_TypeDecl_values.containsKey(_parameters)) {
       return ((Boolean)accessibleFrom_TypeDecl_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean accessibleFrom_TypeDecl_value = accessibleFrom_compute(type);
-      if(isFinal && num == state().boundariesCrossed) accessibleFrom_TypeDecl_values.put(_parameters, Boolean.valueOf(accessibleFrom_TypeDecl_value));
+if(isFinal && num == state().boundariesCrossed) accessibleFrom_TypeDecl_values.put(_parameters, Boolean.valueOf(accessibleFrom_TypeDecl_value));
     return accessibleFrom_TypeDecl_value;
   }
   /**
@@ -661,11 +564,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(dimension_computed) {
       return dimension_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     dimension_value = dimension_compute();
-      if(isFinal && num == state().boundariesCrossed) dimension_computed = true;
+if(isFinal && num == state().boundariesCrossed) dimension_computed = true;
     return dimension_value;
   }
   /**
@@ -690,11 +593,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(elementType_computed) {
       return elementType_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     elementType_value = elementType_compute();
-      if(isFinal && num == state().boundariesCrossed) elementType_computed = true;
+if(isFinal && num == state().boundariesCrossed) elementType_computed = true;
     return elementType_value;
   }
   /**
@@ -703,15 +606,19 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   private TypeDecl elementType_compute() {  return componentType().elementType();  }
   /**
    * @attribute syn
-   * @aspect TypeName
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/QualifiedNames.jrag:68
+   * @aspect Arrays
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/Arrays.jrag:53
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String name() {
-    ASTNode$State state = state();
-    try {  return fullName();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String name_value = name_compute();
+    return name_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String name_compute() {  return fullName();  }
   /**
    * @apilevel internal
    */
@@ -730,11 +637,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(fullName_computed) {
       return fullName_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     fullName_value = fullName_compute();
-      if(isFinal && num == state().boundariesCrossed) fullName_computed = true;
+if(isFinal && num == state().boundariesCrossed) fullName_computed = true;
     return fullName_value;
   }
   /**
@@ -759,11 +666,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(typeName_computed) {
       return typeName_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     typeName_value = typeName_compute();
-      if(isFinal && num == state().boundariesCrossed) typeName_computed = true;
+if(isFinal && num == state().boundariesCrossed) typeName_computed = true;
     return typeName_value;
   }
   /**
@@ -774,7 +681,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:96
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:76
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean castingConversionTo(TypeDecl type) {
@@ -783,11 +690,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(castingConversionTo_TypeDecl_values.containsKey(_parameters)) {
       return ((Boolean)castingConversionTo_TypeDecl_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean castingConversionTo_TypeDecl_value = castingConversionTo_compute(type);
-      if(isFinal && num == state().boundariesCrossed) castingConversionTo_TypeDecl_values.put(_parameters, Boolean.valueOf(castingConversionTo_TypeDecl_value));
+if(isFinal && num == state().boundariesCrossed) castingConversionTo_TypeDecl_values.put(_parameters, Boolean.valueOf(castingConversionTo_TypeDecl_value));
     return castingConversionTo_TypeDecl_value;
   }
   /**
@@ -818,14 +725,18 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:213
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:214
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isArrayDecl() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isArrayDecl_value = isArrayDecl_compute();
+    return isArrayDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isArrayDecl_compute() {  return true;  }
   protected java.util.Map instanceOf_TypeDecl_values;
   /**
    * @attribute syn
@@ -839,11 +750,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(instanceOf_TypeDecl_values.containsKey(_parameters)) {
       return ((Boolean)instanceOf_TypeDecl_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean instanceOf_TypeDecl_value = instanceOf_compute(type);
-      if(isFinal && num == state().boundariesCrossed) instanceOf_TypeDecl_values.put(_parameters, Boolean.valueOf(instanceOf_TypeDecl_value));
+if(isFinal && num == state().boundariesCrossed) instanceOf_TypeDecl_values.put(_parameters, Boolean.valueOf(instanceOf_TypeDecl_value));
     return instanceOf_TypeDecl_value;
   }
   /**
@@ -853,31 +764,39 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:453
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:469
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isSupertypeOfArrayDecl(ArrayDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean isSupertypeOfArrayDecl_ArrayDecl_value = isSupertypeOfArrayDecl_compute(type);
+    return isSupertypeOfArrayDecl_ArrayDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isSupertypeOfArrayDecl_compute(ArrayDecl type) {
     if(type.elementType().isPrimitive() && elementType().isPrimitive())
       return type.dimension() == dimension() && type.elementType() == elementType();
     return type.componentType().instanceOf(componentType());
-  }
-    finally {
-    }
   }
   /* It is a compile-time error if the return type of a method declared in an
   annotation type is any type other than one of the following: one of the
   primitive types, String, Class and any invocation of Class, an enum type
   (\u00df8.9), an annotation type, or an array (\u00df10) of one of the preceding types.* @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:121
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:133
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isValidAnnotationMethodReturnType() {
-    ASTNode$State state = state();
-    try {  return componentType().isValidAnnotationMethodReturnType();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isValidAnnotationMethodReturnType_value = isValidAnnotationMethodReturnType_compute();
+    return isValidAnnotationMethodReturnType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isValidAnnotationMethodReturnType_compute() {  return componentType().isValidAnnotationMethodReturnType();  }
   /* An element type T is commensurate with an element value V if and only if one of the following conditions is true:
     * T is an array type E[] and either:
           o V is an ElementValueArrayInitializer and each ElementValueInitializer (analogous to a variable initializer in an array initializer) in V is commensurate with E. Or
@@ -888,14 +807,18 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
           o if T is Class, or an invocation of Class, and V is a class literal (\u00df15.8.2).
           o If T is an enum type, and V is an enum constant. * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:474
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:494
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean commensurateWith(ElementValue value) {
-    ASTNode$State state = state();
-    try {  return value.commensurateWithArrayDecl(this);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean commensurateWith_ElementValue_value = commensurateWith_compute(value);
+    return commensurateWith_ElementValue_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean commensurateWith_compute(ElementValue value) {  return value.commensurateWithArrayDecl(this);  }
   /**
    * @apilevel internal
    */
@@ -940,7 +863,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
         involvesTypeParameters_value = new_involvesTypeParameters_value; 
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
       involvesTypeParameters_computed = true;
       }
       else {
@@ -984,18 +907,18 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsErasure
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:353
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:326
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl erasure() {
     if(erasure_computed) {
       return erasure_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     erasure_value = erasure_compute();
-      if(isFinal && num == state().boundariesCrossed) erasure_computed = true;
+if(isFinal && num == state().boundariesCrossed) erasure_computed = true;
     return erasure_value;
   }
   /**
@@ -1021,7 +944,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1082
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1043
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean usesTypeVariable() {
@@ -1046,7 +969,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
         usesTypeVariable_value = new_usesTypeVariable_value; 
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
       usesTypeVariable_computed = true;
       }
       else {
@@ -1119,7 +1042,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
         }
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
         subtype_TypeDecl_values.put(_parameters, new_subtype_TypeDecl_value);
       }
       else {
@@ -1152,17 +1075,21 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:450
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:466
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeArrayDecl(ArrayDecl type) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean supertypeArrayDecl_ArrayDecl_value = supertypeArrayDecl_compute(type);
+    return supertypeArrayDecl_ArrayDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeArrayDecl_compute(ArrayDecl type) {
     if(type.elementType().isPrimitive() && elementType().isPrimitive())
       return type.dimension() == dimension() && type.elementType() == elementType();
     return type.componentType().subtype(componentType());
-  }
-    finally {
-    }
   }
   /**
    * @apilevel internal
@@ -1182,11 +1109,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(jvmName_computed) {
       return jvmName_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     jvmName_value = jvmName_compute();
-      if(isFinal && num == state().boundariesCrossed) jvmName_computed = true;
+if(isFinal && num == state().boundariesCrossed) jvmName_computed = true;
     return jvmName_value;
   }
   /**
@@ -1204,14 +1131,18 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Java2Rewrites
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/Java2Rewrites.jrag:57
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/Java2Rewrites.jrag:61
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String referenceClassFieldName() {
-    ASTNode$State state = state();
-    try {  return "array" + jvmName().replace('[', '$').replace('.', '$').replace(';', ' ').trim();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String referenceClassFieldName_value = referenceClassFieldName_compute();
+    return referenceClassFieldName_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String referenceClassFieldName_compute() {  return "array" + jvmName().replace('[', '$').replace('.', '$').replace(';', ' ').trim();  }
   /**
    * @apilevel internal
    */
@@ -1230,11 +1161,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(getSootClassDecl_computed) {
       return getSootClassDecl_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     getSootClassDecl_value = getSootClassDecl_compute();
-      if(isFinal && num == state().boundariesCrossed) getSootClassDecl_computed = true;
+if(isFinal && num == state().boundariesCrossed) getSootClassDecl_computed = true;
     return getSootClassDecl_value;
   }
   /**
@@ -1259,11 +1190,11 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     if(getSootType_computed) {
       return getSootType_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     getSootType_value = getSootType_compute();
-      if(isFinal && num == state().boundariesCrossed) getSootType_computed = true;
+if(isFinal && num == state().boundariesCrossed) getSootType_computed = true;
     return getSootType_value;
   }
   /**
@@ -1271,29 +1202,13 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
    */
   private Type getSootType_compute() {  return soot.ArrayType.v(elementType().getSootType(), dimension());  }
   /**
-	 * A type is reifiable if it either refers to a non-parameterized type,
-	 * is a raw type, is a parameterized type with only unbound wildcard
-	 * parameters or is an array type with a reifiable type parameter.
-	 *
-	 * @see "JLSv3 &sect;4.7"
-	 * @attribute syn
-   * @aspect SafeVarargs
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/SafeVarargs.jrag:106
-   */
-  public boolean isReifiable() {
-    ASTNode$State state = state();
-    try {  return elementType().isReifiable();  }
-    finally {
-    }
-  }
-  /**
    * @attribute inh
    * @aspect TypeConversion
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:140
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeSerializable() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeSerializable_value = getParent().Define_TypeDecl_typeSerializable(this, null);
     return typeSerializable_value;
   }
@@ -1304,7 +1219,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeCloneable() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeCloneable_value = getParent().Define_TypeDecl_typeCloneable(this, null);
     return typeCloneable_value;
   }

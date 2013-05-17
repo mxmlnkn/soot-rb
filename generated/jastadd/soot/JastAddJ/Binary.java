@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production Binary : {@link Expr} ::= <span class="component">LeftOperand:{@link Expr}</span> <span class="component">RightOperand:{@link Expr}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:150
+ * @declaredat java.ast:147
  */
 public abstract class Binary extends Expr implements Cloneable {
   /**
@@ -117,7 +116,7 @@ public abstract class Binary extends Expr implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public Binary() {
     super();
@@ -125,19 +124,8 @@ public abstract class Binary extends Expr implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public Binary(Expr p0, Expr p1) {
     setChild(p0, 0);
@@ -146,7 +134,7 @@ public abstract class Binary extends Expr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   protected int numChildren() {
     return 2;
@@ -154,69 +142,59 @@ public abstract class Binary extends Expr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the LeftOperand child.
-   * @param node The new node to replace the LeftOperand child.
+   * Setter for LeftOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setLeftOperand(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the LeftOperand child.
-   * @return The current node used as the LeftOperand child.
+   * Getter for LeftOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getLeftOperand() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the LeftOperand child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the LeftOperand child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getLeftOperandNoTransform() {
     return (Expr)getChildNoTransform(0);
   }
   /**
-   * Replaces the RightOperand child.
-   * @param node The new node to replace the RightOperand child.
+   * Setter for RightOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setRightOperand(Expr node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the RightOperand child.
-   * @return The current node used as the RightOperand child.
+   * Getter for RightOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getRightOperand() {
     return (Expr)getChild(1);
   }
   /**
-   * Retrieves the RightOperand child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the RightOperand child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getRightOperandNoTransform() {
     return (Expr)getChildNoTransform(1);
@@ -224,7 +202,7 @@ public abstract class Binary extends Expr implements Cloneable {
   /**
    * @ast method 
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:370
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:516
    */
   private TypeDecl refined_ConstantExpression_Binary_binaryNumericPromotedType()
 {
@@ -266,7 +244,7 @@ public abstract class Binary extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:345
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:491
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isConstant() {
@@ -291,7 +269,7 @@ public abstract class Binary extends Expr implements Cloneable {
         isConstant_value = new_isConstant_value; 
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
       isConstant_computed = true;
       }
       else {
@@ -327,42 +305,54 @@ public abstract class Binary extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:368
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:514
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public Expr left() {
-    ASTNode$State state = state();
-    try {  return getLeftOperand();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    Expr left_value = left_compute();
+    return left_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private Expr left_compute() {  return getLeftOperand();  }
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:369
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:515
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public Expr right() {
-    ASTNode$State state = state();
-    try {  return getRightOperand();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    Expr right_value = right_compute();
+    return right_value;
   }
   /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:370
+   * @apilevel internal
    */
+  private Expr right_compute() {  return getRightOperand();  }
+  /**
+   * @attribute syn
+   * @aspect AutoBoxing
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:205
+   */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl binaryNumericPromotedType() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    TypeDecl binaryNumericPromotedType_value = binaryNumericPromotedType_compute();
+    return binaryNumericPromotedType_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private TypeDecl binaryNumericPromotedType_compute() {
     TypeDecl leftType = left().type();
     TypeDecl rightType = right().type();
     if(leftType.isBoolean() && rightType.isBoolean()) {
       return leftType.isReferenceType() ? leftType.unboxed() : leftType;
     }
     return refined_ConstantExpression_Binary_binaryNumericPromotedType();
-  }
-    finally {
-    }
   }
   protected java.util.Map isDAafterTrue_Variable_values;
   /**
@@ -377,11 +367,11 @@ public abstract class Binary extends Expr implements Cloneable {
     if(isDAafterTrue_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDAafterTrue_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDAafterTrue_Variable_value = isDAafterTrue_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDAafterTrue_Variable_values.put(_parameters, Boolean.valueOf(isDAafterTrue_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDAafterTrue_Variable_values.put(_parameters, Boolean.valueOf(isDAafterTrue_Variable_value));
     return isDAafterTrue_Variable_value;
   }
   /**
@@ -401,11 +391,11 @@ public abstract class Binary extends Expr implements Cloneable {
     if(isDAafterFalse_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDAafterFalse_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDAafterFalse_Variable_value = isDAafterFalse_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDAafterFalse_Variable_values.put(_parameters, Boolean.valueOf(isDAafterFalse_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDAafterFalse_Variable_values.put(_parameters, Boolean.valueOf(isDAafterFalse_Variable_value));
     return isDAafterFalse_Variable_value;
   }
   /**
@@ -425,11 +415,11 @@ public abstract class Binary extends Expr implements Cloneable {
     if(isDAafter_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDAafter_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDAafter_Variable_value = isDAafter_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDAafter_Variable_values.put(_parameters, Boolean.valueOf(isDAafter_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDAafter_Variable_values.put(_parameters, Boolean.valueOf(isDAafter_Variable_value));
     return isDAafter_Variable_value;
   }
   /**
@@ -440,7 +430,7 @@ public abstract class Binary extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:845
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:844
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafter(Variable v) {
@@ -449,11 +439,11 @@ public abstract class Binary extends Expr implements Cloneable {
     if(isDUafter_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDUafter_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDUafter_Variable_value = isDUafter_compute(v);
-      if(isFinal && num == state().boundariesCrossed) isDUafter_Variable_values.put(_parameters, Boolean.valueOf(isDUafter_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDUafter_Variable_values.put(_parameters, Boolean.valueOf(isDUafter_Variable_value));
     return isDUafter_Variable_value;
   }
   /**
@@ -464,7 +454,7 @@ public abstract class Binary extends Expr implements Cloneable {
   /**
    * @attribute inh
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:696
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:695
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUbefore(Variable v) {
@@ -473,11 +463,11 @@ public abstract class Binary extends Expr implements Cloneable {
     if(isDUbefore_Variable_values.containsKey(_parameters)) {
       return ((Boolean)isDUbefore_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean isDUbefore_Variable_value = getParent().Define_boolean_isDUbefore(this, null, v);
-      if(isFinal && num == state().boundariesCrossed) isDUbefore_Variable_values.put(_parameters, Boolean.valueOf(isDUbefore_Variable_value));
+if(isFinal && num == state().boundariesCrossed) isDUbefore_Variable_values.put(_parameters, Boolean.valueOf(isDUbefore_Variable_value));
     return isDUbefore_Variable_value;
   }
   /**
@@ -488,19 +478,17 @@ public abstract class Binary extends Expr implements Cloneable {
     if(caller == getRightOperandNoTransform()) {
       return getLeftOperand().isDAafter(v);
     }
-    else {      return getParent().Define_boolean_isDAbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDAbefore(this, caller, v);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:846
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:845
    * @apilevel internal
    */
   public boolean Define_boolean_isDUbefore(ASTNode caller, ASTNode child, Variable v) {
     if(caller == getRightOperandNoTransform()) {
       return getLeftOperand().isDUafter(v);
     }
-    else {      return getParent().Define_boolean_isDUbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDUbefore(this, caller, v);
   }
   /**
    * @apilevel internal

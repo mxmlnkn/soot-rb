@@ -1,5 +1,0 @@
-#!/bin/sh
-
-ant classesjar
-
-cp lib/sootclasses-trunk.jar ../rootbeer1/lib/sootclasses-rbclassload.jar

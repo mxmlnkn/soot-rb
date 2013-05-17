@@ -1,9 +1,6 @@
 Improvements and API changes in HEAD
 
-1. Added support for Android. There is a new experimental module called 
-   Dexpler which converts Dalvik bytecode to Jimple. This enables Soot
-   to directly read bytecode from Android applications. 
-   TODO Further comments...
+1. Added support for Android. TODO Further comments...
 
 2. Changed default throw analysis from "pedantic" to "unit based". This
    changes the default the assumptions that Soot makes about which
@@ -23,15 +20,6 @@ Improvements and API changes in HEAD
 5. Ben Bellamy modified the fast type assigner to handle variables that
    during their lifetime both point to array and non-array typed objects.
    This is necessary for dalvik-to-Jimple code generation.
-   
-6. Soot now requires Java 1.6 to build and run. 
-
-7. Changed the definition of EntryPoints.application() to just return
-   the empty set if no main class is present.
-   
-8. Soot now support Java 7 source-code syntax. 
-
-9. Improves the geometric encoding points-to solver. Bug fixes for processing the functions with more than 2^63 contexts. Performance is significantly improved. It is now scalable to analyze DaCapo-2006 with JDK1.6 within 9 minutes for the largest program. Precision is slightly better due to new fake information filtering algorithm. Code is refactored to be more readable. 
 
 Improvements and API changes in version 2.5.0
 

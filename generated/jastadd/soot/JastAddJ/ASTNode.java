@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,13 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
+
+// Generated with JastAdd II (http://jastadd.org) version R20110924
+
 /**
- * @production ASTNode;
  * @ast node
- * 
+ * @declaredat ASTNode.ast:0
  */
 public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Cloneable, Iterable<T> {
   /**
@@ -60,33 +62,18 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ASTNode<T> fullCopy() {
-    try {
-      ASTNode tree = (ASTNode) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ASTNode res = (ASTNode)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect AccessControl
@@ -168,7 +155,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @ast method 
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:450
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:449
    */
   protected boolean checkDUeverywhere(Variable v) {
     for(int i = 0; i < getNumChild(); i++)
@@ -179,7 +166,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @ast method 
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:560
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:559
    */
   protected boolean isDescendantTo(ASTNode node) {
     if(this == node)
@@ -304,15 +291,32 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
+   * @aspect ErrorCheck
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ErrorCheck.jrag:195
+   */
+  public void collectErrors() {
+    nameCheck();
+    typeCheck();
+    accessControl();
+    exceptionHandling();
+    checkUnreachableStmt();
+    definiteAssignment();
+    checkModifiers();
+    for(int i = 0; i < getNumChild(); i++) {
+      getChild(i).collectErrors();
+    }
+  }
+  /**
+   * @ast method 
    * @aspect ExceptionHandling
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ExceptionHandling.jrag:54
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ExceptionHandling.jrag:40
    */
   public void exceptionHandling() {
   }
   /**
    * @ast method 
    * @aspect ExceptionHandling
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ExceptionHandling.jrag:224
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ExceptionHandling.jrag:210
    */
   protected boolean reachedException(TypeDecl type) {
     for(int i = 0; i < getNumChild(); i++)
@@ -521,7 +525,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @ast method 
    * @aspect InnerClasses
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:158
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:155
    */
   public void collectEnclosingVariables(HashSet set, TypeDecl typeDecl) {
     for(int i = 0; i < getNumChild(); i++)
@@ -695,55 +699,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
       b.addNextStmt(list);
   }
   /**
-	 * Create a deep copy of this subtree.
-	 * The copy is dangling, i.e. has no parent.
-	 *
-	 * @return a dangling copy of the subtree at this node
-	 * @ast method 
-   * @aspect JastAddExtensions
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/JastAddExtensions.jadd:20
-   */
-  public ASTNode cloneSubtree() {
-		try {
-			ASTNode tree = (ASTNode) clone();
-			tree.setParent(null);// make dangling
-			if (children != null) {
-				tree.children = new ASTNode[children.length];
-				for (int i = 0; i < children.length; ++i) {
-					if (children[i] == null) {
-						tree.children[i] = null;
-					} else {
-						tree.children[i] = children[i].cloneSubtree();
-						tree.children[i].setParent(tree);
-					}
-				}
-			}
-			return tree;
-		} catch (CloneNotSupportedException e) {
-			throw new Error("Error: clone not supported for " +
-					getClass().getName());
-		}
-	}
-  /**
-   * @ast method 
-   * @aspect UncheckedConversion
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/UncheckedConversion.jrag:40
-   */
-  public void checkUncheckedConversion(TypeDecl source, TypeDecl dest) {
-    if (source.isUncheckedConversionTo(dest))
-      warning("unchecked conversion from raw type "+source.typeName()+
-        " to generic type "+dest.typeName());
-  }
-  /**
-	 * Checking of the SafeVarargs annotation is only needed for method
-	 * declarations.
-	 * @ast method 
-   * @aspect Warnings
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/Warnings.jadd:38
-   */
-  public void checkWarnings() {
-	}
-  /**
    * @ast method 
    * @aspect EmitJimpleRefinements
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/SootJastAddJ/EmitJimpleRefinements.jrag:197
@@ -763,30 +718,20 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:1
    */
   public ASTNode() {
     super();
 
-    init$Children();
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
-   * @ast method 
-   * 
-   */
-  public void init$Children() {
-  }
-  /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:10
    */
   
+
   /**
    * @apilevel internal
    */
@@ -794,7 +739,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:14
    */
   
   /**
@@ -804,7 +749,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:18
    */
   
   /**
@@ -814,7 +759,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:22
    */
   
   /**
@@ -824,13 +769,13 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:26
    */
   public final ASTNode$State state() { return state; }
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:30
    */
   
   /**
@@ -840,19 +785,19 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:34
    */
   public boolean in$Circle() { return in$Circle; }
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:38
    */
   public void in$Circle(boolean b) { in$Circle = b; }
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:42
    */
   
   /**
@@ -862,19 +807,19 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:46
    */
   public boolean is$Final() { return is$Final; }
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:50
    */
   public void is$Final(boolean b) { is$Final = b; }
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:54
    */
   @SuppressWarnings("cast") public T getChild(int i) {
     return (T)ASTNode.getChild(this, i);
@@ -882,7 +827,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:60
    */
   public static ASTNode getChild(ASTNode that, int i) {
     ASTNode node = that.getChildNoTransform(i);
@@ -915,7 +860,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:91
    */
   
   /**
@@ -925,7 +870,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:95
    */
   public int getIndexOfChild(ASTNode node) {
     if(node != null && node.childIndex < getNumChildNoTransform() && node == getChildNoTransform(node.childIndex))
@@ -940,25 +885,24 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:109
    */
   public void addChild(T node) {
     setChild(node, getNumChildNoTransform());
   }
   /**
-   * <p><em>This method does not invoke AST transformations.</em></p>
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:115
    */
   @SuppressWarnings("cast")
   public final T getChildNoTransform(int i) {
-    return (T) (children != null ? children[i] : null);
+    return (T)children[i];
   }
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:122
    */
   
   /**
@@ -968,7 +912,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:126
    */
   protected int numChildren() {
     return numChildren;
@@ -976,16 +920,15 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:132
    */
   public int getNumChild() {
     return numChildren();
   }
   /**
-   * <p><em>This method does not invoke AST transformations.</em></p>
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:138
    */
   public final int getNumChildNoTransform() {
     return numChildren();
@@ -993,12 +936,12 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:144
    */
   public void setChild(ASTNode node, int i) {
-    if(children == null) {
-      children = new ASTNode[i+1>4?i+1:4];
-    } else if (i >= children.length) {
+  if(children == null) {
+      children = new ASTNode[i + 1];
+  } else if (i >= children.length) {
       ASTNode c[] = new ASTNode[i << 1];
       System.arraycopy(children, 0, c, 0, children.length);
       children = c;
@@ -1010,23 +953,18 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:159
    */
   public void insertChild(ASTNode node, int i) {
     if(children == null) {
-      children = new ASTNode[i+1>4?i+1:4];
+      children = new ASTNode[i + 1];
       children[i] = node;
     } else {
       ASTNode c[] = new ASTNode[children.length + 1];
       System.arraycopy(children, 0, c, 0, i);
       c[i] = node;
-      if(i < children.length) {
+      if(i < children.length)
         System.arraycopy(children, i, c, i+1, children.length-i);
-        for(int j = i+1; j < c.length; ++j) {
-          if(c[j] != null)
-            c[j].childIndex = j;
-        }
-      }
       children = c;
     }
     numChildren++;
@@ -1035,7 +973,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:177
    */
   public void removeChild(int i) {
     if(children != null) {
@@ -1046,18 +984,12 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
       }
       System.arraycopy(children, i+1, children, i, children.length-i-1);
       numChildren--;
-      for(int j = i; j < numChildren; ++j) {
-        if(children[j] != null) {
-          child = (ASTNode) children[j];
-          child.childIndex = j;
-        }
-      }
     }
   }
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:191
    */
   public ASTNode getParent() {
     if(parent != null && ((ASTNode)parent).is$Final() != is$Final()) {
@@ -1068,7 +1000,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:200
    */
   public void setParent(ASTNode node) {
     parent = node;
@@ -1076,7 +1008,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:206
    */
   
   /**
@@ -1086,7 +1018,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:210
    */
   
   /**
@@ -1095,10 +1027,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   protected ASTNode[] children;
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:212
    */
-  protected boolean duringImplicitConstructor() {
-    if(state().duringImplicitConstructor == 0) {
+  protected boolean duringLookupConstructor() {
+    if(state().duringLookupConstructor == 0) {
       return false;
     }
     else {
@@ -1109,7 +1041,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:223
    */
   protected boolean duringBoundNames() {
     if(state().duringBoundNames == 0) {
@@ -1123,10 +1055,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:234
    */
-  protected boolean duringNameResolution() {
-    if(state().duringNameResolution == 0) {
+  protected boolean duringResolveAmbiguousNames() {
+    if(state().duringResolveAmbiguousNames == 0) {
       return false;
     }
     else {
@@ -1137,7 +1069,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:245
    */
   protected boolean duringSyntacticClassification() {
     if(state().duringSyntacticClassification == 0) {
@@ -1151,7 +1083,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:256
    */
   protected boolean duringAnonymousClasses() {
     if(state().duringAnonymousClasses == 0) {
@@ -1165,10 +1097,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:267
    */
-  protected boolean duringVariableDeclarationTransformation() {
-    if(state().duringVariableDeclarationTransformation == 0) {
+  protected boolean duringVariableDeclaration() {
+    if(state().duringVariableDeclaration == 0) {
       return false;
     }
     else {
@@ -1179,10 +1111,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:278
    */
-  protected boolean duringLiterals() {
-    if(state().duringLiterals == 0) {
+  protected boolean duringConstantExpression() {
+    if(state().duringConstantExpression == 0) {
       return false;
     }
     else {
@@ -1193,10 +1125,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:289
    */
-  protected boolean duringDU() {
-    if(state().duringDU == 0) {
+  protected boolean duringDefiniteAssignment() {
+    if(state().duringDefiniteAssignment == 0) {
       return false;
     }
     else {
@@ -1207,7 +1139,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:300
    */
   protected boolean duringAnnotations() {
     if(state().duringAnnotations == 0) {
@@ -1221,7 +1153,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:311
    */
   protected boolean duringEnums() {
     if(state().duringEnums == 0) {
@@ -1235,7 +1167,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   }
   /**
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:322
    */
   protected boolean duringGenericTypeVariables() {
     if(state().duringGenericTypeVariables == 0) {
@@ -1250,10 +1182,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:388
    */
   public java.util.Iterator<T> iterator() {
-    return new java.util.Iterator<T>() {
+  return new java.util.Iterator<T>() {
       private int counter = 0;
       public boolean hasNext() {
         return counter < getNumChild();
@@ -1267,93 +1199,91 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
       public void remove() {
         throw new UnsupportedOperationException();
       }
-    };
+  };
   }
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat ASTNode.ast:408
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-	 * The collectErrors method is refined so that it calls
-	 * the checkWarnings method on each ASTNode to report
-	 * unchecked warnings.
-	 * @ast method 
-   * @aspect Warnings
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/Warnings.jadd:20
-   */
-    public void collectErrors() {
-		nameCheck();
-		typeCheck();
-		accessControl();
-		exceptionHandling();
-		checkUnreachableStmt();
-		definiteAssignment();
-		checkModifiers();
-		checkWarnings();
-		for(int i = 0; i < getNumChild(); i++) {
-			getChild(i).collectErrors();
-		}
-	}
-  /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1196
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:1195
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean unassignedEverywhere(Variable v, TryStmt stmt) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean unassignedEverywhere_Variable_TryStmt_value = unassignedEverywhere_compute(v, stmt);
+    return unassignedEverywhere_Variable_TryStmt_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean unassignedEverywhere_compute(Variable v, TryStmt stmt) {
     for(int i = 0; i < getNumChild(); i++) {
       if(!getChild(i).unassignedEverywhere(v, stmt))
         return false;
     }
     return true;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect ErrorCheck
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ErrorCheck.jrag:22
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public int lineNumber() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    int lineNumber_value = lineNumber_compute();
+    return lineNumber_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private int lineNumber_compute() {
     ASTNode n = this;
     while(n.getParent() != null && n.getStart() == 0) {
       n = n.getParent();
     }
     return getLine(n.getStart());
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect PrettyPrint
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:744
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String indent() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    String indent_value = indent_compute();
+    return indent_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private String indent_compute() {
     String indent = extractIndent();
     return indent.startsWith("\n") ? indent : ("\n" + indent);
-  }
-    finally {
-    }
   }
   /**
    * @attribute syn
    * @aspect PrettyPrint
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:749
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String extractIndent() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    String extractIndent_value = extractIndent_compute();
+    return extractIndent_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private String extractIndent_compute() {
     if(getParent() == null)
       return "";
     String indent = getParent().extractIndent();
@@ -1361,81 +1291,86 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
       indent += "  ";
     return indent;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect PrettyPrint
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:758
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean addsIndentationLevel() {
-    ASTNode$State state = state();
-    try {  return false;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean addsIndentationLevel_value = addsIndentationLevel_compute();
+    return addsIndentationLevel_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean addsIndentationLevel_compute() {  return false;  }
   /**
    * @attribute syn
    * @aspect PrettyPrint
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:800
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String dumpString() {
-    ASTNode$State state = state();
-    try {  return getClass().getName();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String dumpString_value = dumpString_compute();
+    return dumpString_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String dumpString_compute() {  return getClass().getName();  }
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1056
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1017
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean usesTypeVariable() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean usesTypeVariable_value = usesTypeVariable_compute();
+    return usesTypeVariable_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean usesTypeVariable_compute() {
     for(int i = 0; i < getNumChild(); i++)
       if(getChild(i).usesTypeVariable())
         return true;
     return false;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect InnerClasses
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:88
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:85
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isStringAdd() {
-    ASTNode$State state = state();
-    try {  return false;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isStringAdd_value = isStringAdd_compute();
+    return isStringAdd_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isStringAdd_compute() {  return false;  }
   /**
    * @attribute syn
    * @aspect BooleanExpressions
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/JimpleBackend/BooleanExpressions.jrag:21
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean definesLabel() {
-    ASTNode$State state = state();
-    try {  return false;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean definesLabel_value = definesLabel_compute();
+    return definesLabel_value;
   }
   /**
-	 * Fetches the immediately enclosing compilation unit.
-	 * @attribute inh
-   * @aspect Literals
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/Literals.jrag:451
+   * @apilevel internal
    */
-  @SuppressWarnings({"unchecked", "cast"})
-  public CompilationUnit compilationUnit() {
-    ASTNode$State state = state();
-    CompilationUnit compilationUnit_value = getParent().Define_CompilationUnit_compilationUnit(this, null);
-    return compilationUnit_value;
-  }
+  private boolean definesLabel_compute() {  return false;  }
   /**
    * @apilevel internal
    */
@@ -1445,6 +1380,54 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
       state().push(ASTNode$State.REWRITE_NOCHANGE);
     }
     return this;
+  }
+  /**
+   * @apilevel internal
+   */
+  public SimpleSet Define_SimpleSet_lookupVariable(ASTNode caller, ASTNode child, String name) {
+    return getParent().Define_SimpleSet_lookupVariable(this, caller, name);
+  }
+  /**
+   * @apilevel internal
+   */
+  public VariableScope Define_VariableScope_outerScope(ASTNode caller, ASTNode child) {
+    return getParent().Define_VariableScope_outerScope(this, caller);
+  }
+  /**
+   * @apilevel internal
+   */
+  public NameType Define_NameType_nameType(ASTNode caller, ASTNode child) {
+    return getParent().Define_NameType_nameType(this, caller);
+  }
+  /**
+   * @apilevel internal
+   */
+  public boolean Define_boolean_reachable(ASTNode caller, ASTNode child) {
+    return getParent().Define_boolean_reachable(this, caller);
+  }
+  /**
+   * @apilevel internal
+   */
+  public boolean Define_boolean_isMethodParameter(ASTNode caller, ASTNode child) {
+    return getParent().Define_boolean_isMethodParameter(this, caller);
+  }
+  /**
+   * @apilevel internal
+   */
+  public boolean Define_boolean_isConstructorParameter(ASTNode caller, ASTNode child) {
+    return getParent().Define_boolean_isConstructorParameter(this, caller);
+  }
+  /**
+   * @apilevel internal
+   */
+  public boolean Define_boolean_isExceptionHandlerParameter(ASTNode caller, ASTNode child) {
+    return getParent().Define_boolean_isExceptionHandlerParameter(this, caller);
+  }
+  /**
+   * @apilevel internal
+   */
+  public boolean Define_boolean_variableArityValid(ASTNode caller, ASTNode child) {
+    return getParent().Define_boolean_variableArityValid(this, caller);
   }
   /**
    * @apilevel internal
@@ -1671,12 +1654,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    */
-  public SimpleSet Define_SimpleSet_lookupVariable(ASTNode caller, ASTNode child, String name) {
-    return getParent().Define_SimpleSet_lookupVariable(this, caller, name);
-  }
-  /**
-   * @apilevel internal
-   */
   public boolean Define_boolean_mayBePublic(ASTNode caller, ASTNode child) {
     return getParent().Define_boolean_mayBePublic(this, caller);
   }
@@ -1749,12 +1726,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    */
-  public VariableScope Define_VariableScope_outerScope(ASTNode caller, ASTNode child) {
-    return getParent().Define_VariableScope_outerScope(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
   public boolean Define_boolean_insideLoop(ASTNode caller, ASTNode child) {
     return getParent().Define_boolean_insideLoop(this, caller);
   }
@@ -1775,12 +1746,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
    */
   public String Define_String_typeDeclIndent(ASTNode caller, ASTNode child) {
     return getParent().Define_String_typeDeclIndent(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public NameType Define_NameType_nameType(ASTNode caller, ASTNode child) {
-    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @apilevel internal
@@ -1875,24 +1840,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    */
-  public boolean Define_boolean_isMethodParameter(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_isMethodParameter(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public boolean Define_boolean_isConstructorParameter(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_isConstructorParameter(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public boolean Define_boolean_isExceptionHandlerParameter(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_isExceptionHandlerParameter(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
   public boolean Define_boolean_mayUseAnnotationTarget(ASTNode caller, ASTNode child, String name) {
     return getParent().Define_boolean_mayUseAnnotationTarget(this, caller, name);
   }
@@ -1935,12 +1882,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    */
-  public boolean Define_boolean_inExtendsOrImplements(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_inExtendsOrImplements(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
   public TypeDecl Define_TypeDecl_typeWildcard(ASTNode caller, ASTNode child) {
     return getParent().Define_TypeDecl_typeWildcard(this, caller);
   }
@@ -1977,12 +1918,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    */
-  public boolean Define_boolean_variableArityValid(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_variableArityValid(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
   public TypeDecl Define_TypeDecl_expectedType(ASTNode caller, ASTNode child) {
     return getParent().Define_TypeDecl_expectedType(this, caller);
   }
@@ -2015,42 +1950,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
    */
   public ArrayList Define_ArrayList_exceptionRanges(ASTNode caller, ASTNode child) {
     return getParent().Define_ArrayList_exceptionRanges(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public boolean Define_boolean_isCatchParam(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_isCatchParam(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public CatchClause Define_CatchClause_catchClause(ASTNode caller, ASTNode child) {
-    return getParent().Define_CatchClause_catchClause(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public boolean Define_boolean_resourcePreviouslyDeclared(ASTNode caller, ASTNode child, String name) {
-    return getParent().Define_boolean_resourcePreviouslyDeclared(this, caller, name);
-  }
-  /**
-   * @apilevel internal
-   */
-  public ClassInstanceExpr Define_ClassInstanceExpr_getClassInstanceExpr(ASTNode caller, ASTNode child) {
-    return getParent().Define_ClassInstanceExpr_getClassInstanceExpr(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public boolean Define_boolean_isAnonymousDecl(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_isAnonymousDecl(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public boolean Define_boolean_isExplicitGenericConstructorAccess(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_isExplicitGenericConstructorAccess(this, caller);
   }
   /**
    * @apilevel internal
@@ -2097,25 +1996,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol  implements Clonea
   /**
    * @apilevel internal
    */
-  public boolean Define_boolean_reachable(ASTNode caller, ASTNode child) {
-    return getParent().Define_boolean_reachable(this, caller);
-  }
-  /**
-   * @apilevel internal
-   */
-  public boolean Define_boolean_inhModifiedInScope(ASTNode caller, ASTNode child, Variable var) {
-    return getParent().Define_boolean_inhModifiedInScope(this, caller, var);
-  }
-  /**
-   * @apilevel internal
-   */
   public boolean Define_boolean_reachableCatchClause(ASTNode caller, ASTNode child, TypeDecl exceptionType) {
     return getParent().Define_boolean_reachableCatchClause(this, caller, exceptionType);
-  }
-  /**
-   * @apilevel internal
-   */
-  public Collection<TypeDecl> Define_Collection_TypeDecl__caughtExceptions(ASTNode caller, ASTNode child) {
-    return getParent().Define_Collection_TypeDecl__caughtExceptions(this, caller);
   }
 }

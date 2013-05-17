@@ -1503,7 +1503,7 @@ public class JasminClass extends AbstractJasminClass
                 for (Iterator<Value> iterator = i.getBootstrapArgs().iterator(); iterator.hasNext();) {
 					Value val = iterator.next();
 					bsmArgString += "("+jasminDescriptorOf(val.getType())+")";
-					bsmArgString += escape(val.toString());
+					bsmArgString += val.toString();
 										
 					if(iterator.hasNext()) bsmArgString += ",";
 					
@@ -1513,11 +1513,7 @@ public class JasminClass extends AbstractJasminClass
             }
             
             
-            private String escape(String bsmArgString) {
-				return bsmArgString.replace(",", "\\comma").replace(" ", "\\blank").replace("\t", "\\tab").replace("\n", "\\newline");
-			}
-
-			public void caseStaticInvokeInst(StaticInvokeInst i)
+            public void caseStaticInvokeInst(StaticInvokeInst i)
             {
                 SootMethodRef m = i.getMethodRef();
 

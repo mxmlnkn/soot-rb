@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -20,10 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
- * @production ParTypeAccess : {@link Access} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">TypeArgument:{@link Access}*</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.ast:16
+ * @declaredat Generics.ast:13
  */
 public class ParTypeAccess extends Access implements Cloneable {
   /**
@@ -67,37 +66,22 @@ public class ParTypeAccess extends Access implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ParTypeAccess fullCopy() {
-    try {
-      ParTypeAccess tree = (ParTypeAccess) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ParTypeAccess res = (ParTypeAccess)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect GenericsTypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:336
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:309
    */
   public boolean isRaw() {
     return false;
@@ -105,7 +89,7 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @ast method 
    * @aspect GenericsTypeCheck
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:444
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:417
    */
   public void typeCheck() {
     super.typeCheck();
@@ -151,28 +135,17 @@ public class ParTypeAccess extends Access implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Generics.ast:1
    */
   public ParTypeAccess() {
     super();
 
+    setChild(new List(), 1);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-    setChild(new List(), 1);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat Generics.ast:8
    */
   public ParTypeAccess(Access p0, List<Access> p1) {
     setChild(p0, 0);
@@ -181,7 +154,7 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:15
    */
   protected int numChildren() {
     return 2;
@@ -189,91 +162,70 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Generics.ast:21
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the TypeAccess child.
-   * @param node The new node to replace the TypeAccess child.
+   * Setter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:5
    */
   public void setTypeAccess(Access node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * @return The current node used as the TypeAccess child.
+   * Getter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:12
    */
   public Access getTypeAccess() {
     return (Access)getChild(0);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the TypeAccess child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:18
    */
   public Access getTypeAccessNoTransform() {
     return (Access)getChildNoTransform(0);
   }
   /**
-   * Replaces the TypeArgument list.
-   * @param list The new list node to be used as the TypeArgument list.
+   * Setter for TypeArgumentList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:5
    */
   public void setTypeArgumentList(List<Access> list) {
     setChild(list, 1);
   }
   /**
-   * Retrieves the number of children in the TypeArgument list.
-   * @return Number of children in the TypeArgument list.
+   * @return number of children in TypeArgumentList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:12
    */
   public int getNumTypeArgument() {
     return getTypeArgumentList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the TypeArgument list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the TypeArgument list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumTypeArgumentNoTransform() {
-    return getTypeArgumentListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the TypeArgument list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the TypeArgument list.
+   * Getter for child in list TypeArgumentList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Access getTypeArgument(int i) {
     return (Access)getTypeArgumentList().getChild(i);
   }
   /**
-   * Append an element to the TypeArgument list.
-   * @param node The element to append to the TypeArgument list.
+   * Add element to list TypeArgumentList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:27
    */
   public void addTypeArgument(Access node) {
     List<Access> list = (parent == null || state == null) ? getTypeArgumentListNoTransform() : getTypeArgumentList();
@@ -282,51 +234,44 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:34
    */
   public void addTypeArgumentNoTransform(Access node) {
     List<Access> list = getTypeArgumentListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the TypeArgument list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list TypeArgumentList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:42
    */
   public void setTypeArgument(Access node, int i) {
     List<Access> list = getTypeArgumentList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the TypeArgument list.
-   * @return The node representing the TypeArgument list.
+   * Getter for TypeArgument list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:50
    */
   public List<Access> getTypeArguments() {
     return getTypeArgumentList();
   }
   /**
-   * Retrieves the TypeArgument list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the TypeArgument list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:56
    */
   public List<Access> getTypeArgumentsNoTransform() {
     return getTypeArgumentListNoTransform();
   }
   /**
-   * Retrieves the TypeArgument list.
-   * @return The node representing the TypeArgument list.
+   * Getter for list TypeArgumentList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getTypeArgumentList() {
@@ -335,12 +280,9 @@ public class ParTypeAccess extends Access implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the TypeArgument list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the TypeArgument list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Access> getTypeArgumentListNoTransform() {
@@ -348,15 +290,19 @@ public class ParTypeAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect LookupMethod
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupMethod.jrag:17
+   * @aspect GenericsTypeAnalysis
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:244
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public Expr unqualifiedScope() {
-    ASTNode$State state = state();
-    try {  return getParent() instanceof Access ? ((Access)getParent()).unqualifiedScope() : super.unqualifiedScope();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    Expr unqualifiedScope_value = unqualifiedScope_compute();
+    return unqualifiedScope_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private Expr unqualifiedScope_compute() {  return getParent() instanceof Access ? ((Access)getParent()).unqualifiedScope() : super.unqualifiedScope();  }
   /**
    * @apilevel internal
    */
@@ -368,18 +314,18 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsTypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:273
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:247
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl type() {
     if(type_computed) {
       return type_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     type_value = type_compute();
-      if(isFinal && num == state().boundariesCrossed) type_computed = true;
+if(isFinal && num == state().boundariesCrossed) type_computed = true;
     return type_value;
   }
   /**
@@ -389,9 +335,8 @@ public class ParTypeAccess extends Access implements Cloneable {
     TypeDecl typeDecl = genericDecl();
     if(typeDecl instanceof GenericTypeDecl) {
       // use signature in lookup for types that are used in extends and implements clauses
-      if (unqualifiedScope().inExtendsOrImplements()) {
+      if(unqualifiedScope().getParent().getParent() instanceof TypeDecl)
         return ((GenericTypeDecl)typeDecl).lookupParTypeDecl(this);
-      }
       ArrayList args = new ArrayList();
       for(int i = 0; i < getNumTypeArgument(); i++)
         args.add(getTypeArgument(i).type());
@@ -402,50 +347,35 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsTypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:287
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:260
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl genericDecl() {
-    ASTNode$State state = state();
-    try {  return getTypeAccess().type();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    TypeDecl genericDecl_value = genericDecl_compute();
+    return genericDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private TypeDecl genericDecl_compute() {  return getTypeAccess().type();  }
   /**
    * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ResolveAmbiguousNames.jrag:13
+   * @aspect GenericsTypeAnalysis
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:261
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isTypeAccess() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isTypeAccess_value = isTypeAccess_compute();
+    return isTypeAccess_value;
   }
   /**
-	 * Builds a copy of this Access node where all occurrences
-	 * of type variables in the original type parameter list have been replaced
-	 * by the substitution type parameters.
-	 *
-	 * @return the substituted Access node
-	 * @attribute syn
-   * @aspect TypeInference
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/TypeInference.jrag:406
+   * @apilevel internal
    */
-  public Access substituted(Collection<TypeVariable> original, List<TypeVariable> substitution) {
-    ASTNode$State state = state();
-    try {
-		List<Access> substArgs = new List<Access>();
-		for (Access arg : getTypeArgumentList())
-			substArgs.add(arg.substituted(original, substitution));
-		return new ParTypeAccess(
-				getTypeAccess().substituted(original, substitution),
-				substArgs);
-	}
-    finally {
-    }
-  }
+  private boolean isTypeAccess_compute() {  return true;  }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:265
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:245
    * @apilevel internal
    */
   public SimpleSet Define_SimpleSet_lookupType(ASTNode caller, ASTNode child, String name) {
@@ -453,8 +383,7 @@ public class ParTypeAccess extends Access implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return unqualifiedScope().lookupType(name);
     }
-    else {      return getParent().Define_SimpleSet_lookupType(this, caller, name);
-    }
+    return getParent().Define_SimpleSet_lookupType(this, caller, name);
   }
   /**
    * @apilevel internal

@@ -19,6 +19,7 @@
 package soot.jimple.spark.geom.geomPA;
 
 import soot.jimple.spark.pag.Node;
+import soot.options.SparkOptions;
 
 /**
  * An abstract class for hiding different encoding methods, e.g. Geom, HeapIns, PtIns.
@@ -28,6 +29,17 @@ import soot.jimple.spark.pag.Node;
  */
 public abstract class IEncodingBroker 
 {
+	// Define the mapping types
+	public final static int Undefined_Mapping = -1;
+	public final static int ONE_TO_ONE = 0;
+	public final static int MANY_TO_MANY = 1;
+	
+	public static final int full_convertor[] = { 
+		ONE_TO_ONE, MANY_TO_MANY, 
+		MANY_TO_MANY, MANY_TO_MANY 
+	};
+	
+	
 	/**
 	 * Generate a node of proper kind.
 	 * @param v
@@ -41,8 +53,9 @@ public abstract class IEncodingBroker
 	public abstract void initFlowGraph( GeomPointsTo ptAnalyzer );
 	
 	/**
-	 * Return the signature of the implemented sub-class, may be useful in somewhere.
-	 * @return
+	 * @see SparkOptions#geom_encoding_Geom
+	 * @see SparkOptions#geom_encoding_HeapIns
+	 * @see SparkOptions#geom_encoding_PtIns
 	 */
-	public abstract String getSignature();
+	public abstract int getEncodingType();
 }

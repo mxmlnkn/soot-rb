@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -20,10 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
- * @production ImportDecl : {@link ASTNode} ::= <span class="component">{@link Access}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:10
+ * @declaredat java.ast:7
  */
 public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
@@ -56,7 +55,7 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ImportDecl() {
     super();
@@ -64,19 +63,8 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[1];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public ImportDecl(Access p0) {
     setChild(p0, 0);
@@ -84,7 +72,7 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:13
    */
   protected int numChildren() {
     return 1;
@@ -92,38 +80,33 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Access child.
-   * @param node The new node to replace the Access child.
+   * Setter for Access
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setAccess(Access node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Access child.
-   * @return The current node used as the Access child.
+   * Getter for Access
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Access getAccess() {
     return (Access)getChild(0);
   }
   /**
-   * Retrieves the Access child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Access child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Access getAccessNoTransform() {
     return (Access)getChildNoTransform(0);
@@ -132,7 +115,7 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:322
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:234
    */
   @SuppressWarnings({"unchecked", "cast"})
   public SimpleSet importedTypes(String name) {
@@ -141,11 +124,11 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
     if(importedTypes_String_values.containsKey(_parameters)) {
       return (SimpleSet)importedTypes_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet importedTypes_String_value = importedTypes_compute(name);
-      if(isFinal && num == state().boundariesCrossed) importedTypes_String_values.put(_parameters, importedTypes_String_value);
+if(isFinal && num == state().boundariesCrossed) importedTypes_String_values.put(_parameters, importedTypes_String_value);
     return importedTypes_String_value;
   }
   /**
@@ -155,22 +138,33 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:351
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:263
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isOnDemand() {
-    ASTNode$State state = state();
-    try {  return false;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isOnDemand_value = isOnDemand_compute();
+    return isOnDemand_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isOnDemand_compute() {  return false;  }
   /**
    * @attribute syn
    * @aspect Names
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/QualifiedNames.jrag:51
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String typeName() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    String typeName_value = typeName_compute();
+    return typeName_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private String typeName_compute() {
     Access a = getAccess().lastAccess();
     String name = a.isTypeAccess() ? ((TypeAccess)a).nameWithPackage() : "";
     while(a.hasPrevExpr() && a.prevExpr() instanceof Access) {
@@ -180,9 +174,6 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
       a = pred;
     }
     return name;
-  }
-    finally {
-    }
   }
   protected java.util.Map importedFields_String_values;
   /**
@@ -197,11 +188,11 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
     if(importedFields_String_values.containsKey(_parameters)) {
       return (SimpleSet)importedFields_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     SimpleSet importedFields_String_value = importedFields_compute(name);
-      if(isFinal && num == state().boundariesCrossed) importedFields_String_values.put(_parameters, importedFields_String_value);
+if(isFinal && num == state().boundariesCrossed) importedFields_String_values.put(_parameters, importedFields_String_value);
     return importedFields_String_value;
   }
   /**
@@ -221,11 +212,11 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
     if(importedMethods_String_values.containsKey(_parameters)) {
       return (Collection)importedMethods_String_values.get(_parameters);
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     Collection importedMethods_String_value = importedMethods_compute(name);
-      if(isFinal && num == state().boundariesCrossed) importedMethods_String_values.put(_parameters, importedMethods_String_value);
+if(isFinal && num == state().boundariesCrossed) importedMethods_String_values.put(_parameters, importedMethods_String_value);
     return importedMethods_String_value;
   }
   /**
@@ -235,11 +226,11 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect TypeScopePropagation
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:349
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:261
    */
   @SuppressWarnings({"unchecked", "cast"})
   public String packageName() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     String packageName_value = getParent().Define_String_packageName(this, null);
     return packageName_value;
   }
@@ -251,8 +242,7 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
     if(caller == getAccessNoTransform()) {
       return false;
     }
-    else {      return getParent().Define_boolean_isDest(this, caller);
-    }
+    return getParent().Define_boolean_isDest(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:32
@@ -262,8 +252,7 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
     if(caller == getAccessNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_isSource(this, caller);
-    }
+    return getParent().Define_boolean_isSource(this, caller);
   }
   /**
    * @apilevel internal

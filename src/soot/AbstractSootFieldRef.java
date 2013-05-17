@@ -42,11 +42,6 @@ class AbstractSootFieldRef implements SootFieldRef {
         if( declaringClass == null ) throw new RuntimeException( "Attempt to create SootFieldRef with null class" );
         if( name == null ) throw new RuntimeException( "Attempt to create SootFieldRef with null name" );
         if( type == null ) throw new RuntimeException( "Attempt to create SootFieldRef with null type" );
-        
-        if(Options.v().rbclassload()){
-          String field_class_name = declaringClass.getName();
-          SootResolver.v().resolveClass(field_class_name, SootClass.BODIES); 
-        }
     }
 
     private final SootClass declaringClass;

@@ -148,7 +148,9 @@ public class AnnotationGenerator {
 		if(!annotationName.endsWith(";"))
 			annotationName = "L" + annotationName + ';';
 		VisibilityAnnotationTag tagToAdd = findOrAdd(h, visibility);
-		AnnotationTag at = new AnnotationTag(annotationName, elems);
+		AnnotationTag at = new AnnotationTag(annotationName, elems.size());
+		for (AnnotationElem elem : elems) 
+			at.addElem(elem);
 		tagToAdd.addAnnotation(at);
 	}
 	

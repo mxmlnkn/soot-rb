@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production PrimaryExpr : {@link Expr};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:129
+ * @declaredat java.ast:126
  */
 public abstract class PrimaryExpr extends Expr implements Cloneable {
   /**
@@ -49,7 +48,7 @@ public abstract class PrimaryExpr extends Expr implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public PrimaryExpr() {
     super();
@@ -57,19 +56,9 @@ public abstract class PrimaryExpr extends Expr implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
-   * @ast method 
-   * 
-   */
-  public void init$Children() {
-  }
-  /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:10
    */
   protected int numChildren() {
     return 0;
@@ -77,7 +66,7 @@ public abstract class PrimaryExpr extends Expr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:16
    */
   public boolean mayHaveRewrite() {
     return false;

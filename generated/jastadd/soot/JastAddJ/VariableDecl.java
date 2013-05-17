@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -20,10 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
- * @production VariableDecl : {@link ASTNode} ::= <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link Dims}*</span> <span class="component">[Init:{@link Expr}]</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:85
+ * @declaredat java.ast:82
  */
 public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
@@ -63,33 +62,18 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public VariableDecl fullCopy() {
-    try {
-      VariableDecl tree = (VariableDecl) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    VariableDecl res = (VariableDecl)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect VariableDeclarationTransformation
@@ -128,29 +112,18 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public VariableDecl() {
     super();
 
+    setChild(new List(), 0);
+    setChild(new Opt(), 1);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-    setChild(new List(), 0);
-    setChild(new Opt(), 1);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:9
    */
   public VariableDecl(String p0, List<Dims> p1, Opt<Expr> p2) {
     setID(p0);
@@ -159,7 +132,7 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   public VariableDecl(beaver.Symbol p0, List<Dims> p1, Opt<Expr> p2) {
     setID(p0);
@@ -169,7 +142,7 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:22
    */
   protected int numChildren() {
     return 2;
@@ -177,48 +150,40 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:28
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
-  /**
-   * @apilevel internal
-   * @ast method 
-   * 
+  /**   * @apilevel internal   * @ast method 
+   * @declaredat java.ast:8
    */
   
-  /**
-   * @apilevel internal
-   */
-  protected String tokenString_ID;
+  /**   * @apilevel internal   */  protected String tokenString_ID;
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:9
    */
   
   public int IDstart;
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:10
    */
   
   public int IDend;
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:11
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -228,64 +193,47 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:22
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the Dims list.
-   * @param list The new list node to be used as the Dims list.
+   * Setter for DimsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setDimsList(List<Dims> list) {
     setChild(list, 0);
   }
   /**
-   * Retrieves the number of children in the Dims list.
-   * @return Number of children in the Dims list.
+   * @return number of children in DimsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumDims() {
     return getDimsList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the Dims list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the Dims list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumDimsNoTransform() {
-    return getDimsListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the Dims list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the Dims list.
+   * Getter for child in list DimsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Dims getDims(int i) {
     return (Dims)getDimsList().getChild(i);
   }
   /**
-   * Append an element to the Dims list.
-   * @param node The element to append to the Dims list.
+   * Add element to list DimsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addDims(Dims node) {
     List<Dims> list = (parent == null || state == null) ? getDimsListNoTransform() : getDimsList();
@@ -294,51 +242,44 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addDimsNoTransform(Dims node) {
     List<Dims> list = getDimsListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the Dims list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list DimsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setDims(Dims node, int i) {
     List<Dims> list = getDimsList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the Dims list.
-   * @return The node representing the Dims list.
+   * Getter for Dims list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<Dims> getDimss() {
     return getDimsList();
   }
   /**
-   * Retrieves the Dims list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Dims list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<Dims> getDimssNoTransform() {
     return getDimsListNoTransform();
   }
   /**
-   * Retrieves the Dims list.
-   * @return The node representing the Dims list.
+   * Getter for list DimsList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Dims> getDimsList() {
@@ -347,76 +288,64 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the Dims list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Dims list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Dims> getDimsListNoTransform() {
     return (List<Dims>)getChildNoTransform(0);
   }
   /**
-   * Replaces the optional node for the Init child. This is the {@code Opt} node containing the child Init, not the actual child!
-   * @param opt The new node to be used as the optional node for the Init child.
+   * Setter for InitOpt
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setInitOpt(Opt<Expr> opt) {
     setChild(opt, 1);
   }
   /**
-   * Check whether the optional Init child exists.
-   * @return {@code true} if the optional Init child exists, {@code false} if it does not.
+   * Does this node have a Init child?
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public boolean hasInit() {
     return getInitOpt().getNumChild() != 0;
   }
   /**
-   * Retrieves the (optional) Init child.
-   * @return The Init child, if it exists. Returns {@code null} otherwise.
-   * @apilevel low-level
+   * Getter for optional child Init
+   * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Expr getInit() {
     return (Expr)getInitOpt().getChild(0);
   }
   /**
-   * Replaces the (optional) Init child.
-   * @param node The new node to be used as the Init child.
+   * Setter for optional child Init
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void setInit(Expr node) {
     getInitOpt().setChild(node, 0);
   }
   /**
-   * Retrieves the optional node for the Init child. This is the {@code Opt} node containing the child Init, not the actual child!
-   * @return The optional node for child the Init child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:37
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Expr> getInitOpt() {
     return (Opt<Expr>)getChild(1);
   }
   /**
-   * Retrieves the optional node for child Init. This is the {@code Opt} node containing the child Init, not the actual child!
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The optional node for child Init.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:44
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Opt<Expr> getInitOptNoTransform() {
@@ -427,12 +356,16 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
    * @aspect Variables
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/VariableDeclaration.jrag:84
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String name() {
-    ASTNode$State state = state();
-    try {  return getID();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String name_value = name_compute();
+    return name_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String name_compute() {  return getID();  }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:41
    * @apilevel internal
@@ -441,19 +374,17 @@ public class VariableDecl extends ASTNode<ASTNode> implements Cloneable {
     if(caller == getInitOptNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_isSource(this, caller);
-    }
+    return getParent().Define_boolean_isSource(this, caller);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:69
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:66
    * @apilevel internal
    */
   public TypeDecl Define_TypeDecl_expectedType(ASTNode caller, ASTNode child) {
     if(caller == getInitOptNoTransform()) {
       return null;
     }
-    else {      return getParent().Define_TypeDecl_expectedType(this, caller);
-    }
+    return getParent().Define_TypeDecl_expectedType(this, caller);
   }
   /**
    * @apilevel internal

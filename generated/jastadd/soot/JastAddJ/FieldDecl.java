@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production FieldDecl : {@link MemberDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">TypeAccess:{@link Access}</span> <span class="component">{@link VariableDecl}*</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:79
+ * @declaredat java.ast:76
  */
 public class FieldDecl extends MemberDecl implements Cloneable {
   /**
@@ -62,57 +61,31 @@ public class FieldDecl extends MemberDecl implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public FieldDecl fullCopy() {
-    try {
-      FieldDecl tree = (FieldDecl) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    FieldDecl res = (FieldDecl)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public FieldDecl() {
     super();
 
+    setChild(new List(), 2);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[3];
-    setChild(new List(), 2);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public FieldDecl(Modifiers p0, Access p1, List<VariableDecl> p2) {
     setChild(p0, 0);
@@ -122,7 +95,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:16
    */
   protected int numChildren() {
     return 3;
@@ -130,122 +103,96 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:22
    */
   public boolean mayHaveRewrite() {
     return true;
   }
   /**
-   * Replaces the Modifiers child.
-   * @param node The new node to replace the Modifiers child.
+   * Setter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setModifiers(Modifiers node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * @return The current node used as the Modifiers child.
+   * Getter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Modifiers getModifiers() {
     return (Modifiers)getChild(0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Modifiers child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Modifiers getModifiersNoTransform() {
     return (Modifiers)getChildNoTransform(0);
   }
   /**
-   * Replaces the TypeAccess child.
-   * @param node The new node to replace the TypeAccess child.
+   * Setter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setTypeAccess(Access node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * @return The current node used as the TypeAccess child.
+   * Getter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Access getTypeAccess() {
     return (Access)getChild(1);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the TypeAccess child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Access getTypeAccessNoTransform() {
     return (Access)getChildNoTransform(1);
   }
   /**
-   * Replaces the VariableDecl list.
-   * @param list The new list node to be used as the VariableDecl list.
+   * Setter for VariableDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setVariableDeclList(List<VariableDecl> list) {
     setChild(list, 2);
   }
   /**
-   * Retrieves the number of children in the VariableDecl list.
-   * @return Number of children in the VariableDecl list.
+   * @return number of children in VariableDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumVariableDecl() {
     return getVariableDeclList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the VariableDecl list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the VariableDecl list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumVariableDeclNoTransform() {
-    return getVariableDeclListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the VariableDecl list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the VariableDecl list.
+   * Getter for child in list VariableDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public VariableDecl getVariableDecl(int i) {
     return (VariableDecl)getVariableDeclList().getChild(i);
   }
   /**
-   * Append an element to the VariableDecl list.
-   * @param node The element to append to the VariableDecl list.
+   * Add element to list VariableDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addVariableDecl(VariableDecl node) {
     List<VariableDecl> list = (parent == null || state == null) ? getVariableDeclListNoTransform() : getVariableDeclList();
@@ -254,51 +201,44 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addVariableDeclNoTransform(VariableDecl node) {
     List<VariableDecl> list = getVariableDeclListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the VariableDecl list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list VariableDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setVariableDecl(VariableDecl node, int i) {
     List<VariableDecl> list = getVariableDeclList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the VariableDecl list.
-   * @return The node representing the VariableDecl list.
+   * Getter for VariableDecl list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<VariableDecl> getVariableDecls() {
     return getVariableDeclList();
   }
   /**
-   * Retrieves the VariableDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the VariableDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<VariableDecl> getVariableDeclsNoTransform() {
     return getVariableDeclListNoTransform();
   }
   /**
-   * Retrieves the VariableDecl list.
-   * @return The node representing the VariableDecl list.
+   * Getter for list VariableDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<VariableDecl> getVariableDeclList() {
@@ -307,12 +247,9 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the VariableDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the VariableDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<VariableDecl> getVariableDeclListNoTransform() {
@@ -323,12 +260,16 @@ public class FieldDecl extends MemberDecl implements Cloneable {
    * @aspect Modifiers
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/Modifiers.jrag:243
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isStatic() {
-    ASTNode$State state = state();
-    try {  return getModifiers().isStatic();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isStatic_value = isStatic_compute();
+    return isStatic_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isStatic_compute() {  return getModifiers().isStatic();  }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:77
    * @apilevel internal
@@ -337,8 +278,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     if(caller == getTypeAccessNoTransform()) {
       return NameType.TYPE_NAME;
     }
-    else {      return getParent().Define_NameType_nameType(this, caller);
-    }
+    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:257
@@ -349,8 +289,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return null;
     }
-    else {      return getParent().Define_TypeDecl_declType(this, caller);
-    }
+    return getParent().Define_TypeDecl_declType(this, caller);
   }
   /**
    * @apilevel internal
@@ -358,22 +297,22 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   public ASTNode rewriteTo() {
     // Declared in /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/VariableDeclaration.jrag at line 101
     if(getNumVariableDecl() == 1) {
-      state().duringVariableDeclarationTransformation++;
+      state().duringVariableDeclaration++;
       ASTNode result = rewriteRule0();
-      state().duringVariableDeclarationTransformation--;
+      state().duringVariableDeclaration--;
       return result;
     }
 
     // Declared in /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/VariableDeclaration.jrag at line 112
     if(getParent().getParent() instanceof TypeDecl && 
       ((TypeDecl)getParent().getParent()).getBodyDeclListNoTransform() == getParent() && getNumVariableDecl() > 1) {
-    state().duringVariableDeclarationTransformation++;
+    state().duringVariableDeclaration++;
       List list = (List)getParent();
       int i = list.getIndexOfChild(this);
       List newList = rewriteTypeDecl_getBodyDecl();
       for(int j = 1; j < newList.getNumChildNoTransform(); j++)
         list.insertChild(newList.getChildNoTransform(j), ++i);
-        state().duringVariableDeclarationTransformation--;
+        state().duringVariableDeclaration--;
       return newList.getChildNoTransform(0);
     }
     return super.rewriteTo();

@@ -21,33 +21,39 @@ package soot.jimple.spark.geom.geomE;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
-import soot.Hierarchy;
+
 import soot.RefType;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.Type;
-import soot.jimple.spark.geom.geomPA.Constants;
+import soot.jimple.spark.geom.geomPA.CallsiteContextVar;
+import soot.jimple.spark.geom.geomPA.CgEdge;
 import soot.jimple.spark.geom.geomPA.GeomPointsTo;
+import soot.jimple.spark.geom.geomPA.IEncodingBroker;
 import soot.jimple.spark.geom.geomPA.IVarAbstraction;
 import soot.jimple.spark.geom.geomPA.IWorklist;
 import soot.jimple.spark.geom.geomPA.PlainConstraint;
 import soot.jimple.spark.geom.geomPA.RectangleNode;
 import soot.jimple.spark.geom.geomPA.SegmentNode;
-import soot.jimple.spark.geom.helper.PtSensVisitor;
+import soot.jimple.spark.geom.geomPA.ZArrayNumberer;
+import soot.jimple.spark.geom.geomE.FullSensitiveNode;
+import soot.jimple.spark.geom.geomE.GeometricManager;
 import soot.jimple.spark.pag.AllocNode;
-import soot.jimple.spark.pag.Node;
 import soot.jimple.spark.pag.LocalVarNode;
+import soot.jimple.spark.pag.Node;
 import soot.jimple.spark.pag.StringConstantNode;
 import soot.jimple.spark.sets.P2SetVisitor;
 
+
 /**
- * This class defines an abstract pointer in the geometric points-to solver.
- * All the points-to/flows-to information and the load/store constraints related to this pointer are stored here.
- * The pointer assignment inference rules and the complex constraints initialization rules are also implemented here.
+ * This class defines the pointer for use in the geometric encoding based points-to analysis.
+ * All the points-to/flows-to information and the complex constraints are all included here.
+ * The pointer assignment inference rules and complex constraints initialization rules are also implemented here.
  *  
  * @author xiao
  *
@@ -70,23 +76,14 @@ public class FullSensitiveNode extends IVarAbstraction
 	
 	static {
 		stubManager = new GeometricManager();
-		pres = new RectangleNode(1, 1, Constants.MAX_CONTEXTS, Constants.MAX_CONTEXTS);
-		stubManager.addNewFigure(GeometricManager.MANY_TO_MANY, pres);
+		pres = new RectangleNode(1, 1, GeomPointsTo.MAX_CONTEXTS, GeomPointsTo.MAX_CONTEXTS);
+		stubManager.addNewFigure(IEncodingBroker.MANY_TO_MANY, pres);
 		deadManager = new GeometricManager();
 	}
 	
 	public FullSensitiveNode( Node thisVar )
 	{		
 		me = thisVar;
-	}
-	
-	@Override
-	public void deleteAll()
-	{
-		flowto = null;
-		pt_objs = null;
-		new_pts = null;
-		complex_cons = null;
 	}
 	
 	@Override
@@ -121,37 +118,27 @@ public class FullSensitiveNode extends IVarAbstraction
 		 * We have a pointer p in type A.
 		 * pts(p) = { o1, o2 }, where o1 is in type A and o2 is in type B.
 		 * Therefore, the call p.foo() will be resolved to call both A::foo and B::foo.
-		 * Then, in the points-to analysis, we have two assignments: p -> A::foo.THIS, p -> B::foo.THIS
+		 * Then, in the points-to analysis, we have to assignments: p -> A::foo.THIS, p -> B::foo.THIS
 		 * At this time, obviously, although with the type filter, A::foo.THIS will receive the object o2, which is definitely a fake.
 		 * Thus, we need a new filter to guarantee that A::foo.THIS only points to o1.
 		 * We call this filter "this pointer filter".
 		 */
-		Node wrappedNode = getWrappedNode();
-		if ( wrappedNode instanceof LocalVarNode &&
-				((LocalVarNode)wrappedNode).isThisPtr() ) {
-			SootMethod func = ((LocalVarNode)wrappedNode).getMethod();
+		if ( me instanceof LocalVarNode &&
+				((LocalVarNode)me).isThisPtr() ) {
+			SootMethod func = ((LocalVarNode)me).getMethod();
 			if ( !func.isConstructor() ) {
 				// We don't process the specialinvoke call edge
 				SootClass defClass = func.getDeclaringClass();
-				Hierarchy typeHierarchy = Scene.v().getActiveHierarchy();
 				
 				for ( Iterator<AllocNode> it = new_pts.keySet().iterator(); it.hasNext(); ) {
 					AllocNode obj = it.next();
 					if ( obj.getType() instanceof RefType ) {
 						SootClass sc = ((RefType)obj.getType()).getSootClass();
-						if ( defClass != sc ) {
-							try {
-								SootMethod rt_func = typeHierarchy.resolveConcreteDispatch(sc, func);
-								if ( rt_func != func ) {
-									it.remove();
-									// Also preclude it from propagation again
-									pt_objs.put(obj, (GeometricManager)deadManager);
-								}
-							}
-							catch ( RuntimeException e ) {
-								// If the input program has a wrong type cast, resolveConcreteDispatch fails and it goes here
-								// We simply ignore this error
-							}
+						if ( defClass != sc && 
+								Scene.v().getActiveHierarchy().resolveConcreteDispatch(sc, func) != func ) {
+							it.remove();
+							// Also preclude it from propagation again
+							pt_objs.put(obj, (GeometricManager)deadManager);
 						}
 					}
 				}
@@ -168,6 +155,16 @@ public class FullSensitiveNode extends IVarAbstraction
 			}
 		}
 		new_pts = new HashMap<AllocNode, GeometricManager>();
+	}
+
+	@Override
+	public boolean is_empty() {
+		return pt_objs.size() == 0;
+	}
+
+	@Override
+	public boolean has_new_pts() {
+		return new_pts.size() != 0;
 	}
 
 	@Override
@@ -188,7 +185,7 @@ public class FullSensitiveNode extends IVarAbstraction
 		pres.I2 = I2;
 		pres.L = L;
 
-		return addPointsTo(GeometricManager.ONE_TO_ONE, obj);
+		return addPointsTo(IEncodingBroker.ONE_TO_ONE, obj);
 	}
 
 	@Override
@@ -200,7 +197,7 @@ public class FullSensitiveNode extends IVarAbstraction
 		pres.L = L1;
 		pres.L_prime = L2;
 		
-		return addPointsTo(GeometricManager.MANY_TO_MANY, obj);
+		return addPointsTo(IEncodingBroker.MANY_TO_MANY, obj);
 	}
 
 	@Override
@@ -211,7 +208,7 @@ public class FullSensitiveNode extends IVarAbstraction
 		pres.I2 = I2;
 		pres.L = L;
 		
-		return addFlowsTo(GeometricManager.ONE_TO_ONE, qv);
+		return addFlowsTo(IEncodingBroker.ONE_TO_ONE, qv);
 	}
 
 	@Override
@@ -223,7 +220,7 @@ public class FullSensitiveNode extends IVarAbstraction
 		pres.L = L1;
 		pres.L_prime = L2;
 		
-		return addFlowsTo(GeometricManager.MANY_TO_MANY, qv);
+		return addFlowsTo(IEncodingBroker.MANY_TO_MANY, qv);
 	}
 
 	@Override
@@ -254,8 +251,6 @@ public class FullSensitiveNode extends IVarAbstraction
 		GeometricManager gm1, gm2;
 		FullSensitiveNode qn, objn;
 		boolean added, hasNewPointsTo;
-
-		if ( pt_objs.size() == 0 ) return;
 		
 		// We first build the new flow edges via the field dereferences
 		if ( complex_cons != null ) {
@@ -282,13 +277,13 @@ public class FullSensitiveNode extends IVarAbstraction
 						
 						while ( pts != null && pts.is_new == true ) {
 							switch ( pcons.type ) {
-							case Constants.STORE_CONS:
+							case GeomPointsTo.STORE_CONS:
 								// Store, qv -> pv.field
 								if ( instantiateStoreConstraint( qn, objn, pts, (pcons.code<<8) | i ) )
 									worklist.push( qn );
 								break;
 								
-							case Constants.LOAD_CONS:
+							case GeomPointsTo.LOAD_CONS:
 								// Load, pv.field -> qv
 								if ( instantiateLoadConstraint( objn, qn, pts, (pcons.code<<8) | i ) )
 									worklist.push( objn );
@@ -305,18 +300,12 @@ public class FullSensitiveNode extends IVarAbstraction
 			}
 		}
 		
-		if ( flowto.size() == 0 ) return;
-		
 		// First, we get the flow-to shapes
 		for (Map.Entry<FullSensitiveNode, GeometricManager> entry1 : flowto.entrySet()) {	
 			added = false;
 			qn = entry1.getKey();
 			gm1 = entry1.getValue();
 			entry_pe = gm1.getFigures();
-			
-//			if ( qn.getWrappedNode().toString().equals("<sun.misc.Launcher: sun.misc.URLClassPath getBootstrapClassPath()>:$r5") &&
-//					((LocalVarNode)qn.getWrappedNode()).getMethod().toString().equals("<sun.misc.Launcher: sun.misc.URLClassPath getBootstrapClassPath()>") )
-//				System.err.println();
 			
 			// We specialize the two cases that we hope it running faster
 			// We have new flow-to edges
@@ -496,16 +485,16 @@ public class FullSensitiveNode extends IVarAbstraction
 		RectangleNode rect_q, rect_p;
 		
 		switch (code>>8) {
-		case GeometricManager.ONE_TO_ONE:
+		case IEncodingBroker.ONE_TO_ONE:
 			switch (code&255) {
-			case GeometricManager.ONE_TO_ONE:
+			case IEncodingBroker.ONE_TO_ONE:
 				if ( (p.I2 - p.I1) == (q.I2 - q.I1) ) {
 					if ( p.I1 < (q.I1 + q.L) && q.I1 < (p.I1 + p.L) )
 						return true;
 				}
 				break;
 				
-			case GeometricManager.MANY_TO_MANY:
+			case IEncodingBroker.MANY_TO_MANY:
 				rect_q = (RectangleNode)q;
 				
 				// If one of the end point is in the body of the rectangle
@@ -524,7 +513,7 @@ public class FullSensitiveNode extends IVarAbstraction
 			
 			break;
 			
-		case GeometricManager.MANY_TO_MANY:
+		case IEncodingBroker.MANY_TO_MANY:
 			rect_p = (RectangleNode)p;
 			rect_q = (RectangleNode)q;
 			
@@ -619,7 +608,7 @@ public class FullSensitiveNode extends IVarAbstraction
 	@Override
 	public void print_context_sensitive_points_to(PrintStream outPrintStream) 
 	{
-		for (Iterator<AllocNode> it = pt_objs.keySet().iterator(); it.hasNext();) {
+		for (Iterator<AllocNode> it = new_pts.keySet().iterator(); it.hasNext();) {
 			AllocNode obj = it.next();		
 			SegmentNode[] int_entry = find_points_to( obj );
 			
@@ -639,8 +628,7 @@ public class FullSensitiveNode extends IVarAbstraction
 	}
 
 	/**
-	 *  We transfer the SPARK results to current pointer if this pointer is not involved in the geometric analysis.
-	 *  Note that, the unreachable objects will not be inserted.
+	 *  We transfer the SPARK results to current pointer if this pointer is not involved in the computation
 	 */
 	@Override
 	public void injectPts()
@@ -683,10 +671,18 @@ public class FullSensitiveNode extends IVarAbstraction
 		pt_objs.remove(obj);
 	}
 
+	/**
+	 * Given the pointers falling in the context range [l, r), we compute the set of 1-CFA objects pointed to by those pointers.
+	 */
 	@Override
-	public void get_all_context_sensitive_objects( long l, long r, PtSensVisitor visitor ) 
+	public int get_all_context_sensitive_objects( long l, long r, 
+			ZArrayNumberer<CallsiteContextVar> all_objs, Vector<CallsiteContextVar> outList ) 
 	{
 		GeomPointsTo ptsProvider = (GeomPointsTo)Scene.v().getPointsToAnalysis();
+		CallsiteContextVar cobj = new CallsiteContextVar();
+		CallsiteContextVar res;
+		
+		outList.clear();
 		
 		for ( Map.Entry<AllocNode, GeometricManager> entry : pt_objs.entrySet() ) {
 			AllocNode obj = entry.getKey();
@@ -695,22 +691,22 @@ public class FullSensitiveNode extends IVarAbstraction
 			if ( sm != null ) {
 				sm_int = ptsProvider.getIDFromSootMethod(sm);
 			}
+			List<CgEdge> edges = ptsProvider.getCallEdgesInto(sm_int);
 			
 			GeometricManager gm = entry.getValue();
 			SegmentNode[] int_entry = gm.getFigures();
 			boolean flag = true;
+			cobj.var = obj;
 			
 			for ( int i = 0; i < GeometricManager.Divisions; ++i ) {
-				// We iterate all the figures
 				SegmentNode p = int_entry[i];
-				
 				while ( p != null ) {
 					long R = p.I1 + p.L;
 					long objL = -1, objR = -1;
 					
 					// Now we compute which context sensitive objects are pointed to by this pointer
 					if ( l <= p.I1 && p.I1 < r ) {	
-						if ( i == GeometricManager.ONE_TO_ONE ) {
+						if ( i == IEncodingBroker.ONE_TO_ONE ) {
 							long d = r - p.I1;
 							if ( d > p.L ) d = p.L;
 							objL = p.I2;
@@ -722,7 +718,7 @@ public class FullSensitiveNode extends IVarAbstraction
 						}
 					}
 					else if (p.I1 <= l && l < R) {
-						if ( i == GeometricManager.ONE_TO_ONE ) {
+						if ( i == IEncodingBroker.ONE_TO_ONE ) {
 							long d = R - l;
 							if ( R > r ) d = r - l;
 							objL = p.I2 + l - p.I1;
@@ -735,16 +731,43 @@ public class FullSensitiveNode extends IVarAbstraction
 					}
 					
 					// Now we test which context versions should this interval [objL, objR) maps to
-					if ( objL != -1 && objR != -1 )
-						flag = visitor.visit(obj, objL, objR, sm_int);
+					if ( objL != -1 && objR != -1 ) {
+						if ( edges != null ) {
+							for ( CgEdge e : edges ) {
+								long rangeL = e.map_offset;
+								long rangeR = rangeL + ptsProvider.max_context_size_block[e.s];
+								if ( (objL <= rangeL && rangeL < objR) ||
+										(rangeL <= objL && objL < rangeR) ) {
+									cobj.context = e;
+									res = all_objs.searchFor(cobj);
+									if ( res.inQ == false ) {
+										outList.add(res);
+										res.inQ = true;
+									}
+								}
+							}
+						}
+						else {
+							cobj.context = null;
+							res = all_objs.searchFor(cobj);
+							if ( res.inQ == false ) {
+								outList.add(res);
+								res.inQ = true;
+							}
+							flag = false;
+							break;
+						}
+					}
 					
-					if ( flag == false ) break;
 					p = p.next; 
 				}
 				
-				if ( flag == false ) break;
+				if ( flag == false )
+					break;
 			}
 		}
+		
+		return outList.size();
 	}
 
 	@Override
@@ -833,14 +856,14 @@ public class FullSensitiveNode extends IVarAbstraction
 	private void do_pts_interval_merge()
 	{
 		for ( GeometricManager gm : new_pts.values() ) {
-			gm.mergeFigures( Constants.max_pts_budget );
+			gm.mergeFigures( GeomPointsTo.max_pts_budget );
 		}
 	}
 	
 	private void do_flow_edge_interval_merge()
 	{
 		for ( GeometricManager gm : flowto.values() ) {
-			gm.mergeFigures( Constants.max_cons_budget );
+			gm.mergeFigures( GeomPointsTo.max_cons_budget );
 		}
 	}
 	
@@ -868,24 +891,24 @@ public class FullSensitiveNode extends IVarAbstraction
 		
 		if ( interI < interJ ) {
 			switch ( code ) {
-			case GeometricManager.ONE_TO_ONE:
+			case IEncodingBroker.ONE_TO_ONE:
 				// pe is a 1-1 mapping
 				pres.I1 = interI - pe.I1 + pe.I2;
 				pres.I2 = interI - pts.I1 + pts.I2;
 				pres.L = interJ - interI;
-				return GeometricManager.ONE_TO_ONE;
+				return IEncodingBroker.ONE_TO_ONE;
 				
-			case GeometricManager.MANY_TO_MANY:
+			case IEncodingBroker.MANY_TO_MANY:
 				// pe is a many-many mapping
 				pres.I1 = pe.I2;
 				pres.I2 = interI - pts.I1 + pts.I2;
 				pres.L = ((RectangleNode)pe).L_prime;
 				pres.L_prime = interJ - interI;
-				return GeometricManager.MANY_TO_MANY;
+				return IEncodingBroker.MANY_TO_MANY;
 			}
 		}
 		
-		return GeometricManager.Undefined_Mapping;
+		return IEncodingBroker.Undefined_Mapping;
 	}
 	
 	/**
@@ -902,7 +925,7 @@ public class FullSensitiveNode extends IVarAbstraction
 		
 		if ( interI < interJ ) {
 			switch ( code ) {
-			case GeometricManager.ONE_TO_ONE:
+			case IEncodingBroker.ONE_TO_ONE:
 				// pe is a 1-1 mapping
 				pres.I1 = interI - pe.I1 + pe.I2;
 				pres.I2 = pts.I2;
@@ -910,7 +933,7 @@ public class FullSensitiveNode extends IVarAbstraction
 				pres.L_prime = pts.L_prime;
 				break;
 				
-			case GeometricManager.MANY_TO_MANY:
+			case IEncodingBroker.MANY_TO_MANY:
 				// pe is a many-many mapping
 				pres.I1 = pe.I2;
 				pres.I2 = pts.I2;
@@ -919,10 +942,10 @@ public class FullSensitiveNode extends IVarAbstraction
 				break;
 			}
 			
-			return GeometricManager.MANY_TO_MANY;
+			return IEncodingBroker.MANY_TO_MANY;
 		}
 		
-		return GeometricManager.Undefined_Mapping;
+		return IEncodingBroker.Undefined_Mapping;
 	}
 	
 	/**
@@ -935,21 +958,21 @@ public class FullSensitiveNode extends IVarAbstraction
 	 */
 	private boolean reasonAndPropagate( FullSensitiveNode qn, AllocNode obj, SegmentNode pts, SegmentNode pe, int code )
 	{
-		int ret_type = GeometricManager.Undefined_Mapping;
+		int ret_type = IEncodingBroker.Undefined_Mapping;
 		
 		switch ( code >> 8 ) {
-		case GeometricManager.ONE_TO_ONE:
+		case IEncodingBroker.ONE_TO_ONE:
 			// pts is a 1-1 mapping
 			ret_type = infer_pts_is_one_to_one(pts, pe, code & 255 );
 			break;
 			
-		case GeometricManager.MANY_TO_MANY:
+		case IEncodingBroker.MANY_TO_MANY:
 			// pts is a mangy-many mapping
 			ret_type = infer_pts_is_many_to_many((RectangleNode)pts, pe, code & 255 );
 			break;
 		}
 		
-		if (ret_type != GeometricManager.Undefined_Mapping)
+		if (ret_type != IEncodingBroker.Undefined_Mapping)
 			return qn.addPointsTo( ret_type, obj );
 		
 		return false;
@@ -961,26 +984,26 @@ public class FullSensitiveNode extends IVarAbstraction
 	private boolean instantiateLoadConstraint(FullSensitiveNode objn,
 			FullSensitiveNode qn, SegmentNode pts, int code ) 
 	{
-		int ret_type = GeometricManager.Undefined_Mapping;
+		int ret_type = IEncodingBroker.Undefined_Mapping;
 		
-		if ( (code>>8) == GeometricManager.ONE_TO_ONE ) {
+		if ( (code>>8) == IEncodingBroker.ONE_TO_ONE ) {
 			// pe is a 1-1 mapping
 			
 			pres.I1 = pts.I2;
 			pres.I2 = pts.I1;
 			
 			switch ( code & 255 ) {
-			case GeometricManager.ONE_TO_ONE:
+			case IEncodingBroker.ONE_TO_ONE:
 				// pts is a 1-1 mapping
 				pres.L = pts.L;
-				ret_type = GeometricManager.ONE_TO_ONE;
+				ret_type = IEncodingBroker.ONE_TO_ONE;
 				break;
 				
-			case GeometricManager.MANY_TO_MANY:
+			case IEncodingBroker.MANY_TO_MANY:
 				// pts is a many-many mapping
 				pres.L = ((RectangleNode)pts).L_prime;
 				pres.L_prime = pts.L;
-				ret_type = GeometricManager.MANY_TO_MANY;
+				ret_type = IEncodingBroker.MANY_TO_MANY;
 				break;
 			}
 		}
@@ -991,16 +1014,16 @@ public class FullSensitiveNode extends IVarAbstraction
 			pres.L_prime = 1;
 			
 			switch ( code & 255 ) {
-			case GeometricManager.ONE_TO_ONE:
+			case IEncodingBroker.ONE_TO_ONE:
 				// pts is a 1-1 mapping or 1-many mapping	
 				pres.L = pts.L;
-				ret_type = GeometricManager.MANY_TO_MANY;
+				ret_type = IEncodingBroker.MANY_TO_MANY;
 				break;
 				
-			case GeometricManager.MANY_TO_MANY:
+			case IEncodingBroker.MANY_TO_MANY:
 				// pts is a many-many mapping
 				pres.L = ((RectangleNode)pts).L_prime;
-				ret_type = GeometricManager.MANY_TO_MANY;
+				ret_type = IEncodingBroker.MANY_TO_MANY;
 				break;
 			}
 		}
@@ -1016,9 +1039,9 @@ public class FullSensitiveNode extends IVarAbstraction
 	private boolean instantiateStoreConstraint(FullSensitiveNode qn,
 			FullSensitiveNode objn, SegmentNode pts, int code) 
 	{
-		int ret_type = GeometricManager.Undefined_Mapping;
+		int ret_type = IEncodingBroker.Undefined_Mapping;
 		
-		if ( (code>>8) == GeometricManager.ONE_TO_ONE ) {
+		if ( (code>>8) == IEncodingBroker.ONE_TO_ONE ) {
 			// pe is a 1-1 mapping
 			
 			pres.I1 = pts.I1;
@@ -1026,15 +1049,15 @@ public class FullSensitiveNode extends IVarAbstraction
 			pres.L = pts.L;
 			
 			switch ( code & 255 ) {
-			case GeometricManager.ONE_TO_ONE:
+			case IEncodingBroker.ONE_TO_ONE:
 				// pts is a 1-1 mapping			
-				ret_type = GeometricManager.ONE_TO_ONE;
+				ret_type = IEncodingBroker.ONE_TO_ONE;
 				break;
 				
-			case GeometricManager.MANY_TO_MANY:
+			case IEncodingBroker.MANY_TO_MANY:
 				// pts is a many-many mapping
 				pres.L_prime = ((RectangleNode)pts).L_prime;
-				ret_type = GeometricManager.MANY_TO_MANY;
+				ret_type = IEncodingBroker.MANY_TO_MANY;
 				break;
 			}
 		}
@@ -1045,16 +1068,16 @@ public class FullSensitiveNode extends IVarAbstraction
 			pres.L = 1;
 			
 			switch ( code & 255 ) {
-			case GeometricManager.ONE_TO_ONE:
+			case IEncodingBroker.ONE_TO_ONE:
 				// pts is a 1-1 mapping			
 				pres.L_prime = pts.L;
-				ret_type = GeometricManager.MANY_TO_MANY;
+				ret_type = IEncodingBroker.MANY_TO_MANY;
 				break;
 				
-			case GeometricManager.MANY_TO_MANY:
+			case IEncodingBroker.MANY_TO_MANY:
 				// pts is a many-many mapping
 				pres.L_prime = ((RectangleNode)pts).L_prime;
-				ret_type = GeometricManager.MANY_TO_MANY;
+				ret_type = IEncodingBroker.MANY_TO_MANY;
 				break;
 			}
 		}

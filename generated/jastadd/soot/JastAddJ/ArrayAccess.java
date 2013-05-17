@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ArrayAccess : {@link Access} ::= <span class="component">{@link Expr}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:31
+ * @declaredat java.ast:28
  */
 public class ArrayAccess extends Access implements Cloneable {
   /**
@@ -66,33 +65,18 @@ public class ArrayAccess extends Access implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ArrayAccess fullCopy() {
-    try {
-      ArrayAccess tree = (ArrayAccess) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ArrayAccess res = (ArrayAccess)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -130,7 +114,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ArrayAccess() {
     super();
@@ -138,19 +122,8 @@ public class ArrayAccess extends Access implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[1];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public ArrayAccess(Expr p0) {
     setChild(p0, 0);
@@ -158,7 +131,7 @@ public class ArrayAccess extends Access implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:13
    */
   protected int numChildren() {
     return 1;
@@ -166,38 +139,33 @@ public class ArrayAccess extends Access implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Expr child.
-   * @param node The new node to replace the Expr child.
+   * Setter for Expr
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setExpr(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Expr child.
-   * @return The current node used as the Expr child.
+   * Getter for Expr
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getExpr() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the Expr child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Expr child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getExprNoTransform() {
     return (Expr)getChildNoTransform(0);
@@ -205,47 +173,63 @@ public class ArrayAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:235
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:356
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return getExpr().isDAafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDAafter_Variable_value = isDAafter_compute(v);
+    return isDAafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDAafter_compute(Variable v) {  return getExpr().isDAafter(v);  }
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:694
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:835
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return getExpr().isDUafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDUafter_Variable_value = isDUafter_compute(v);
+    return isDUafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDUafter_compute(Variable v) {  return getExpr().isDUafter(v);  }
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ResolveAmbiguousNames.jrag:41
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ResolveAmbiguousNames.jrag:43
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isArrayAccess() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isArrayAccess_value = isArrayAccess_compute();
+    return isArrayAccess_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isArrayAccess_compute() {  return true;  }
   /**
    * @attribute syn
    * @aspect SyntacticClassification
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:56
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:100
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public NameType predNameType() {
-    ASTNode$State state = state();
-    try {  return NameType.EXPRESSION_NAME;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    NameType predNameType_value = predNameType_compute();
+    return predNameType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private NameType predNameType_compute() {  return NameType.EXPRESSION_NAME;  }
   /**
    * @apilevel internal
    */
@@ -264,11 +248,11 @@ public class ArrayAccess extends Access implements Cloneable {
     if(type_computed) {
       return type_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     type_value = type_compute();
-      if(isFinal && num == state().boundariesCrossed) type_computed = true;
+if(isFinal && num == state().boundariesCrossed) type_computed = true;
     return type_value;
   }
   /**
@@ -278,14 +262,18 @@ public class ArrayAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeCheck.jrag:15
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeCheck.jrag:18
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isVariable() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isVariable_value = isVariable_compute();
+    return isVariable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isVariable_compute() {  return true;  }
   /**
    * @attribute inh
    * @aspect TypeAnalysis
@@ -293,7 +281,7 @@ public class ArrayAccess extends Access implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl unknownType() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl unknownType_value = getParent().Define_TypeDecl_unknownType(this, null);
     return unknownType_value;
   }
@@ -305,8 +293,7 @@ public class ArrayAccess extends Access implements Cloneable {
     if(caller == getExprNoTransform()) {
       return false;
     }
-    else {      return getParent().Define_boolean_isDest(this, caller);
-    }
+    return getParent().Define_boolean_isDest(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:35
@@ -316,8 +303,7 @@ public class ArrayAccess extends Access implements Cloneable {
     if(caller == getExprNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_isSource(this, caller);
-    }
+    return getParent().Define_boolean_isSource(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupMethod.jrag:30
@@ -327,8 +313,7 @@ public class ArrayAccess extends Access implements Cloneable {
     if(caller == getExprNoTransform()) {
       return unqualifiedScope().lookupMethod(name);
     }
-    else {      return getParent().Define_Collection_lookupMethod(this, caller, name);
-    }
+    return getParent().Define_Collection_lookupMethod(this, caller, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:90
@@ -338,19 +323,17 @@ public class ArrayAccess extends Access implements Cloneable {
     if(caller == getExprNoTransform()) {
       return unqualifiedScope().hasPackage(packageName);
     }
-    else {      return getParent().Define_boolean_hasPackage(this, caller, packageName);
-    }
+    return getParent().Define_boolean_hasPackage(this, caller, packageName);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:255
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupType.jrag:167
    * @apilevel internal
    */
   public SimpleSet Define_SimpleSet_lookupType(ASTNode caller, ASTNode child, String name) {
     if(caller == getExprNoTransform()) {
       return unqualifiedScope().lookupType(name);
     }
-    else {      return getParent().Define_SimpleSet_lookupType(this, caller, name);
-    }
+    return getParent().Define_SimpleSet_lookupType(this, caller, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/LookupVariable.jrag:135
@@ -360,8 +343,7 @@ public class ArrayAccess extends Access implements Cloneable {
     if(caller == getExprNoTransform()) {
       return unqualifiedScope().lookupVariable(name);
     }
-    else {      return getParent().Define_SimpleSet_lookupVariable(this, caller, name);
-    }
+    return getParent().Define_SimpleSet_lookupVariable(this, caller, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:122
@@ -371,8 +353,7 @@ public class ArrayAccess extends Access implements Cloneable {
     if(caller == getExprNoTransform()) {
       return NameType.EXPRESSION_NAME;
     }
-    else {      return getParent().Define_NameType_nameType(this, caller);
-    }
+    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @apilevel internal

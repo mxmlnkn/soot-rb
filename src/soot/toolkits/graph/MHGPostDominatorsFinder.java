@@ -27,11 +27,11 @@ package soot.toolkits.graph;
  *
  * @author Eric Bodden
  **/
-public class MHGPostDominatorsFinder<N> extends MHGDominatorsFinder<N>
+public class MHGPostDominatorsFinder extends MHGDominatorsFinder
 {
 
-	public MHGPostDominatorsFinder(DirectedGraph<N> graph) {
-		super(new InverseGraph<N>(graph));
+	public MHGPostDominatorsFinder(DirectedGraph graph) {
+		super(new InverseGraph(graph));
 	}
 	
 	

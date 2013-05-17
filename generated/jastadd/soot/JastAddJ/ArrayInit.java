@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ArrayInit : {@link Expr} ::= <span class="component">Init:{@link Expr}*</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:93
+ * @declaredat java.ast:90
  */
 public class ArrayInit extends Expr implements Cloneable {
   /**
@@ -74,33 +73,18 @@ public class ArrayInit extends Expr implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ArrayInit fullCopy() {
-    try {
-      ArrayInit tree = (ArrayInit) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ArrayInit res = (ArrayInit)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -159,28 +143,17 @@ public class ArrayInit extends Expr implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ArrayInit() {
     super();
 
+    setChild(new List(), 0);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[1];
-    setChild(new List(), 0);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public ArrayInit(List<Expr> p0) {
     setChild(p0, 0);
@@ -188,7 +161,7 @@ public class ArrayInit extends Expr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   protected int numChildren() {
     return 1;
@@ -196,60 +169,44 @@ public class ArrayInit extends Expr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Init list.
-   * @param list The new list node to be used as the Init list.
+   * Setter for InitList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setInitList(List<Expr> list) {
     setChild(list, 0);
   }
   /**
-   * Retrieves the number of children in the Init list.
-   * @return Number of children in the Init list.
+   * @return number of children in InitList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumInit() {
     return getInitList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the Init list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the Init list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumInitNoTransform() {
-    return getInitListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the Init list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the Init list.
+   * Getter for child in list InitList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Expr getInit(int i) {
     return (Expr)getInitList().getChild(i);
   }
   /**
-   * Append an element to the Init list.
-   * @param node The element to append to the Init list.
+   * Add element to list InitList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addInit(Expr node) {
     List<Expr> list = (parent == null || state == null) ? getInitListNoTransform() : getInitList();
@@ -258,51 +215,44 @@ public class ArrayInit extends Expr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addInitNoTransform(Expr node) {
     List<Expr> list = getInitListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the Init list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list InitList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setInit(Expr node, int i) {
     List<Expr> list = getInitList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the Init list.
-   * @return The node representing the Init list.
+   * Getter for Init list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<Expr> getInits() {
     return getInitList();
   }
   /**
-   * Retrieves the Init list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Init list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<Expr> getInitsNoTransform() {
     return getInitListNoTransform();
   }
   /**
-   * Retrieves the Init list.
-   * @return The node representing the Init list.
+   * Getter for list InitList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Expr> getInitList() {
@@ -311,12 +261,9 @@ public class ArrayInit extends Expr implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the Init list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Init list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<Expr> getInitListNoTransform() {
@@ -329,35 +276,43 @@ public class ArrayInit extends Expr implements Cloneable {
    * where T must be byte, char or short.
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:308
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:469
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean representableIn(TypeDecl t) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean representableIn_TypeDecl_value = representableIn_compute(t);
+    return representableIn_TypeDecl_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean representableIn_compute(TypeDecl t) {
     for(int i = 0; i < getNumInit(); i++)
       if(!getInit(i).representableIn(t))
         return false;
     return true;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:235
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:498
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return getNumInit() == 0 ? isDAbefore(v) : getInit(getNumInit()-1).isDAafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDAafter_Variable_value = isDAafter_compute(v);
+    return isDAafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDAafter_compute(Variable v) {  return getNumInit() == 0 ? isDAbefore(v) : getInit(getNumInit()-1).isDAafter(v);  }
   protected java.util.Map computeDABefore_int_Variable_values;
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:502
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:501
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean computeDABefore(int childIndex, Variable v) {
@@ -368,11 +323,11 @@ public class ArrayInit extends Expr implements Cloneable {
     if(computeDABefore_int_Variable_values.containsKey(_parameters)) {
       return ((Boolean)computeDABefore_int_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean computeDABefore_int_Variable_value = computeDABefore_compute(childIndex, v);
-      if(isFinal && num == state().boundariesCrossed) computeDABefore_int_Variable_values.put(_parameters, Boolean.valueOf(computeDABefore_int_Variable_value));
+if(isFinal && num == state().boundariesCrossed) computeDABefore_int_Variable_values.put(_parameters, Boolean.valueOf(computeDABefore_int_Variable_value));
     return computeDABefore_int_Variable_value;
   }
   /**
@@ -388,19 +343,23 @@ public class ArrayInit extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:694
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:881
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return getNumInit() == 0 ? isDUbefore(v) : getInit(getNumInit()-1).isDUafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDUafter_Variable_value = isDUafter_compute(v);
+    return isDUafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDUafter_compute(Variable v) {  return getNumInit() == 0 ? isDUbefore(v) : getInit(getNumInit()-1).isDUafter(v);  }
   protected java.util.Map computeDUbefore_int_Variable_values;
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:885
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:884
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean computeDUbefore(int childIndex, Variable v) {
@@ -411,11 +370,11 @@ public class ArrayInit extends Expr implements Cloneable {
     if(computeDUbefore_int_Variable_values.containsKey(_parameters)) {
       return ((Boolean)computeDUbefore_int_Variable_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean computeDUbefore_int_Variable_value = computeDUbefore_compute(childIndex, v);
-      if(isFinal && num == state().boundariesCrossed) computeDUbefore_int_Variable_values.put(_parameters, Boolean.valueOf(computeDUbefore_int_Variable_value));
+if(isFinal && num == state().boundariesCrossed) computeDUbefore_int_Variable_values.put(_parameters, Boolean.valueOf(computeDUbefore_int_Variable_value));
     return computeDUbefore_int_Variable_value;
   }
   /**
@@ -446,11 +405,11 @@ public class ArrayInit extends Expr implements Cloneable {
     if(type_computed) {
       return type_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     type_value = type_compute();
-      if(isFinal && num == state().boundariesCrossed) type_computed = true;
+if(isFinal && num == state().boundariesCrossed) type_computed = true;
     return type_value;
   }
   /**
@@ -475,11 +434,11 @@ public class ArrayInit extends Expr implements Cloneable {
     if(declType_computed) {
       return declType_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     declType_value = getParent().Define_TypeDecl_declType(this, null);
-      if(isFinal && num == state().boundariesCrossed) declType_computed = true;
+if(isFinal && num == state().boundariesCrossed) declType_computed = true;
     return declType_value;
   }
   /**
@@ -489,7 +448,7 @@ public class ArrayInit extends Expr implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl expectedType() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl expectedType_value = getParent().Define_TypeDecl_expectedType(this, null);
     return expectedType_value;
   }
@@ -502,11 +461,10 @@ public class ArrayInit extends Expr implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return true;
     }
-    else {      return getParent().Define_boolean_isSource(this, caller);
-    }
+    return getParent().Define_boolean_isSource(this, caller);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:500
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:499
    * @apilevel internal
    */
   public boolean Define_boolean_isDAbefore(ASTNode caller, ASTNode child, Variable v) {
@@ -514,11 +472,10 @@ public class ArrayInit extends Expr implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return computeDABefore(childIndex, v);
     }
-    else {      return getParent().Define_boolean_isDAbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDAbefore(this, caller, v);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:883
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:882
    * @apilevel internal
    */
   public boolean Define_boolean_isDUbefore(ASTNode caller, ASTNode child, Variable v) {
@@ -526,8 +483,7 @@ public class ArrayInit extends Expr implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return computeDUbefore(childIndex, v);
     }
-    else {      return getParent().Define_boolean_isDUbefore(this, caller, v);
-    }
+    return getParent().Define_boolean_isDUbefore(this, caller, v);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:263
@@ -538,8 +494,7 @@ public class ArrayInit extends Expr implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return declType().componentType();
     }
-    else {      return getParent().Define_TypeDecl_declType(this, caller);
-    }
+    return getParent().Define_TypeDecl_declType(this, caller);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericMethodsInference.jrag:37
@@ -550,11 +505,10 @@ public class ArrayInit extends Expr implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return declType().componentType();
     }
-    else {      return getParent().Define_TypeDecl_assignConvertedType(this, caller);
-    }
+    return getParent().Define_TypeDecl_assignConvertedType(this, caller);
   }
   /**
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:70
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:67
    * @apilevel internal
    */
   public TypeDecl Define_TypeDecl_expectedType(ASTNode caller, ASTNode child) {
@@ -562,8 +516,7 @@ public class ArrayInit extends Expr implements Cloneable {
       int childIndex = caller.getIndexOfChild(child);
       return expectedType().componentType();
     }
-    else {      return getParent().Define_TypeDecl_expectedType(this, caller);
-    }
+    return getParent().Define_TypeDecl_expectedType(this, caller);
   }
   /**
    * @apilevel internal

@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production EqualityExpr : {@link RelationalExpr};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:181
+ * @declaredat java.ast:178
  */
 public abstract class EqualityExpr extends RelationalExpr implements Cloneable {
   /**
@@ -67,7 +66,7 @@ public abstract class EqualityExpr extends RelationalExpr implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public EqualityExpr() {
     super();
@@ -75,19 +74,8 @@ public abstract class EqualityExpr extends RelationalExpr implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public EqualityExpr(Expr p0, Expr p1) {
     setChild(p0, 0);
@@ -96,7 +84,7 @@ public abstract class EqualityExpr extends RelationalExpr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   protected int numChildren() {
     return 2;
@@ -104,69 +92,59 @@ public abstract class EqualityExpr extends RelationalExpr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the LeftOperand child.
-   * @param node The new node to replace the LeftOperand child.
+   * Setter for LeftOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setLeftOperand(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the LeftOperand child.
-   * @return The current node used as the LeftOperand child.
+   * Getter for LeftOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getLeftOperand() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the LeftOperand child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the LeftOperand child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getLeftOperandNoTransform() {
     return (Expr)getChildNoTransform(0);
   }
   /**
-   * Replaces the RightOperand child.
-   * @param node The new node to replace the RightOperand child.
+   * Setter for RightOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setRightOperand(Expr node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the RightOperand child.
-   * @return The current node used as the RightOperand child.
+   * Getter for RightOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getRightOperand() {
     return (Expr)getChild(1);
   }
   /**
-   * Retrieves the RightOperand child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the RightOperand child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getRightOperandNoTransform() {
     return (Expr)getChildNoTransform(1);

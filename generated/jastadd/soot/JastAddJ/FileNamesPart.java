@@ -19,9 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
-  * @ast class
- * 
+ * @ast class
+ * @declaredat :0
  */
 public class FileNamesPart extends PathPart {
 
@@ -55,7 +56,7 @@ public class FileNamesPart extends PathPart {
         File classFile = new File(f);
         if(classFile.isFile()) {
           is = new FileInputStream(classFile);
-          pathName = classFile.getPath();
+          pathName = classFile.getAbsolutePath(); // TODO: check me"";
           relativeName = f;
           fullName = canonicalName;
           sourceFiles.remove(canonicalName);
@@ -66,18 +67,12 @@ public class FileNamesPart extends PathPart {
     }
 
 
-
-    /**
-     * Add a source file to be parsed.
-     * @return The CompilationUnit representing the source file,
-     * or <code>null</code> if no such file exists
-     */
-    public CompilationUnit addSourceFile(String name) {
+    public void addSourceFile(String name) {
       try {
         File classFile = new File(name);
         if(classFile.isFile()) {
           is = new FileInputStream(classFile);
-          this.pathName = classFile.getPath();
+          this.pathName = classFile.getAbsolutePath();
           relativeName = name;
           fullName = name; // is this ok
           CompilationUnit u = getCompilationUnit();
@@ -94,11 +89,9 @@ public class FileNamesPart extends PathPart {
               }
             }
           }
-          return u;
         }
       } catch (IOException e) {
       }
-      return null;
     }
 
 

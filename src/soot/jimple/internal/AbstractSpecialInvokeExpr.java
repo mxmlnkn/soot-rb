@@ -51,14 +51,13 @@ public abstract class AbstractSpecialInvokeExpr extends AbstractInstanceInvokeEx
         {
             AbstractSpecialInvokeExpr ie = (AbstractSpecialInvokeExpr)o;
             if (!(baseBox.getValue().equivTo(ie.baseBox.getValue()) &&
-                    getMethod().equals(ie.getMethod()) &&
+                    getMethod().equals(ie.getMethod()) && 
                     argBoxes.length == ie.argBoxes.length))
                 return false;
-            for(int i=0; i< argBoxes.length; i++){
-           if(!(argBoxes[i]).getValue().equivTo(ie.argBoxes[i].getValue()))
-                return false;
-           }
-           return true;
+            for (ValueBox element : argBoxes)
+				if (!(element.getValue().equivTo(element.getValue())))
+                    return false;
+            return true;
         }
         return false;
     }

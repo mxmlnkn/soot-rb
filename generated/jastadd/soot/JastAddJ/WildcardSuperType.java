@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production WildcardSuperType : {@link AbstractWildcardType} ::= <span class="component">{@link Access}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.ast:28
+ * @declaredat Generics.ast:25
  */
 public class WildcardSuperType extends AbstractWildcardType implements Cloneable {
   /**
@@ -82,37 +81,22 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public WildcardSuperType fullCopy() {
-    try {
-      WildcardSuperType tree = (WildcardSuperType) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    WildcardSuperType res = (WildcardSuperType)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:907
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:880
    */
   public Access substitute(Parameterization parTypeDecl) {
     if(!usesTypeVariable())
@@ -121,28 +105,17 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Generics.ast:1
    */
   public WildcardSuperType() {
     super();
 
+    setChild(new List(), 1);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[3];
-    setChild(new List(), 1);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat Generics.ast:8
    */
   public WildcardSuperType(Modifiers p0, String p1, List<BodyDecl> p2, Access p3) {
     setChild(p0, 0);
@@ -152,7 +125,7 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Generics.ast:14
    */
   public WildcardSuperType(Modifiers p0, beaver.Symbol p1, List<BodyDecl> p2, Access p3) {
     setChild(p0, 0);
@@ -163,7 +136,7 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:23
    */
   protected int numChildren() {
     return 3;
@@ -171,57 +144,49 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Generics.ast:29
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Modifiers child.
-   * @param node The new node to replace the Modifiers child.
+   * Setter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setModifiers(Modifiers node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * @return The current node used as the Modifiers child.
+   * Getter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Modifiers getModifiers() {
     return (Modifiers)getChild(0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Modifiers child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Modifiers getModifiersNoTransform() {
     return (Modifiers)getChildNoTransform(0);
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -231,64 +196,47 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the BodyDecl list.
-   * @param list The new list node to be used as the BodyDecl list.
+   * Setter for BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setBodyDeclList(List<BodyDecl> list) {
     setChild(list, 1);
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * @return Number of children in the BodyDecl list.
+   * @return number of children in BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumBodyDecl() {
     return getBodyDeclList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the BodyDecl list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumBodyDeclNoTransform() {
-    return getBodyDeclListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the BodyDecl list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the BodyDecl list.
+   * Getter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BodyDecl getBodyDecl(int i) {
     return (BodyDecl)getBodyDeclList().getChild(i);
   }
   /**
-   * Append an element to the BodyDecl list.
-   * @param node The element to append to the BodyDecl list.
+   * Add element to list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addBodyDecl(BodyDecl node) {
     List<BodyDecl> list = (parent == null || state == null) ? getBodyDeclListNoTransform() : getBodyDeclList();
@@ -297,51 +245,44 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addBodyDeclNoTransform(BodyDecl node) {
     List<BodyDecl> list = getBodyDeclListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the BodyDecl list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setBodyDecl(BodyDecl node, int i) {
     List<BodyDecl> list = getBodyDeclList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for BodyDecl list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<BodyDecl> getBodyDecls() {
     return getBodyDeclList();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<BodyDecl> getBodyDeclsNoTransform() {
     return getBodyDeclListNoTransform();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclList() {
@@ -350,44 +291,36 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
     return list;
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclListNoTransform() {
     return (List<BodyDecl>)getChildNoTransform(1);
   }
   /**
-   * Replaces the Access child.
-   * @param node The new node to replace the Access child.
+   * Setter for Access
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:5
    */
   public void setAccess(Access node) {
     setChild(node, 2);
   }
   /**
-   * Retrieves the Access child.
-   * @return The current node used as the Access child.
+   * Getter for Access
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:12
    */
   public Access getAccess() {
     return (Access)getChild(2);
   }
   /**
-   * Retrieves the Access child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Access child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Generics.ast:18
    */
   public Access getAccessNoTransform() {
     return (Access)getChildNoTransform(2);
@@ -436,7 +369,7 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
         involvesTypeParameters_value = new_involvesTypeParameters_value; 
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
       involvesTypeParameters_computed = true;
       }
       else {
@@ -472,17 +405,21 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:571
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:579
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean sameSignature(Access a) {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean sameSignature_Access_value = sameSignature_compute(a);
+    return sameSignature_Access_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean sameSignature_compute(Access a) {
     if(a instanceof WildcardSuper)
       return getAccess().type().sameSignature(((WildcardSuper)a).getAccess());
     return super.sameSignature(a);
-  }
-    finally {
-    }
   }
   /**
    * @apilevel internal
@@ -503,7 +440,7 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1081
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1042
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean usesTypeVariable() {
@@ -528,7 +465,7 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
         usesTypeVariable_value = new_usesTypeVariable_value; 
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
       usesTypeVariable_computed = true;
       }
       else {
@@ -564,25 +501,33 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1367
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Generics.jrag:1261
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl superType() {
-    ASTNode$State state = state();
-    try {  return getAccess().type();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    TypeDecl superType_value = superType_compute();
+    return superType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private TypeDecl superType_compute() {  return getAccess().type();  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:46
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:53
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeWildcard(WildcardType type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(typeObject());  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeWildcard_WildcardType_value = supertypeWildcard_compute(type);
+    return supertypeWildcard_WildcardType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeWildcard_compute(WildcardType type) {  return superType().subtype(typeObject());  }
   protected java.util.Map subtype_TypeDecl_values;
   /**
    * @attribute syn
@@ -623,7 +568,7 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
         }
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
         subtype_TypeDecl_values.put(_parameters, new_subtype_TypeDecl_value);
       }
       else {
@@ -656,102 +601,138 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:66
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:71
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeWildcardSuper(WildcardSuperType type) {
-    ASTNode$State state = state();
-    try {  return type.superType().subtype(superType());  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeWildcardSuper_WildcardSuperType_value = supertypeWildcardSuper_compute(type);
+    return supertypeWildcardSuper_WildcardSuperType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeWildcardSuper_compute(WildcardSuperType type) {  return type.superType().subtype(superType());  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:421
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:93
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeClassDecl(ClassDecl type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeClassDecl_ClassDecl_value = supertypeClassDecl_compute(type);
+    return supertypeClassDecl_ClassDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeClassDecl_compute(ClassDecl type) {  return superType().subtype(type);  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:437
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:94
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeInterfaceDecl(InterfaceDecl type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeInterfaceDecl_InterfaceDecl_value = supertypeInterfaceDecl_compute(type);
+    return supertypeInterfaceDecl_InterfaceDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeInterfaceDecl_compute(InterfaceDecl type) {  return superType().subtype(type);  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:125
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:95
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeParClassDecl(ParClassDecl type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeParClassDecl_ParClassDecl_value = supertypeParClassDecl_compute(type);
+    return supertypeParClassDecl_ParClassDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeParClassDecl_compute(ParClassDecl type) {  return superType().subtype(type);  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:129
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:96
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeParInterfaceDecl(ParInterfaceDecl type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeParInterfaceDecl_ParInterfaceDecl_value = supertypeParInterfaceDecl_compute(type);
+    return supertypeParInterfaceDecl_ParInterfaceDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeParInterfaceDecl_compute(ParInterfaceDecl type) {  return superType().subtype(type);  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:26
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:97
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeRawClassDecl(RawClassDecl type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeRawClassDecl_RawClassDecl_value = supertypeRawClassDecl_compute(type);
+    return supertypeRawClassDecl_RawClassDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeRawClassDecl_compute(RawClassDecl type) {  return superType().subtype(type);  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:30
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:98
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeRawInterfaceDecl(RawInterfaceDecl type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeRawInterfaceDecl_RawInterfaceDecl_value = supertypeRawInterfaceDecl_compute(type);
+    return supertypeRawInterfaceDecl_RawInterfaceDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeRawInterfaceDecl_compute(RawInterfaceDecl type) {  return superType().subtype(type);  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:291
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:99
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeTypeVariable(TypeVariable type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeTypeVariable_TypeVariable_value = supertypeTypeVariable_compute(type);
+    return supertypeTypeVariable_TypeVariable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeTypeVariable_compute(TypeVariable type) {  return superType().subtype(type);  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:450
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:100
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeArrayDecl(ArrayDecl type) {
-    ASTNode$State state = state();
-    try {  return superType().subtype(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeArrayDecl_ArrayDecl_value = supertypeArrayDecl_compute(type);
+    return supertypeArrayDecl_ArrayDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeArrayDecl_compute(ArrayDecl type) {  return superType().subtype(type);  }
   protected java.util.Map containedIn_TypeDecl_values;
   /**
    * @attribute syn
@@ -792,7 +773,7 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
         }
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
         containedIn_TypeDecl_values.put(_parameters, new_containedIn_TypeDecl_value);
       }
       else {
@@ -869,7 +850,7 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
         }
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
         sameStructure_TypeDecl_values.put(_parameters, new_sameStructure_TypeDecl_value);
       }
       else {
@@ -913,11 +894,11 @@ public class WildcardSuperType extends AbstractWildcardType implements Cloneable
     if(instanceOf_TypeDecl_values.containsKey(_parameters)) {
       return ((Boolean)instanceOf_TypeDecl_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean instanceOf_TypeDecl_value = instanceOf_compute(type);
-      if(isFinal && num == state().boundariesCrossed) instanceOf_TypeDecl_values.put(_parameters, Boolean.valueOf(instanceOf_TypeDecl_value));
+if(isFinal && num == state().boundariesCrossed) instanceOf_TypeDecl_values.put(_parameters, Boolean.valueOf(instanceOf_TypeDecl_value));
     return instanceOf_TypeDecl_value;
   }
   /**

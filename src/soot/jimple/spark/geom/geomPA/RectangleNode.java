@@ -18,10 +18,8 @@
  */
 package soot.jimple.spark.geom.geomPA;
 
-import soot.jimple.spark.geom.geomPA.SegmentNode;
-
 /**
- * The rectangle figure for encoding the many-to-many relation.
+ * The rectangle figure for encoding the points-to/flows-to relations.
  * 
  * @author xiao
  *
@@ -37,11 +35,6 @@ public class RectangleNode extends SegmentNode {
 	public RectangleNode() {}
 
 	public RectangleNode( RectangleNode other )
-	{
-		copyRectangle(other);
-	}
-	
-	public void copyRectangle( RectangleNode other )
 	{
 		I1 = other.I1;
 		I2 = other.I2;

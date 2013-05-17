@@ -18,16 +18,11 @@
  */
 package soot.jimple.spark.geom.geomPA;
 
-
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
-
-import soot.jimple.AssignStmt;
-import soot.jimple.CastExpr;
-import soot.jimple.Stmt;
 
 import soot.RefLikeType;
 import soot.Scene;
@@ -35,8 +30,16 @@ import soot.SootClass;
 import soot.SootMethod;
 import soot.Type;
 import soot.Value;
-import soot.jimple.spark.pag.GlobalVarNode;
+import soot.jimple.AssignStmt;
+import soot.jimple.CastExpr;
+import soot.jimple.Stmt;
+import soot.jimple.spark.geom.geomPA.GeomPointsTo;
+import soot.jimple.spark.geom.geomPA.IVarAbstraction;
+import soot.jimple.spark.geom.geomPA.PlainConstraint;
+import soot.jimple.spark.geom.geomPA.ZArrayNumberer;
+import soot.jimple.spark.geom.geomPA.CgEdge;
 import soot.jimple.spark.pag.AllocNode;
+import soot.jimple.spark.pag.GlobalVarNode;
 import soot.jimple.spark.pag.LocalVarNode;
 import soot.jimple.spark.pag.Node;
 import soot.jimple.spark.pag.SparkField;
@@ -49,8 +52,8 @@ import soot.jimple.toolkits.callgraph.Edge;
  * The implemented techniques are:
  * 
  * 1. Intra-procedural equivalent pointer detection;
- * 2. Pointer distillation: the library code that does not impact the application code pointers is removed;
- * 3. Pointer ranking for worklist prioritizing.
+ * 2. Unreachable library code removal;
+ * 3. Pointer serialization for worklist prioritizing.
  * 
  * @author xiao
  * 
@@ -74,6 +77,7 @@ public class OfflineProcessor
 	ZArrayNumberer<IVarAbstraction> int2var;
 	ArrayList<off_graph_edge> varGraph;
 	int pre[], low[], count[], rep[], repsize[];
+	boolean usefulVar[];
 	Deque<Integer> queue;
 	int pre_cnt;
 	int n_var;
@@ -93,7 +97,7 @@ public class OfflineProcessor
 		for ( int i = 0; i < size; ++i ) varGraph.add(null);
 	}
 	
-	public void runOptimizations( int useClients, boolean useSpark, Set<VarNode> basePointers )
+	public void runOptimizations( boolean useSpark, Set<VarNode> basePointers )
 	{
 		// We prepare the essential data structure first
 		n_var = int2var.size();						// The size of the pointers will shrink after each round of analysis
@@ -105,21 +109,7 @@ public class OfflineProcessor
 		
 		// The instance graph reverses the assignment relations. E.g., p = q  => p -> q
 		buildInstanceAssignmentGraph( useSpark );
-		
-		switch (useClients) {
-		case 1:
-			setVirualBaseVarsUseful();
-			break;
-			
-		case 2:
-			setStaticCastsVarUseful( useSpark );
-			break;
-			
-		default:
-			setAllUserCodeVariablesUseful();
-			break;
-		}
-
+		setAllUserCodeVariablesUseful();
 		// In any case, we need the virtual callsites pointers to update the call graph
 		addUsefulVariables(basePointers);
 		eliminateUselessConstraints( useSpark );
@@ -158,7 +148,7 @@ public class OfflineProcessor
 		for ( PlainConstraint cons : ptAnalyzer.constraints ) {
 			// We should keep all the constraints that are deleted by the offline variable merging
 			if ( cons.isViable == false &&
-					cons.type != Constants.ASSIGN_CONS )
+					cons.type != GeomPointsTo.ASSIGN_CONS )
 				continue;
 			
 			// In our constraint representation, lhs -> rhs means rhs = lhs.
@@ -184,12 +174,12 @@ public class OfflineProcessor
 			switch ( cons.type ) {
 			
 			// rhs = lhs
-			case Constants.ASSIGN_CONS:
+			case GeomPointsTo.ASSIGN_CONS:
 				add_graph_edge( rhs.id, lhs.id );
 				break;
 				
 			// rhs = lhs.f
-			case Constants.LOAD_CONS:
+			case GeomPointsTo.LOAD_CONS:
 				if ( useSpark ) {
 					lhs.getWrappedNode().getP2Set().forall( new P2SetVisitor() {
 						@Override
@@ -214,7 +204,7 @@ public class OfflineProcessor
 				break;
 			
 			// rhs.f = lhs
-			case Constants.STORE_CONS:
+			case GeomPointsTo.STORE_CONS:
 				if ( useSpark ) {
 					rhs.getWrappedNode().getP2Set().forall( new P2SetVisitor() {
 						@Override
@@ -265,7 +255,7 @@ public class OfflineProcessor
 		for ( int i = 0; i < n_var; ++i ) {
 			Node node = int2var.get(i).getWrappedNode();
 			int sm_id = ptAnalyzer.getMappedMethodID(node);
-			if ( sm_id == Constants.UNKNOWN_FUNCTION )
+			if ( sm_id == GeomPointsTo.UNKNOWN_FUNCTION )
 				continue;
 			
 			if ( node instanceof VarNode ) {
@@ -443,13 +433,13 @@ public class OfflineProcessor
 			visitedFlag = false;
 			
 			switch ( cons.type ) {
-			case Constants.NEW_CONS:
-			case Constants.ASSIGN_CONS:
-			case Constants.LOAD_CONS:
+			case GeomPointsTo.NEW_CONS:
+			case GeomPointsTo.ASSIGN_CONS:
+			case GeomPointsTo.LOAD_CONS:
 				visitedFlag = pn.willUpdate;
 				break;
 			
-			case Constants.STORE_CONS:
+			case GeomPointsTo.STORE_CONS:
 				if ( useSpark ) {
 					pn.getWrappedNode().getP2Set().forall( new P2SetVisitor() {
 						@Override
@@ -498,16 +488,16 @@ public class OfflineProcessor
 			final SparkField field = cons.f;
 			
 			switch ( cons.type ) {
-			case Constants.NEW_CONS:
+			case GeomPointsTo.NEW_CONS:
 				// We enqueue the pointers that are allocation result receivers
 				queue.add(rhs.id);
 				break;
 				
-			case Constants.ASSIGN_CONS:
+			case GeomPointsTo.ASSIGN_CONS:
 				add_graph_edge( lhs.id, rhs.id );
 				break;
 				
-			case Constants.LOAD_CONS:
+			case GeomPointsTo.LOAD_CONS:
 				if ( useSpark ) {
 					lhs.getWrappedNode().getP2Set().forall( new P2SetVisitor() {
 						@Override
@@ -528,7 +518,7 @@ public class OfflineProcessor
 				}
 				break;
 				
-			case Constants.STORE_CONS:
+			case GeomPointsTo.STORE_CONS:
 				if ( useSpark ) {
 					rhs.getWrappedNode().getP2Set().forall( new P2SetVisitor() {
 						@Override
@@ -651,7 +641,7 @@ public class OfflineProcessor
 	 */
 	protected void mergeLocalVariables()
 	{
-		IVarAbstraction my_lhs, my_rhs, root;
+		IVarAbstraction my_lhs, my_rhs;
 		Node lhs, rhs;
 		
 		// First time scan, in-degree counting
@@ -668,7 +658,7 @@ public class OfflineProcessor
 		// We charge the degree counting with new constraint
 		for ( PlainConstraint cons : ptAnalyzer.constraints ) {
 			if ( (cons.isViable == true ) &&
-					(cons.type == Constants.NEW_CONS) ) {
+					(cons.type == GeomPointsTo.NEW_CONS) ) {
 				my_rhs = cons.expr.getO2();
 				count[ my_rhs.id ]++;
 			}
@@ -677,7 +667,7 @@ public class OfflineProcessor
 		// Second time scan, we delete those constraints that only duplicate points-to information
 		for ( PlainConstraint cons : ptAnalyzer.constraints ) {
 			if ( (cons.isViable == true ) &&
-					(cons.type == Constants.ASSIGN_CONS) ) {
+					(cons.type == GeomPointsTo.ASSIGN_CONS) ) {
 				my_lhs = cons.expr.getO1();
 				my_rhs = cons.expr.getO2();
 				lhs = my_lhs.getWrappedNode();
@@ -689,13 +679,14 @@ public class OfflineProcessor
 					SootMethod sm2 = ((LocalVarNode)rhs).getMethod();
 					
 					// They are local to the same function and the receiver variable has only one incoming edge
-					// Only most importantly, they have the same type.
 					if ( sm1 == sm2 && 
 							count[my_rhs.id] == 1 
 							&& lhs.getType() == rhs.getType() ) {
-						boolean willUpdate = my_rhs.willUpdate;
-						root = my_rhs.merge(my_lhs);
-						if ( root.willUpdate == false ) root.willUpdate = willUpdate;
+						// We directly merge the SPARK nodes to save effort for maintaining additional data structures
+						// Maybe lhs and rhs have different types, however, we have already delete the SPARK points-to result.
+						// Therefore, there is no exception threw.
+						my_rhs = my_rhs.merge(my_lhs);
+						if ( my_rhs.willUpdate == false ) my_rhs.willUpdate = true;
 						cons.isViable = false;
 					}
 				}

@@ -25,7 +25,7 @@ import soot.jimple.toolkits.callgraph.Edge;
 import soot.toolkits.scalar.Pair;
 
 /**
- * The geometric encoding based constraint descriptor.
+ * The constraint descriptor class.
  * 
  * @author xiao
  *

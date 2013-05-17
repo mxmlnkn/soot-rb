@@ -42,13 +42,9 @@ import soot.JastAddJ.JavaParser;
 import soot.JastAddJ.JastAddJavaParser;
 import soot.JastAddJ.Program;
 
-import soot.rbclassload.RootbeerClassLoader;
-
 /** Loads symbols for SootClasses from either class files or jimple files. */
 public class SootResolver 
 {
-    private final Map<SootClass, ArrayList> classToTypesBody = new HashMap<SootClass, ArrayList>();
-
     /** Maps each resolved class to a list of all references in it. */
     private final Map<SootClass, ArrayList> classToTypesSignature = new HashMap<SootClass, ArrayList>();
 
@@ -94,9 +90,6 @@ public class SootResolver
     
     /** Returns true if we are resolving all class refs recursively. */
     private boolean resolveEverything() {
-      if(Options.v().rbclassload()){
-        return false;
-      }
         return( Options.v().whole_program() || Options.v().whole_shimple()
 	|| Options.v().full_resolver() 
 	|| Options.v().output_format() == Options.output_format_dava );
@@ -138,7 +131,6 @@ public class SootResolver
             while( !worklist[i].isEmpty() ) {
                 SootClass sc = (SootClass) worklist[i].removeFirst();
                 if( resolveEverything() ) {
-                    System.out.println("resolveEverything");
                     boolean onlySignatures = sc.isPhantom() || (
 	            			Options.v().no_bodies_for_excluded() &&
 	            			Scene.v().isExcluded(sc) &&
@@ -191,12 +183,7 @@ public class SootResolver
         sc.setResolvingLevel(SootClass.HIERARCHY);
 
         String className = sc.getName();
-        ClassSource is; 
-        if(Options.v().rbclassload()){
-          is = RootbeerClassLoader.v().getClassSource(className);
-        } else {
-          is = SourceLocator.v().getClassSource(className);
-        }
+        ClassSource is = SourceLocator.v().getClassSource(className);
         boolean modelAsPhantomRef = is == null;
 //        || (
 //        		Options.v().no_jrl() &&
@@ -223,13 +210,11 @@ public class SootResolver
                 sc.setPhantomClass();
                 classToTypesSignature.put( sc, new ArrayList() );
                 classToTypesHierarchy.put( sc, new ArrayList() );
-                classToTypesBody.put( sc, new ArrayList() );
             }
         } else {
             Dependencies dependencies = is.resolve(sc);
             classToTypesSignature.put( sc, new ArrayList(dependencies.typesToSignature) );
             classToTypesHierarchy.put( sc, new ArrayList(dependencies.typesToHierarchy) );
-            classToTypesBody.put( sc, new ArrayList(dependencies.typesToBody) );
         }
         reResolveHierarchy(sc);
     }
@@ -244,18 +229,6 @@ public class SootResolver
             final SootClass iface = (SootClass) ifaceIt.next();
             addToResolveWorklist(iface, SootClass.HIERARCHY);
         }
-    }
-
-    public void resolveMethod(SootMethod method){
-      addToResolveWorklist(method.getReturnType(), SootClass.HIERARCHY);
-      List<Type> params = method.getParameterTypes();
-      for(Type param : params){
-        addToResolveWorklist(param, SootClass.HIERARCHY);
-      }
-      List<SootClass> exceptions = method.getExceptions();
-      for(SootClass exception : exceptions){
-        addToResolveWorklist(exception, SootClass.HIERARCHY);
-      }
     }
 
     /** Signatures - we know the signatures of all methods and fields
@@ -273,9 +246,7 @@ public class SootResolver
             final SootField f = (SootField) fIt.next();
             addToResolveWorklist( f.getType(), SootClass.HIERARCHY );
         }
-
-        if(Options.v().rbclassload() == false){
-          for( Iterator mIt = sc.getMethods().iterator(); mIt.hasNext(); ) {
+        for( Iterator mIt = sc.getMethods().iterator(); mIt.hasNext(); ) {
             final SootMethod m = (SootMethod) mIt.next();
             addToResolveWorklist( m.getReturnType(), SootClass.HIERARCHY );
             for( Iterator ptypeIt = m.getParameterTypes().iterator(); ptypeIt.hasNext(); ) {
@@ -285,15 +256,14 @@ public class SootResolver
             for (SootClass exception : m.getExceptions()) {
                 addToResolveWorklist( exception, SootClass.HIERARCHY );
             }
-          }
         }
 
         // Bring superclasses to signatures
         if(sc.hasSuperclass()) 
-            addToResolveWorklist(sc.getSuperclass(), SootClass.HIERARCHY);
+            addToResolveWorklist(sc.getSuperclass(), SootClass.SIGNATURES);
         for( Iterator ifaceIt = sc.getInterfaces().iterator(); ifaceIt.hasNext(); ) {
             final SootClass iface = (SootClass) ifaceIt.next();
-            addToResolveWorklist(iface, SootClass.HIERARCHY);
+            addToResolveWorklist(iface, SootClass.SIGNATURES);
         }
     }
 

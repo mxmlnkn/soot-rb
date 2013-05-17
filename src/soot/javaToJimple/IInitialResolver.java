@@ -32,30 +32,11 @@ public interface IInitialResolver {
 	public Dependencies resolveFromJavaFile(SootClass sc);
 	
 	public class Dependencies {
-		public final Set<Type> typesToHierarchy, typesToSignature, typesToBody;
+		public final Set<Type> typesToHierarchy, typesToSignature;
 		public Dependencies() {
 			typesToHierarchy = new HashSet<Type>();
 			typesToSignature = new HashSet<Type>();
-			typesToBody = new HashSet<Type>();
 		}
-
-    @Override
-    public String toString(){
-      StringBuilder ret = new StringBuilder();
-      ret.append("  typesToHierarchy: \n");
-      for(Type type : typesToHierarchy){
-        ret.append("    "+type.toString()+"\n");
-      }
-      ret.append("  typesToSignature: \n");
-      for(Type type : typesToSignature){
-        ret.append("    "+type.toString()+"\n");
-      }
-      ret.append("  typesToBody: \n");
-      for(Type type : typesToBody){
-        ret.append("    "+type.toString()+"\n");
-      }
-      return ret.toString();
-    }
 	}
 
 }

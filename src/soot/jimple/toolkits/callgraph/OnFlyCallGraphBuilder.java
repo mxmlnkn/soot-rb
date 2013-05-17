@@ -423,7 +423,6 @@ public final class OnFlyCallGraphBuilder
             }
             MethodOrMethodContext momc = (MethodOrMethodContext) worklist.next();
             SootMethod m = momc.method();
-            System.out.println("reachable: "+m.getSignature());
             if( appOnly && !m.getDeclaringClass().isApplicationClass() ) continue;
             if( analyzedMethods.add( m ) ) processNewMethod( m );
             processNewMethodContext( momc );

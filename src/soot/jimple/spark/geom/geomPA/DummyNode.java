@@ -20,13 +20,20 @@ package soot.jimple.spark.geom.geomPA;
 
 import java.io.PrintStream;
 import java.util.Set;
+import java.util.Vector;
+
 import soot.Type;
-import soot.jimple.spark.geom.helper.PtSensVisitor;
+import soot.jimple.spark.geom.geomPA.CallsiteContextVar;
+import soot.jimple.spark.geom.geomPA.GeomPointsTo;
+import soot.jimple.spark.geom.geomPA.IVarAbstraction;
+import soot.jimple.spark.geom.geomPA.IWorklist;
+import soot.jimple.spark.geom.geomPA.PlainConstraint;
+import soot.jimple.spark.geom.geomPA.ZArrayNumberer;
 import soot.jimple.spark.pag.AllocNode;
 import soot.jimple.spark.pag.Node;
 
 /**
- * It is used to represent the non-pointer variables (e.g. heap variable) in the geometric encoding PAG.
+ * It is used to represent the non-pointer variables (e.g. heap variable) in the encoded PAG.
  * 
  * @author xiao
  *
@@ -36,11 +43,6 @@ public class DummyNode extends IVarAbstraction
 	public DummyNode(Node thisVarNode)
 	{
 		me = thisVarNode;
-	}
-	
-	@Override
-	public void deleteAll()
-	{
 	}
 	
 	@Override
@@ -113,6 +115,18 @@ public class DummyNode extends IVarAbstraction
 	}
 
 	@Override
+	public boolean is_empty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean has_new_pts() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
 	public int num_of_diff_objs() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -173,6 +187,13 @@ public class DummyNode extends IVarAbstraction
 	}
 
 	@Override
+	public int get_all_context_sensitive_objects(long l, long r,
+			ZArrayNumberer<CallsiteContextVar> all_objs, Vector<CallsiteContextVar> outList) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
 	public void print_context_sensitive_points_to(PrintStream outPrintStream) {
 		// TODO Auto-generated method stub
 
@@ -194,12 +215,5 @@ public class DummyNode extends IVarAbstraction
 	public boolean isDeadObject(AllocNode obj) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public void get_all_context_sensitive_objects(long l, long r,
-			PtSensVisitor visitor) {
-		// TODO Auto-generated method stub
-		
 	}
 }

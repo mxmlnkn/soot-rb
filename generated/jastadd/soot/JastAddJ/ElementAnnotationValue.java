@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ElementAnnotationValue : {@link ElementValue} ::= <span class="component">{@link Annotation}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.ast:12
+ * @declaredat Annotations.ast:12
  */
 public class ElementAnnotationValue extends ElementValue implements Cloneable {
   /**
@@ -62,33 +61,18 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ElementAnnotationValue fullCopy() {
-    try {
-      ElementAnnotationValue tree = (ElementAnnotationValue) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ElementAnnotationValue res = (ElementAnnotationValue)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect Annotations
@@ -109,7 +93,7 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:1
    */
   public ElementAnnotationValue() {
     super();
@@ -117,19 +101,8 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[1];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat Annotations.ast:7
    */
   public ElementAnnotationValue(Annotation p0) {
     setChild(p0, 0);
@@ -137,7 +110,7 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:13
    */
   protected int numChildren() {
     return 1;
@@ -145,38 +118,33 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:19
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Annotation child.
-   * @param node The new node to replace the Annotation child.
+   * Setter for Annotation
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:5
    */
   public void setAnnotation(Annotation node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Annotation child.
-   * @return The current node used as the Annotation child.
+   * Getter for Annotation
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:12
    */
   public Annotation getAnnotation() {
     return (Annotation)getChild(0);
   }
   /**
-   * Retrieves the Annotation child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Annotation child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat Annotations.ast:18
    */
   public Annotation getAnnotationNoTransform() {
     return (Annotation)getChildNoTransform(0);
@@ -184,27 +152,35 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:475
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:490
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean commensurateWithTypeDecl(TypeDecl type) {
-    ASTNode$State state = state();
-    try {
-    return type() == type;
+      ASTNode$State state = state();
+    boolean commensurateWithTypeDecl_TypeDecl_value = commensurateWithTypeDecl_compute(type);
+    return commensurateWithTypeDecl_TypeDecl_value;
   }
-    finally {
-    }
+  /**
+   * @apilevel internal
+   */
+  private boolean commensurateWithTypeDecl_compute(TypeDecl type) {
+    return type() == type;
   }
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:510
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:512
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl type() {
-    ASTNode$State state = state();
-    try {  return getAnnotation().type();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    TypeDecl type_value = type_compute();
+    return type_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private TypeDecl type_compute() {  return getAnnotation().type();  }
   /**
    * @attribute inh
    * @aspect Annotations
@@ -212,7 +188,7 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Annotation lookupAnnotation(TypeDecl typeDecl) {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     Annotation lookupAnnotation_TypeDecl_value = getParent().Define_Annotation_lookupAnnotation(this, null, typeDecl);
     return lookupAnnotation_TypeDecl_value;
   }
@@ -224,8 +200,7 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
     if(caller == getAnnotationNoTransform()) {
       return true;
     }
-    else {      return getParent().Define_boolean_mayUseAnnotationTarget(this, caller, name);
-    }
+    return getParent().Define_boolean_mayUseAnnotationTarget(this, caller, name);
   }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:427
@@ -235,8 +210,7 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
     if(caller == getAnnotationNoTransform()) {
       return getAnnotation().type() == typeDecl ? getAnnotation() : lookupAnnotation(typeDecl);
     }
-    else {      return getParent().Define_Annotation_lookupAnnotation(this, caller, typeDecl);
-    }
+    return getParent().Define_Annotation_lookupAnnotation(this, caller, typeDecl);
   }
   /**
    * @apilevel internal

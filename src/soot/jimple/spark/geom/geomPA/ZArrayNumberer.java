@@ -26,32 +26,19 @@ import soot.util.IterableNumberer;
 import soot.util.Numberable;
 
 /**
- * Similar to the ArrayNumberer class in soot. But, this class counts the objects from zero.
+ * Similar to the ArrayNumberer in soot. But, this class counts the objects from zero.
  * And, we permit the deletion of objects from the array container.
  * And most importantly, we permits the search for a particular object efficiently.
- * Therefore, this class supports efficiently insert, lookup, deletion and traversal queries.
+ * Therefore, this class supports both efficiently insert, lookup, deletion and list queries.
  * 
  * @author xiao
  */
-public class ZArrayNumberer<E extends Numberable> implements IterableNumberer<E> , Iterable<E>
+public class ZArrayNumberer<E extends Numberable > implements IterableNumberer<E> , Iterable<E>
 {
-    Numberable[] numberToObj = null;
-    Map<E, E> objContainer = null;
+    Numberable[] numberToObj = new Numberable[1024];
+    Map<E, E> objContainer = new HashMap<E, E>();
     int lastNumber = 0;
     int filledCells = 0;
-    
-    public ZArrayNumberer()
-    {
-    	// With default initialize size
-    	numberToObj = new Numberable[1023];
-    	objContainer = new HashMap<E, E>(1023);
-    }
-    
-    public ZArrayNumberer( int initSize )
-    {
-    	numberToObj = new Numberable[initSize];
-    	objContainer = new HashMap<E, E>(initSize);
-    }
     
     public void add( E o ) 
     {
@@ -73,12 +60,9 @@ public class ZArrayNumberer<E extends Numberable> implements IterableNumberer<E>
         }
     }
 
-    /**
-     * Clear the reference to the objects to help the garbage collection
-     */
     public void clear()
     {
-    	
+    	// Clear the reference for garbage collection
     	for ( int i = 0; i < lastNumber; ++i )
     		numberToObj[i] = null;
     	
@@ -161,7 +145,6 @@ public class ZArrayNumberer<E extends Numberable> implements IterableNumberer<E>
     	lastNumber = i;
     }
     
-    @Override
     public Iterator<E> iterator() {
         return new NumbererIterator();
     }
@@ -198,4 +181,3 @@ public class ZArrayNumberer<E extends Numberable> implements IterableNumberer<E>
         }
     }
 }
-

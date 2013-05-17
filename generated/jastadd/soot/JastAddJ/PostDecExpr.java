@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production PostDecExpr : {@link PostfixExpr};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:148
+ * @declaredat java.ast:145
  */
 public class PostDecExpr extends PostfixExpr implements Cloneable {
   /**
@@ -62,33 +61,18 @@ public class PostDecExpr extends PostfixExpr implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public PostDecExpr fullCopy() {
-    try {
-      PostDecExpr tree = (PostDecExpr) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    PostDecExpr res = (PostDecExpr)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect Expressions
@@ -97,7 +81,7 @@ public class PostDecExpr extends PostfixExpr implements Cloneable {
   public soot.Value eval(Body b) { return emitPostfix(b, -1); }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public PostDecExpr() {
     super();
@@ -105,19 +89,8 @@ public class PostDecExpr extends PostfixExpr implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[1];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public PostDecExpr(Expr p0) {
     setChild(p0, 0);
@@ -125,7 +98,7 @@ public class PostDecExpr extends PostfixExpr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:13
    */
   protected int numChildren() {
     return 1;
@@ -133,38 +106,33 @@ public class PostDecExpr extends PostfixExpr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Operand child.
-   * @param node The new node to replace the Operand child.
+   * Setter for Operand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setOperand(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Operand child.
-   * @return The current node used as the Operand child.
+   * Getter for Operand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getOperand() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the Operand child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Operand child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getOperandNoTransform() {
     return (Expr)getChildNoTransform(0);
@@ -172,14 +140,18 @@ public class PostDecExpr extends PostfixExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrint
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:372
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:374
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String printPostOp() {
-    ASTNode$State state = state();
-    try {  return "--";  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String printPostOp_value = printPostOp_compute();
+    return printPostOp_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String printPostOp_compute() {  return "--";  }
   /**
    * @apilevel internal
    */

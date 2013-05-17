@@ -19,9 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
-  * @ast class
- * 
+ * @ast class
+ * @declaredat :0
  */
 public class FolderPart extends PathPart {
 
@@ -83,7 +84,7 @@ public class FolderPart extends PathPart {
         if(classFile.isFile()) {
           is = new FileInputStream(classFile);
           age = classFile.lastModified();
-          pathName = classFile.getPath();
+          pathName = classFile.getAbsolutePath();
           relativeName = fileName + fileSuffix();
           fullName = canonicalName;
           return true;

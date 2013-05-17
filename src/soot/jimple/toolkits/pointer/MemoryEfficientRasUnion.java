@@ -119,11 +119,7 @@ public class MemoryEfficientRasUnion extends Union {
 	 * {@inheritDoc}
 	 */
 	public String toString() {
-	  if(subsets == null){
-	    return "[]";
-	  }else{
-		  return subsets.toString();
-		}
+		return subsets.toString();
 	}
 
 }

@@ -18,9 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
-  * @ast class
- * 
+ * @ast class
+ * @declaredat :0
  */
 public class Frontend extends java.lang.Object {
 
@@ -46,11 +47,11 @@ public class Frontend extends java.lang.Object {
 
       if(program.options().hasOption("-version")) {
         printVersion();
-        return true;
+        return false;
       }
       if(program.options().hasOption("-help") || files.isEmpty()) {
         printUsage();
-        return true;
+        return false;
       }
 
       try {
@@ -64,36 +65,26 @@ public class Frontend extends java.lang.Object {
         for(Iterator iter = program.compilationUnitIterator(); iter.hasNext(); ) {
           CompilationUnit unit = (CompilationUnit)iter.next();
           if(unit.fromSource()) {
-            try {
-              Collection errors = unit.parseErrors();
-              Collection warnings = new LinkedList();
-              // compute static semantic errors when there are no parse errors
-              // or the recover from parse errors option is specified
-              if(errors.isEmpty() || program.options().hasOption("-recover"))
-                unit.errorCheck(errors, warnings);
-              if(!errors.isEmpty()) {
-                processErrors(errors, unit);
-                return false;
-              }
-              else {
-               if(!warnings.isEmpty())
-                 processWarnings(warnings, unit);
-                processNoErrors(unit);
-              }
-            } catch (Throwable t) {
-              System.err.println("Errors:");
-              System.err.println("Fatal exception while processing " +
-                  unit.pathName() + ":");
-              t.printStackTrace(System.err);
+            Collection errors = unit.parseErrors();
+            Collection warnings = new LinkedList();
+            // compute static semantic errors when there are no parse errors or 
+            // the recover from parse errors option is specified
+            if(errors.isEmpty() || program.options().hasOption("-recover"))
+              unit.errorCheck(errors, warnings);
+            if(!errors.isEmpty()) {
+              processErrors(errors, unit);
               return false;
+            }
+            else {
+             if(!warnings.isEmpty())
+               processWarnings(warnings, unit);
+              processNoErrors(unit);
             }
           }
         }
-      } catch (Throwable t) {
-        System.err.println("Errors:");
-        System.err.println("Fatal exception:");
-        t.printStackTrace(System.err);
-        return false;
+      } catch (Exception e) {
+        System.err.println(e.getMessage());
+        e.printStackTrace();
       }
       return true;
     }
@@ -155,7 +146,7 @@ public class Frontend extends java.lang.Object {
 
 
     protected void printUsage() {
-      printLongVersion();
+      printVersion();
       System.out.println(
           "\n" + name() + "\n\n" +
           "Usage: java " + name() + " <options> <source files>\n" +
@@ -172,14 +163,8 @@ public class Frontend extends java.lang.Object {
 
 
 
-    protected void printLongVersion() {
-      System.out.println(name() + " " + url() + " Version " + version());
-    }
-
-
-
     protected void printVersion() {
-      System.out.println(name() + " " + version());
+      System.out.println(name() + " " + url() + " Version " + version());
     }
 
 

@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production CastExpr : {@link Expr} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">{@link Expr}</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:144
+ * @declaredat java.ast:141
  */
 public class CastExpr extends Expr implements Cloneable {
   /**
@@ -66,33 +65,18 @@ public class CastExpr extends Expr implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public CastExpr fullCopy() {
-    try {
-      CastExpr tree = (CastExpr) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    CastExpr res = (CastExpr)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -134,16 +118,7 @@ public class CastExpr extends Expr implements Cloneable {
   }
   /**
    * @ast method 
-   * @aspect UncheckedConversion
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/UncheckedConversion.jrag:35
-   */
-  public void checkWarnings() {
-    if (!withinSuppressWarnings("unchecked"))
-      checkUncheckedConversion(getExpr().type(), getTypeAccess().type());
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public CastExpr() {
     super();
@@ -151,19 +126,8 @@ public class CastExpr extends Expr implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public CastExpr(Access p0, Expr p1) {
     setChild(p0, 0);
@@ -172,7 +136,7 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   protected int numChildren() {
     return 2;
@@ -180,69 +144,59 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the TypeAccess child.
-   * @param node The new node to replace the TypeAccess child.
+   * Setter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setTypeAccess(Access node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * @return The current node used as the TypeAccess child.
+   * Getter for TypeAccess
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Access getTypeAccess() {
     return (Access)getChild(0);
   }
   /**
-   * Retrieves the TypeAccess child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the TypeAccess child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Access getTypeAccessNoTransform() {
     return (Access)getChildNoTransform(0);
   }
   /**
-   * Replaces the Expr child.
-   * @param node The new node to replace the Expr child.
+   * Setter for Expr
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setExpr(Expr node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the Expr child.
-   * @return The current node used as the Expr child.
+   * Getter for Expr
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getExpr() {
     return (Expr)getChild(1);
   }
   /**
-   * Retrieves the Expr child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Expr child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getExprNoTransform() {
     return (Expr)getChildNoTransform(1);
@@ -250,70 +204,94 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:91
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:110
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public Constant constant() {
-    ASTNode$State state = state();
-    try {  return type().cast(getExpr().constant());  }
-    finally {
-    }
+      ASTNode$State state = state();
+    Constant constant_value = constant_compute();
+    return constant_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private Constant constant_compute() {  return type().cast(getExpr().constant());  }
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:336
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:485
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isConstant() {
-    ASTNode$State state = state();
-    try {  return getExpr().isConstant() &&
-    (getTypeAccess().type().isPrimitive() || getTypeAccess().type().isString());  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isConstant_value = isConstant_compute();
+    return isConstant_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isConstant_compute() {  return getExpr().isConstant() &&
+    (getTypeAccess().type().isPrimitive() || getTypeAccess().type().isString());  }
   /**
    * @attribute syn
    * @aspect DA
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:235
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:399
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDAafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return getExpr().isDAafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDAafter_Variable_value = isDAafter_compute(v);
+    return isDAafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDAafter_compute(Variable v) {  return getExpr().isDAafter(v);  }
   /**
    * @attribute syn
    * @aspect DU
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:694
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/DefiniteAssignment.jrag:842
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isDUafter(Variable v) {
-    ASTNode$State state = state();
-    try {  return getExpr().isDUafter(v);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isDUafter_Variable_value = isDUafter_compute(v);
+    return isDUafter_Variable_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isDUafter_compute(Variable v) {  return getExpr().isDUafter(v);  }
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ResolveAmbiguousNames.jrag:25
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ResolveAmbiguousNames.jrag:29
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isSuperAccess() {
-    ASTNode$State state = state();
-    try {  return getExpr().isSuperAccess();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isSuperAccess_value = isSuperAccess_compute();
+    return isSuperAccess_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isSuperAccess_compute() {  return getExpr().isSuperAccess();  }
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ResolveAmbiguousNames.jrag:31
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ResolveAmbiguousNames.jrag:35
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isThisAccess() {
-    ASTNode$State state = state();
-    try {  return getExpr().isThisAccess();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isThisAccess_value = isThisAccess_compute();
+    return isThisAccess_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isThisAccess_compute() {  return getExpr().isThisAccess();  }
   /**
    * @apilevel internal
    */
@@ -332,11 +310,11 @@ public class CastExpr extends Expr implements Cloneable {
     if(type_computed) {
       return type_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     type_value = type_compute();
-      if(isFinal && num == state().boundariesCrossed) type_computed = true;
+if(isFinal && num == state().boundariesCrossed) type_computed = true;
     return type_value;
   }
   /**
@@ -346,25 +324,18 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeHierarchyCheck
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeHierarchyCheck.jrag:150
-   */
-  public boolean staticContextQualifier() {
-    ASTNode$State state = state();
-    try {  return getExpr().staticContextQualifier();  }
-    finally {
-    }
-  }
-  /**
-   * @attribute inh
-   * @aspect SuppressWarnings
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/SuppressWarnings.jrag:16
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeHierarchyCheck.jrag:152
    */
   @SuppressWarnings({"unchecked", "cast"})
-  public boolean withinSuppressWarnings(String s) {
-    ASTNode$State state = state();
-    boolean withinSuppressWarnings_String_value = getParent().Define_boolean_withinSuppressWarnings(this, null, s);
-    return withinSuppressWarnings_String_value;
+  public boolean staticContextQualifier() {
+      ASTNode$State state = state();
+    boolean staticContextQualifier_value = staticContextQualifier_compute();
+    return staticContextQualifier_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean staticContextQualifier_compute() {  return getExpr().staticContextQualifier();  }
   /**
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/SyntacticClassification.jrag:88
    * @apilevel internal
@@ -373,8 +344,7 @@ public class CastExpr extends Expr implements Cloneable {
     if(caller == getTypeAccessNoTransform()) {
       return NameType.TYPE_NAME;
     }
-    else {      return getParent().Define_NameType_nameType(this, caller);
-    }
+    return getParent().Define_NameType_nameType(this, caller);
   }
   /**
    * @apilevel internal

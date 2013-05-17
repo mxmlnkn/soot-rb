@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -20,10 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
- * @production ReferenceType : {@link TypeDecl};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:44
+ * @declaredat java.ast:41
  */
 public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
@@ -73,28 +72,17 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ReferenceType() {
     super();
 
+    setChild(new List(), 1);
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-    setChild(new List(), 1);
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public ReferenceType(Modifiers p0, String p1, List<BodyDecl> p2) {
     setChild(p0, 0);
@@ -103,7 +91,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:13
    */
   public ReferenceType(Modifiers p0, beaver.Symbol p1, List<BodyDecl> p2) {
     setChild(p0, 0);
@@ -113,7 +101,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:21
    */
   protected int numChildren() {
     return 2;
@@ -121,57 +109,49 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the Modifiers child.
-   * @param node The new node to replace the Modifiers child.
+   * Setter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setModifiers(Modifiers node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * @return The current node used as the Modifiers child.
+   * Getter for Modifiers
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Modifiers getModifiers() {
     return (Modifiers)getChild(0);
   }
   /**
-   * Retrieves the Modifiers child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Modifiers child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Modifiers getModifiersNoTransform() {
     return (Modifiers)getChildNoTransform(0);
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:8
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -181,64 +161,47 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
   /**
-   * Replaces the BodyDecl list.
-   * @param list The new list node to be used as the BodyDecl list.
+   * Setter for BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setBodyDeclList(List<BodyDecl> list) {
     setChild(list, 1);
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * @return Number of children in the BodyDecl list.
+   * @return number of children in BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public int getNumBodyDecl() {
     return getBodyDeclList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the BodyDecl list.
-   * Calling this method will not trigger rewrites..
-   * @return Number of children in the BodyDecl list.
-   * @apilevel low-level
-   * @ast method 
-   * 
-   */
-  public int getNumBodyDeclNoTransform() {
-    return getBodyDeclListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the BodyDecl list..
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the BodyDecl list.
+   * Getter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:19
    */
   @SuppressWarnings({"unchecked", "cast"})
   public BodyDecl getBodyDecl(int i) {
     return (BodyDecl)getBodyDeclList().getChild(i);
   }
   /**
-   * Append an element to the BodyDecl list.
-   * @param node The element to append to the BodyDecl list.
+   * Add element to list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:27
    */
   public void addBodyDecl(BodyDecl node) {
     List<BodyDecl> list = (parent == null || state == null) ? getBodyDeclListNoTransform() : getBodyDeclList();
@@ -247,51 +210,44 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:34
    */
   public void addBodyDeclNoTransform(BodyDecl node) {
     List<BodyDecl> list = getBodyDeclListNoTransform();
     list.addChild(node);
   }
   /**
-   * Replaces the BodyDecl list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
+   * Setter for child in list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:42
    */
   public void setBodyDecl(BodyDecl node, int i) {
     List<BodyDecl> list = getBodyDeclList();
     list.setChild(node, i);
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for BodyDecl list.
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:50
    */
   public List<BodyDecl> getBodyDecls() {
     return getBodyDeclList();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:56
    */
   public List<BodyDecl> getBodyDeclsNoTransform() {
     return getBodyDeclListNoTransform();
   }
   /**
-   * Retrieves the BodyDecl list.
-   * @return The node representing the BodyDecl list.
+   * Getter for list BodyDeclList
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:63
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclList() {
@@ -300,12 +256,9 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
     return list;
   }
   /**
-   * Retrieves the BodyDecl list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the BodyDecl list.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:72
    */
   @SuppressWarnings({"unchecked", "cast"})
   public List<BodyDecl> getBodyDeclListNoTransform() {
@@ -314,14 +267,18 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeConversion
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:17
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:33
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean wideningConversionTo(TypeDecl type) {
-    ASTNode$State state = state();
-    try {  return instanceOf(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean wideningConversionTo_TypeDecl_value = wideningConversionTo_compute(type);
+    return wideningConversionTo_TypeDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean wideningConversionTo_compute(TypeDecl type) {  return instanceOf(type);  }
   protected java.util.Map narrowingConversionTo_TypeDecl_values;
   /**
    * @attribute syn
@@ -335,11 +292,11 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
     if(narrowingConversionTo_TypeDecl_values.containsKey(_parameters)) {
       return ((Boolean)narrowingConversionTo_TypeDecl_values.get(_parameters)).booleanValue();
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     boolean narrowingConversionTo_TypeDecl_value = narrowingConversionTo_compute(type);
-      if(isFinal && num == state().boundariesCrossed) narrowingConversionTo_TypeDecl_values.put(_parameters, Boolean.valueOf(narrowingConversionTo_TypeDecl_value));
+if(isFinal && num == state().boundariesCrossed) narrowingConversionTo_TypeDecl_values.put(_parameters, Boolean.valueOf(narrowingConversionTo_TypeDecl_value));
     return narrowingConversionTo_TypeDecl_value;
   }
   /**
@@ -365,35 +322,50 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:165
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:166
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isReferenceType() {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isReferenceType_value = isReferenceType_compute();
+    return isReferenceType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isReferenceType_compute() {  return true;  }
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:482
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:483
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isSupertypeOfNullType(NullType type) {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isSupertypeOfNullType_NullType_value = isSupertypeOfNullType_compute(type);
+    return isSupertypeOfNullType_NullType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isSupertypeOfNullType_compute(NullType type) {  return true;  }
   /* It is a compile-time error if the return type of a method declared in an
   annotation type is any type other than one of the following: one of the
   primitive types, String, Class and any invocation of Class, an enum type
   (\u00df8.9), an annotation type, or an array (\u00df10) of one of the preceding types.* @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:121
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/Annotations.jrag:123
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isValidAnnotationMethodReturnType() {
-    ASTNode$State state = state();
-    try {
+      ASTNode$State state = state();
+    boolean isValidAnnotationMethodReturnType_value = isValidAnnotationMethodReturnType_compute();
+    return isValidAnnotationMethodReturnType_value;
+  }
+  /**
+   * @apilevel internal
+   */
+  private boolean isValidAnnotationMethodReturnType_compute() {
     if(isString()) return true;
     if(fullName().equals("java.lang.Class"))
       return true;
@@ -402,20 +374,21 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
       return true;
     return false;
   }
-    finally {
-    }
-  }
   /**
    * @attribute syn
    * @aspect AutoBoxing
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:47
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:48
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean unboxingConversionTo(TypeDecl typeDecl) {
-    ASTNode$State state = state();
-    try {  return unboxed() == typeDecl;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean unboxingConversionTo_TypeDecl_value = unboxingConversionTo_compute(typeDecl);
+    return unboxingConversionTo_TypeDecl_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean unboxingConversionTo_compute(TypeDecl typeDecl) {  return unboxed() == typeDecl;  }
   /**
    * @apilevel internal
    */
@@ -434,11 +407,11 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
     if(unboxed_computed) {
       return unboxed_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     unboxed_value = unboxed_compute();
-      if(isFinal && num == state().boundariesCrossed) unboxed_computed = true;
+if(isFinal && num == state().boundariesCrossed) unboxed_computed = true;
     return unboxed_value;
   }
   /**
@@ -460,92 +433,124 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect NumericPromotion
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:146
+   * @aspect AutoBoxing
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:170
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl unaryNumericPromotion() {
-    ASTNode$State state = state();
-    try {  return isNumericType() && !isUnknown() ? unboxed().unaryNumericPromotion() : this;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    TypeDecl unaryNumericPromotion_value = unaryNumericPromotion_compute();
+    return unaryNumericPromotion_value;
   }
   /**
-   * @attribute syn
-   * @aspect NumericPromotion
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:154
+   * @apilevel internal
    */
+  private TypeDecl unaryNumericPromotion_compute() {  return isNumericType() && !isUnknown() ? unboxed().unaryNumericPromotion() : this;  }
+  /**
+   * @attribute syn
+   * @aspect AutoBoxing
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:174
+   */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl binaryNumericPromotion(TypeDecl type) {
-    ASTNode$State state = state();
-    try {  return unboxed().binaryNumericPromotion(type);  }
-    finally {
-    }
+      ASTNode$State state = state();
+    TypeDecl binaryNumericPromotion_TypeDecl_value = binaryNumericPromotion_compute(type);
+    return binaryNumericPromotion_TypeDecl_value;
   }
   /**
-   * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:173
+   * @apilevel internal
    */
+  private TypeDecl binaryNumericPromotion_compute(TypeDecl type) {  return unboxed().binaryNumericPromotion(type);  }
+  /**
+   * @attribute syn
+   * @aspect AutoBoxing
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:196
+   */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isNumericType() {
-    ASTNode$State state = state();
-    try {  return !unboxed().isUnknown() && unboxed().isNumericType();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isNumericType_value = isNumericType_compute();
+    return isNumericType_value;
   }
   /**
-   * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:177
+   * @apilevel internal
    */
+  private boolean isNumericType_compute() {  return !unboxed().isUnknown() && unboxed().isNumericType();  }
+  /**
+   * @attribute syn
+   * @aspect AutoBoxing
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:199
+   */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isIntegralType() {
-    ASTNode$State state = state();
-    try {  return !unboxed().isUnknown() && unboxed().isIntegralType();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isIntegralType_value = isIntegralType_compute();
+    return isIntegralType_value;
   }
   /**
-   * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:221
+   * @apilevel internal
    */
+  private boolean isIntegralType_compute() {  return !unboxed().isUnknown() && unboxed().isIntegralType();  }
+  /**
+   * @attribute syn
+   * @aspect AutoBoxing
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:202
+   */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isPrimitive() {
-    ASTNode$State state = state();
-    try {  return !unboxed().isUnknown() && unboxed().isPrimitive();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isPrimitive_value = isPrimitive_compute();
+    return isPrimitive_value;
   }
   /**
-   * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/TypeAnalysis.jrag:181
+   * @apilevel internal
    */
+  private boolean isPrimitive_compute() {  return !unboxed().isUnknown() && unboxed().isPrimitive();  }
+  /**
+   * @attribute syn
+   * @aspect AutoBoxing
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/AutoBoxing.jrag:215
+   */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isBoolean() {
-    ASTNode$State state = state();
-    try {  return fullName().equals("java.lang.Boolean") && unboxed().isBoolean();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isBoolean_value = isBoolean_compute();
+    return isBoolean_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isBoolean_compute() {  return fullName().equals("java.lang.Boolean") && unboxed().isBoolean();  }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:479
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.5Frontend/GenericsSubtype.jrag:480
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean supertypeNullType(NullType type) {
-    ASTNode$State state = state();
-    try {  return true;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean supertypeNullType_NullType_value = supertypeNullType_compute(type);
+    return supertypeNullType_NullType_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean supertypeNullType_compute(NullType type) {  return true;  }
   /**
    * @attribute syn
    * @aspect InnerClasses
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:82
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/InnerClasses.jrag:80
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl stringPromotion() {
-    ASTNode$State state = state();
-    try {  return typeObject();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    TypeDecl stringPromotion_value = stringPromotion_compute();
+    return stringPromotion_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private TypeDecl stringPromotion_compute() {  return typeObject();  }
   /**
    * @apilevel internal
    */
@@ -564,11 +569,11 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
     if(jvmName_computed) {
       return jvmName_value;
     }
-    ASTNode$State state = state();
+      ASTNode$State state = state();
   int num = state.boundariesCrossed;
   boolean isFinal = this.is$Final();
     jvmName_value = jvmName_compute();
-      if(isFinal && num == state().boundariesCrossed) jvmName_computed = true;
+if(isFinal && num == state().boundariesCrossed) jvmName_computed = true;
     return jvmName_value;
   }
   /**
@@ -585,14 +590,18 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Java2Rewrites
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/Java2Rewrites.jrag:57
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Backend/Java2Rewrites.jrag:60
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String referenceClassFieldName() {
-    ASTNode$State state = state();
-    try {  return "class$" + jvmName().replace('[', '$').replace('.', '$').replace(';', ' ').trim();  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String referenceClassFieldName_value = referenceClassFieldName_compute();
+    return referenceClassFieldName_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String referenceClassFieldName_compute() {  return "class$" + jvmName().replace('[', '$').replace('.', '$').replace(';', ' ').trim();  }
   /**
    * @attribute inh
    * @aspect AutoBoxing
@@ -600,7 +609,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeBoolean() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeBoolean_value = getParent().Define_TypeDecl_typeBoolean(this, null);
     return typeBoolean_value;
   }
@@ -611,7 +620,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeByte() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeByte_value = getParent().Define_TypeDecl_typeByte(this, null);
     return typeByte_value;
   }
@@ -622,7 +631,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeChar() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeChar_value = getParent().Define_TypeDecl_typeChar(this, null);
     return typeChar_value;
   }
@@ -633,7 +642,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeShort() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeShort_value = getParent().Define_TypeDecl_typeShort(this, null);
     return typeShort_value;
   }
@@ -644,7 +653,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeInt() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeInt_value = getParent().Define_TypeDecl_typeInt(this, null);
     return typeInt_value;
   }
@@ -655,7 +664,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeLong() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeLong_value = getParent().Define_TypeDecl_typeLong(this, null);
     return typeLong_value;
   }
@@ -666,7 +675,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeFloat() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeFloat_value = getParent().Define_TypeDecl_typeFloat(this, null);
     return typeFloat_value;
   }
@@ -677,7 +686,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
    */
   @SuppressWarnings({"unchecked", "cast"})
   public TypeDecl typeDouble() {
-    ASTNode$State state = state();
+      ASTNode$State state = state();
     TypeDecl typeDouble_value = getParent().Define_TypeDecl_typeDouble(this, null);
     return typeDouble_value;
   }

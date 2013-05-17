@@ -19,9 +19,10 @@ import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
 
+
 /**
-  * @ast class
- * 
+ * @ast class
+ * @declaredat :0
  */
 public class NameType extends java.lang.Object {
 

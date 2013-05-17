@@ -18,12 +18,10 @@
  */
 package soot.jimple.spark.geom.geomPA;
 
-import soot.jimple.spark.geom.geomPA.RectangleNode;
-
 /**
- * The segment figure for encoding the one-to-one relation.
+ * The segment figure for the points-to/flows-to descriptor.
  * 
- * @author richardxx
+ * @author xiao
  * 
  */
 public class SegmentNode implements Comparable<SegmentNode> {
@@ -41,11 +39,6 @@ public class SegmentNode implements Comparable<SegmentNode> {
 	public SegmentNode() {}
 
 	public SegmentNode( SegmentNode other )
-	{
-		copySegment(other);
-	}
-	
-	public void copySegment( SegmentNode other )
 	{
 		I1 = other.I1;
 		I2 = other.I2;
@@ -71,7 +64,7 @@ public class SegmentNode implements Comparable<SegmentNode> {
 		return false;
 	}
 
-	@Override
+	
 	public int compareTo(SegmentNode o) 
 	{
 		long d;

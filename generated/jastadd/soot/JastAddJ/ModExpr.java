@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production ModExpr : {@link MultiplicativeExpr};
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:156
+ * @declaredat java.ast:153
  */
 public class ModExpr extends MultiplicativeExpr implements Cloneable {
   /**
@@ -68,33 +67,18 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public ModExpr fullCopy() {
-    try {
-      ModExpr tree = (ModExpr) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    ModExpr res = (ModExpr)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect Expressions
@@ -105,7 +89,7 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public ModExpr() {
     super();
@@ -113,19 +97,8 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-    children = new ASTNode[2];
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public ModExpr(Expr p0, Expr p1) {
     setChild(p0, 0);
@@ -134,7 +107,7 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:14
    */
   protected int numChildren() {
     return 2;
@@ -142,69 +115,59 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:20
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the LeftOperand child.
-   * @param node The new node to replace the LeftOperand child.
+   * Setter for LeftOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setLeftOperand(Expr node) {
     setChild(node, 0);
   }
   /**
-   * Retrieves the LeftOperand child.
-   * @return The current node used as the LeftOperand child.
+   * Getter for LeftOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getLeftOperand() {
     return (Expr)getChild(0);
   }
   /**
-   * Retrieves the LeftOperand child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the LeftOperand child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getLeftOperandNoTransform() {
     return (Expr)getChildNoTransform(0);
   }
   /**
-   * Replaces the RightOperand child.
-   * @param node The new node to replace the RightOperand child.
+   * Setter for RightOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setRightOperand(Expr node) {
     setChild(node, 1);
   }
   /**
-   * Retrieves the RightOperand child.
-   * @return The current node used as the RightOperand child.
+   * Getter for RightOperand
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:12
    */
   public Expr getRightOperand() {
     return (Expr)getChild(1);
   }
   /**
-   * Retrieves the RightOperand child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the RightOperand child.
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:18
    */
   public Expr getRightOperandNoTransform() {
     return (Expr)getChildNoTransform(1);
@@ -212,14 +175,18 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:91
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:119
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public Constant constant() {
-    ASTNode$State state = state();
-    try {  return type().mod(getLeftOperand().constant(), getRightOperand().constant());  }
-    finally {
-    }
+      ASTNode$State state = state();
+    Constant constant_value = constant_compute();
+    return constant_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private Constant constant_compute() {  return type().mod(getLeftOperand().constant(), getRightOperand().constant());  }
   /**
    * @apilevel internal
    */
@@ -239,7 +206,7 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java7Frontend/ConstantExpression.jrag:352
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/ConstantExpression.jrag:498
    */
   @SuppressWarnings({"unchecked", "cast"})
   public boolean isConstant() {
@@ -264,7 +231,7 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
         isConstant_value = new_isConstant_value; 
         state.CIRCLE_INDEX++;
       } while (state.CHANGE);
-        if(isFinal && num == state().boundariesCrossed) {
+      if(isFinal && num == state().boundariesCrossed) {
       isConstant_computed = true;
       }
       else {
@@ -300,14 +267,18 @@ public class ModExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrint
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:400
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:403
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String printOp() {
-    ASTNode$State state = state();
-    try {  return " % ";  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String printOp_value = printOp_compute();
+    return printOp_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String printOp_compute() {  return " % ";  }
   /**
    * @apilevel internal
    */

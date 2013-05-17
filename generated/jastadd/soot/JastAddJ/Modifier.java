@@ -1,4 +1,3 @@
-/* This file was generated with JastAdd2 (http://jastadd.org) version R20121122 (r889) */
 package soot.JastAddJ;
 
 import java.util.HashSet;
@@ -19,10 +18,10 @@ import soot.coffi.method_info;
 import soot.coffi.CONSTANT_Utf8_info;
 import soot.tagkit.SourceFileTag;
 import soot.coffi.CoffiMethodSource;
+
 /**
- * @production Modifier : {@link ASTNode} ::= <span class="component">&lt;ID:String&gt;</span>;
  * @ast node
- * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/java.ast:191
+ * @declaredat java.ast:188
  */
 public class Modifier extends ASTNode<ASTNode> implements Cloneable {
   /**
@@ -62,33 +61,18 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
       return null;
   }
   /**
-   * Create a deep copy of the AST subtree at this node.
-   * The copy is dangling, i.e. has no parent.
-   * @return dangling copy of the subtree at this node
    * @apilevel low-level
    */
   @SuppressWarnings({"unchecked", "cast"})
   public Modifier fullCopy() {
-    try {
-      Modifier tree = (Modifier) clone();
-      tree.setParent(null);// make dangling
-      if (children != null) {
-        tree.children = new ASTNode[children.length];
-        for (int i = 0; i < children.length; ++i) {
-          if (children[i] == null) {
-            tree.children[i] = null;
-          } else {
-            tree.children[i] = ((ASTNode) children[i]).fullCopy();
-            ((ASTNode) tree.children[i]).setParent(tree);
-          }
-        }
-      }
-      return tree;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " +
-        getClass().getName());
+    Modifier res = (Modifier)copy();
+    for(int i = 0; i < getNumChildNoTransform(); i++) {
+      ASTNode node = getChildNoTransform(i);
+      if(node != null) node = node.fullCopy();
+      res.setChild(node, i);
     }
-  }
+    return res;
+    }
   /**
    * @ast method 
    * @aspect PrettyPrint
@@ -99,7 +83,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:1
    */
   public Modifier() {
     super();
@@ -107,25 +91,15 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
 
   }
   /**
-   * Initializes the child array to the correct size.
-   * Initializes List and Opt nta children.
-   * @apilevel internal
-   * @ast method
    * @ast method 
-   * 
-   */
-  public void init$Children() {
-  }
-  /**
-   * @ast method 
-   * 
+   * @declaredat java.ast:7
    */
   public Modifier(String p0) {
     setID(p0);
   }
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:10
    */
   public Modifier(beaver.Symbol p0) {
     setID(p0);
@@ -133,7 +107,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @apilevel low-level
    * @ast method 
-   * 
+   * @declaredat java.ast:16
    */
   protected int numChildren() {
     return 0;
@@ -141,48 +115,40 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:22
    */
   public boolean mayHaveRewrite() {
     return false;
   }
   /**
-   * Replaces the lexeme ID.
-   * @param value The new value for the lexeme ID.
+   * Setter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:5
    */
   public void setID(String value) {
     tokenString_ID = value;
   }
-  /**
-   * @apilevel internal
-   * @ast method 
-   * 
+  /**   * @apilevel internal   * @ast method 
+   * @declaredat java.ast:8
    */
   
-  /**
-   * @apilevel internal
-   */
-  protected String tokenString_ID;
+  /**   * @apilevel internal   */  protected String tokenString_ID;
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:9
    */
   
   public int IDstart;
   /**
    * @ast method 
-   * 
+   * @declaredat java.ast:10
    */
   
   public int IDend;
   /**
-   * JastAdd-internal setter for lexeme ID using the Beaver parser.
-   * @apilevel internal
    * @ast method 
-   * 
+   * @declaredat java.ast:11
    */
   public void setID(beaver.Symbol symbol) {
     if(symbol.value != null && !(symbol.value instanceof String))
@@ -192,11 +158,10 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
     IDend = symbol.getEnd();
   }
   /**
-   * Retrieves the value for the lexeme ID.
-   * @return The value for the lexeme ID.
+   * Getter for lexeme ID
    * @apilevel high-level
    * @ast method 
-   * 
+   * @declaredat java.ast:22
    */
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
@@ -204,36 +169,48 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrint
-   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:800
+   * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddJ/Java1.4Frontend/PrettyPrint.jadd:815
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public String dumpString() {
-    ASTNode$State state = state();
-    try {  return getClass().getName() + " [" + getID() + "]";  }
-    finally {
-    }
+      ASTNode$State state = state();
+    String dumpString_value = dumpString_compute();
+    return dumpString_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private String dumpString_compute() {  return getClass().getName() + " [" + getID() + "]";  }
   /**
    * @attribute syn
    * @aspect AnnotationsCodegen
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/AnnotationsCodegen.jrag:143
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isRuntimeVisible() {
-    ASTNode$State state = state();
-    try {  return false;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isRuntimeVisible_value = isRuntimeVisible_compute();
+    return isRuntimeVisible_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isRuntimeVisible_compute() {  return false;  }
   /**
    * @attribute syn
    * @aspect AnnotationsCodegen
    * @declaredat /Users/eric/Documents/workspaces/clara-soot/JastAddExtensions/Jimple1.5Backend/AnnotationsCodegen.jrag:153
    */
+  @SuppressWarnings({"unchecked", "cast"})
   public boolean isRuntimeInvisible() {
-    ASTNode$State state = state();
-    try {  return false;  }
-    finally {
-    }
+      ASTNode$State state = state();
+    boolean isRuntimeInvisible_value = isRuntimeInvisible_compute();
+    return isRuntimeInvisible_value;
   }
+  /**
+   * @apilevel internal
+   */
+  private boolean isRuntimeInvisible_compute() {  return false;  }
   /**
    * @apilevel internal
    */

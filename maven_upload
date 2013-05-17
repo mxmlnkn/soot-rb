@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mvn deploy:deploy-file -DgroupId=soot -DartifactId=soot -Dversion=rb-1.0 -Dpackaging=jar -Dfile=lib/sootclasses-trunk.jar -DrepositoryId=chirrup_org -Durl=scpexe://chirrup.org/home/pcpratts/www/rootbeer/maven/

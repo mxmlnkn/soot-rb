@@ -886,4 +886,10 @@ public class Singletons {
         return instance_soot_sootify_TemplatePrinter;
     }
 
+    private soot.rbclassload.RootbeerClassLoader instance_soot_rbclassload_RootbeerClassLoader;
+    public soot.rbclassload.RootbeerClassLoader soot_rbclassload_RootbeerClassLoader() {
+        if( instance_soot_rbclassload_RootbeerClassLoader == null ) instance_soot_rbclassload_RootbeerClassLoader = new soot.rbclassload.RootbeerClassLoader( g );
+        return instance_soot_rbclassload_RootbeerClassLoader;
+    }
+
 }

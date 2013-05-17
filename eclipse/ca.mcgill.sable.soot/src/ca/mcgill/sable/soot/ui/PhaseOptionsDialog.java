@@ -1956,6 +1956,36 @@ Composite dbdb_force_recompileChild = dbdb_force_recompileCreate(getPageContaine
 			getConfig().put(getGeneral_Optionswhole_shimple_widget().getAlias(), new Boolean(boolRes));
 		}
 		
+		boolRes = getGeneral_Optionsrbclassload_widget().getButton().getSelection();
+		
+		
+		defBoolRes = false;
+		
+
+		if (boolRes != defBoolRes) {
+			getConfig().put(getGeneral_Optionsrbclassload_widget().getAlias(), new Boolean(boolRes));
+		}
+		
+		boolRes = getGeneral_Optionsrbclassload_buildcg_widget().getButton().getSelection();
+		
+		
+		defBoolRes = false;
+		
+
+		if (boolRes != defBoolRes) {
+			getConfig().put(getGeneral_Optionsrbclassload_buildcg_widget().getAlias(), new Boolean(boolRes));
+		}
+		
+		boolRes = getGeneral_Optionsrbcl_remap_all_widget().getButton().getSelection();
+		
+		
+		defBoolRes = false;
+		
+
+		if (boolRes != defBoolRes) {
+			getConfig().put(getGeneral_Optionsrbcl_remap_all_widget().getAlias(), new Boolean(boolRes));
+		}
+		
 		boolRes = getGeneral_Optionsvalidate_widget().getButton().getSelection();
 		
 		
@@ -1993,6 +2023,15 @@ Composite dbdb_force_recompileChild = dbdb_force_recompileCreate(getPageContaine
 
 	        if ( (!(stringRes.equals(defStringRes))) && (stringRes != null) && (stringRes.length() != 0)) {
 			getConfig().put(getGeneral_Optionsphase_help_widget().getAlias(), stringRes);
+		}
+		
+		stringRes = getGeneral_Optionsrbcl_remap_prefix_widget().getText().getText();
+		
+		defStringRes = "";
+		
+
+	        if ( (!(stringRes.equals(defStringRes))) && (stringRes != null) && (stringRes.length() != 0)) {
+			getConfig().put(getGeneral_Optionsrbcl_remap_prefix_widget().getAlias(), stringRes);
 		}
 		
 		boolRes = getInput_Optionsprepend_classpath_widget().getButton().getSelection();
@@ -6453,6 +6492,36 @@ Composite dbdb_force_recompileChild = dbdb_force_recompileCreate(getPageContaine
 		return General_Optionswhole_shimple_widget;
 	}	
 	
+	private BooleanOptionWidget General_Optionsrbclassload_widget;
+	
+	private void setGeneral_Optionsrbclassload_widget(BooleanOptionWidget widget) {
+		General_Optionsrbclassload_widget = widget;
+	}
+	
+	public BooleanOptionWidget getGeneral_Optionsrbclassload_widget() {
+		return General_Optionsrbclassload_widget;
+	}	
+	
+	private BooleanOptionWidget General_Optionsrbclassload_buildcg_widget;
+	
+	private void setGeneral_Optionsrbclassload_buildcg_widget(BooleanOptionWidget widget) {
+		General_Optionsrbclassload_buildcg_widget = widget;
+	}
+	
+	public BooleanOptionWidget getGeneral_Optionsrbclassload_buildcg_widget() {
+		return General_Optionsrbclassload_buildcg_widget;
+	}	
+	
+	private BooleanOptionWidget General_Optionsrbcl_remap_all_widget;
+	
+	private void setGeneral_Optionsrbcl_remap_all_widget(BooleanOptionWidget widget) {
+		General_Optionsrbcl_remap_all_widget = widget;
+	}
+	
+	public BooleanOptionWidget getGeneral_Optionsrbcl_remap_all_widget() {
+		return General_Optionsrbcl_remap_all_widget;
+	}	
+	
 	private BooleanOptionWidget General_Optionsvalidate_widget;
 	
 	private void setGeneral_Optionsvalidate_widget(BooleanOptionWidget widget) {
@@ -6493,6 +6562,18 @@ Composite dbdb_force_recompileChild = dbdb_force_recompileCreate(getPageContaine
 	public ListOptionWidget getGeneral_Optionsphase_help_widget() {
 		return General_Optionsphase_help_widget;
 	}	
+	
+	
+	
+	private StringOptionWidget General_Optionsrbcl_remap_prefix_widget;
+	
+	private void setGeneral_Optionsrbcl_remap_prefix_widget(StringOptionWidget widget) {
+		General_Optionsrbcl_remap_prefix_widget = widget;
+	}
+	
+	public StringOptionWidget getGeneral_Optionsrbcl_remap_prefix_widget() {
+		return General_Optionsrbcl_remap_prefix_widget;
+	}
 	
 	
 	private BooleanOptionWidget Input_Optionsprepend_classpath_widget;
@@ -10048,6 +10129,54 @@ Composite dbdb_force_recompileChild = dbdb_force_recompileCreate(getPageContaine
 		
 		
 		
+		defKey = ""+" "+""+" "+"rbcl";
+		defKey = defKey.trim();
+
+		if (isInDefList(defKey)) {
+			defaultBool = getBoolDef(defKey);	
+		}
+		else {
+			
+			defaultBool = false;
+			
+		}
+
+		setGeneral_Optionsrbclassload_widget(new BooleanOptionWidget(editGroupGeneral_Options, SWT.NONE, new OptionData("Rootbeer Class Loader", "", "","rbcl", "\nUse Rootbeer Sparse Whole Program Class Loader. This class \nloader is used for call graph analysis. It uses much less ram \nand time than the original soot whole program class loaders. ", defaultBool)));
+		
+		
+		
+		defKey = ""+" "+""+" "+"rbcl-buildcg";
+		defKey = defKey.trim();
+
+		if (isInDefList(defKey)) {
+			defaultBool = getBoolDef(defKey);	
+		}
+		else {
+			
+			defaultBool = false;
+			
+		}
+
+		setGeneral_Optionsrbclassload_buildcg_widget(new BooleanOptionWidget(editGroupGeneral_Options, SWT.NONE, new OptionData("Rootbeer Class Loader Build Call Graph", "", "","rbcl-buildcg", "\nBuild a call graph inside the Rootbeer Class Loader ", defaultBool)));
+		
+		
+		
+		defKey = ""+" "+""+" "+"rbcl-remap-all";
+		defKey = defKey.trim();
+
+		if (isInDefList(defKey)) {
+			defaultBool = getBoolDef(defKey);	
+		}
+		else {
+			
+			defaultBool = false;
+			
+		}
+
+		setGeneral_Optionsrbcl_remap_all_widget(new BooleanOptionWidget(editGroupGeneral_Options, SWT.NONE, new OptionData("Rootbeer Class Loader Remap All", "", "","rbcl-remap-all", "\nRemap all library classes to versions that do not have \nprotected prefix (say java.lang). ", defaultBool)));
+		
+		
+		
 		defKey = ""+" "+""+" "+"validate";
 		defKey = defKey.trim();
 
@@ -10109,6 +10238,21 @@ Composite dbdb_force_recompileChild = dbdb_force_recompileCreate(getPageContaine
 		}
 
 		setGeneral_Optionsphase_help_widget(new ListOptionWidget(editGroupGeneral_Options, SWT.NONE, new OptionData("Phase Help",  "", "","ph", "\nPrint a help message about the phase or sub-phase named PHASE, \nthen exit. To see the help message of more than one phase, \nspecify multiple phase-help options. ", defaultString)));
+		
+		
+		defKey = ""+" "+""+" "+"rbcl-remap-prefix";
+		defKey = defKey.trim();
+		
+		if (isInDefList(defKey)) {
+			defaultString = getStringDef(defKey);	
+		}
+		else {
+			
+			defaultString = "";
+			
+		}
+
+		setGeneral_Optionsrbcl_remap_prefix_widget(new StringOptionWidget(editGroupGeneral_Options, SWT.NONE, new OptionData("Rootbeer Class Loader Remap Prefix",  "", "","rbcl-remap-prefix", "\nThe prefix that will be prepended to remapped classes. ", defaultString)));
 		
 
 		
@@ -10374,7 +10518,7 @@ Composite dbdb_force_recompileChild = dbdb_force_recompileCreate(getPageContaine
 			
 		}
 
-		setInput_Optionsforce_android_jar_widget(new StringOptionWidget(editGroupInput_Options, SWT.NONE, new OptionData("Force specific Android jar file",  "", "","force-android-jar", "\nUse PATH as the path to the android.jar file Soot should use. \nThis option overrides the "android-jars" option. 			", defaultString)));
+		setInput_Optionsforce_android_jar_widget(new StringOptionWidget(editGroupInput_Options, SWT.NONE, new OptionData("Force specific Android jar file",  "", "","force-android-jar", "\nUse PATH as the path to the android.jar file Soot should use. \nThis option overrides the 'android-jars' option. 			", defaultString)));
 		
 		
 		defKey = ""+" "+""+" "+"main-class";

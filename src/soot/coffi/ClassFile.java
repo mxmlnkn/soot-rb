@@ -30,6 +30,7 @@
 
 
 package soot.coffi;
+
 import soot.*;
 
 import java.io.*;
@@ -560,6 +561,16 @@ public class ClassFile {
       return true;
    }
 
+   private void readAllBytes(byte[] dest, DataInputStream d) throws IOException {
+     int total_len = dest.length;
+     int read_len = 0;
+     while(read_len < total_len){
+       int to_read = total_len - read_len;
+       int curr_read = d.read(dest, read_len, to_read);
+       read_len += curr_read;
+     }
+   }
+
    /** Reads in the given number of attributes from the given stream.
     * @param d Stream forming the <tt>.class</tt> file.
     * @param attributes_count number of attributes to read in.
@@ -597,7 +608,7 @@ public class ClassFile {
             ca.max_locals = d.readUnsignedShort();
             ca.code_length = d.readInt() & 0xFFFFFFFFL;
             ca.code = new byte[(int) ca.code_length];
-            d.read(ca.code);
+            readAllBytes(ca.code, d);
             ca.exception_table_length = d.readUnsignedShort();
             ca.exception_table = new exception_table_entry[ca.exception_table_length];
             int k;
@@ -812,7 +823,7 @@ public class ClassFile {
             Generic_attribute ga = new Generic_attribute();
             if (len>0) {
                ga.info = new byte[(int) len];
-               d.read(ga.info);
+               readAllBytes(ga.info, d);
             }
             a = (attribute_info)ga;
          }
@@ -1250,6 +1261,7 @@ public class ClassFile {
                                "\" at offset " + j);
             G.v().out.println(" bytecode = " + (((int)(inst.code))&0xff));
          }
+
          // G.v().out.println("before: " + j);
          j = inst.nextOffset(j);
          // G.v().out.println("after: " + j);
@@ -1487,8 +1499,6 @@ public class ClassFile {
                                   desc.substring(i+1));
                param = "<error>";
             } else {
-               if (j-i>10 && desc.substring(i+1,i+11).compareTo("java/lang/")==0)
-                  i = i+10;
                param = desc.substring(i+1,j);
                // replace '/'s with '.'s
                param = param.replace('/','.');

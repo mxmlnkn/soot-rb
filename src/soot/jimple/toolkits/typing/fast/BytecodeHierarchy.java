@@ -58,16 +58,17 @@ public class BytecodeHierarchy implements IHierarchy
 			{
 				SootClass sc = node.type.getSootClass();
 				
-				for ( Iterator i = sc.getInterfaces().iterator(); i.hasNext(); )
+				for ( Iterator i = sc.getInterfaces().iterator(); i.hasNext(); ){
 					leafs.add(new AncestryTreeNode(
-						node, ((SootClass)i.next()).getType()));
-				
+						node, ((SootClass) i.next()).getType()));
+        }
+
 				// The superclass of all interfaces is Object
 				// -- try to discard phantom interfaces.
 				if ( ( !sc.isInterface() || sc.getInterfaceCount() == 0 ) && !sc.isPhantom())
 					leafs.add(new AncestryTreeNode(
 						node, sc.getSuperclass().getType()));
-				
+	       			
 			}
 		}
 		return r;

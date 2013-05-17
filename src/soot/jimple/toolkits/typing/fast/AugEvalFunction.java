@@ -162,7 +162,7 @@ public class AugEvalFunction implements IEvalFunction
 				throw new RuntimeException(
 					"Exception reference used other than as the first "
 					+ "statement of an exception handler.");
-				
+		
 			return r;
 		}
 		else if ( expr instanceof ArrayRef )

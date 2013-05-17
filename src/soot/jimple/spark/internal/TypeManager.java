@@ -84,7 +84,7 @@ public final class TypeManager {
             }
         }
         BitVector ret = (BitVector) typeMask.get( type );
-        if( ret == null && fh != null ) throw new RuntimeException( "oops"+type );
+        if( ret == null && fh != null ) throw new RuntimeException( "Type mask not found for type "+type );
         return ret;
     }
     final public void clearTypeMask() {
@@ -218,7 +218,7 @@ public final class TypeManager {
             
         for (SootClass impl : implementers) {
             BitVector other = (BitVector)typeMask.get(impl.getType());
-            if (other == null) throw new RuntimeException(impl.toString());
+            if (other == null) other = makeClassTypeMask(impl);
             ret.or(other);          
         }
         // I think, the following can be eliminated. It is added to make

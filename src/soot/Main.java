@@ -38,6 +38,8 @@ import soot.options.CGOptions;
 import soot.options.Options;
 import soot.toolkits.astmetrics.ClassData;
 
+import soot.rbclassload.RootbeerClassLoader;
+
 /** Main class for Soot; provides Soot's command-line user interface. */
 public class Main {
     public Main(Singletons.Global g) {
@@ -164,7 +166,11 @@ public class Main {
 
             G.v().out.println("Soot started on " + start);
 
-            Scene.v().loadNecessaryClasses();
+            if(Options.v().rbclassload()){
+              RootbeerClassLoader.v().loadNecessaryClasses();
+            } else {
+              Scene.v().loadNecessaryClasses();
+            }
 
             /*
              * By this all the java to jimple has occured so we just check ast-metrics flag
@@ -196,7 +202,8 @@ public class Main {
             
             
             PackManager.v().runPacks();
-            PackManager.v().writeOutput();
+            if(!Options.v().oaat())
+            	PackManager.v().writeOutput();
 
             Timers.v().totalTimer.end();
 

@@ -20,7 +20,7 @@
 package soot;
 import soot.util.*;
 import java.util.*;
-
+import soot.options.Options;
 
 /** Returns the various potential entry points of a Java program.
  * @author Ondrej Lhotak
@@ -62,32 +62,35 @@ public class EntryPoints
      * invoked implicitly by the VM. */
     public List<SootMethod> application() {
         List<SootMethod> ret = new ArrayList<SootMethod>();
-        if(Scene.v().hasMainClass() || !Scene.v().hasCustomEntryPoints())
-        	addMethod( ret, Scene.v().getMainClass(), sigMain );
-        for (SootMethod clinit : clinitsOf(Scene.v().getMainClass() )) {
-            ret.add(clinit);
-        }
+        if(Scene.v().hasMainClass()) {
+			addMethod( ret, Scene.v().getMainClass(), sigMain );
+			for (SootMethod clinit : clinitsOf(Scene.v().getMainClass() )) {
+				ret.add(clinit);
+			}
+		}
         return ret;
     }
     /** Returns only the entry points invoked implicitly by the VM. */
     public List<SootMethod> implicit() {
         List<SootMethod> ret = new ArrayList<SootMethod>();
-        addMethod( ret, "<java.lang.System: void initializeSystemClass()>" );
-        addMethod( ret, "<java.lang.ThreadGroup: void <init>()>");
-        //addMethod( ret, "<java.lang.ThreadGroup: void remove(java.lang.Thread)>");
-        addMethod( ret, "<java.lang.Thread: void exit()>");
-        addMethod( ret, "<java.lang.ThreadGroup: void uncaughtException(java.lang.Thread,java.lang.Throwable)>");
-        //addMethod( ret, "<java.lang.System: void loadLibrary(java.lang.String)>");
-        addMethod( ret, "<java.lang.ClassLoader: void <init>()>");
-        addMethod( ret, "<java.lang.ClassLoader: java.lang.Class loadClassInternal(java.lang.String)>");
-        addMethod( ret, "<java.lang.ClassLoader: void checkPackageAccess(java.lang.Class,java.security.ProtectionDomain)>");
-        addMethod( ret, "<java.lang.ClassLoader: void addClass(java.lang.Class)>");
-        addMethod( ret, "<java.lang.ClassLoader: long findNative(java.lang.ClassLoader,java.lang.String)>");
-        addMethod( ret, "<java.security.PrivilegedActionException: void <init>(java.lang.Exception)>");
-        //addMethod( ret, "<java.lang.ref.Finalizer: void register(java.lang.Object)>");
-        addMethod( ret, "<java.lang.ref.Finalizer: void runFinalizer()>");
-        addMethod( ret, "<java.lang.Thread: void <init>(java.lang.ThreadGroup,java.lang.Runnable)>");
-        addMethod( ret, "<java.lang.Thread: void <init>(java.lang.ThreadGroup,java.lang.String)>");
+        if(Options.v().rbclassload() == false){
+          addMethod( ret, "<java.lang.System: void initializeSystemClass()>" );
+          addMethod( ret, "<java.lang.ThreadGroup: void <init>()>");
+          //addMethod( ret, "<java.lang.ThreadGroup: void remove(java.lang.Thread)>");
+          addMethod( ret, "<java.lang.Thread: void exit()>");
+          addMethod( ret, "<java.lang.ThreadGroup: void uncaughtException(java.lang.Thread,java.lang.Throwable)>");
+          //addMethod( ret, "<java.lang.System: void loadLibrary(java.lang.String)>");
+          addMethod( ret, "<java.lang.ClassLoader: void <init>()>");
+          addMethod( ret, "<java.lang.ClassLoader: java.lang.Class loadClassInternal(java.lang.String)>");
+          addMethod( ret, "<java.lang.ClassLoader: void checkPackageAccess(java.lang.Class,java.security.ProtectionDomain)>");
+          addMethod( ret, "<java.lang.ClassLoader: void addClass(java.lang.Class)>");
+          addMethod( ret, "<java.lang.ClassLoader: long findNative(java.lang.ClassLoader,java.lang.String)>");
+          addMethod( ret, "<java.security.PrivilegedActionException: void <init>(java.lang.Exception)>");
+          //addMethod( ret, "<java.lang.ref.Finalizer: void register(java.lang.Object)>");
+          addMethod( ret, "<java.lang.ref.Finalizer: void runFinalizer()>");
+          addMethod( ret, "<java.lang.Thread: void <init>(java.lang.ThreadGroup,java.lang.Runnable)>");
+          addMethod( ret, "<java.lang.Thread: void <init>(java.lang.ThreadGroup,java.lang.String)>");
+        }
         return ret;
     }
     /** Returns all the entry points. */

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -jar pack.jar -mainjar lib/sootclasses-trunk.jar -directory libs -destjar soot-rb.jar

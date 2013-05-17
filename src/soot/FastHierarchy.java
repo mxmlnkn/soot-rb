@@ -242,7 +242,7 @@ public class FastHierarchy
                 }
                 return false;
             }
-        } else {
+        } else if (child instanceof ArrayType) {
             ArrayType achild = (ArrayType) child;
             if( parent instanceof RefType ) {
                 // From Java Language Spec 2nd ed., Chapter 10, Arrays
@@ -268,7 +268,8 @@ public class FastHierarchy
                     return true;
                 return false;
             } else return false;
-        }
+        } else
+        	return false;
     }
 
     /** Given an object of declared type child, returns true if the object
@@ -450,13 +451,14 @@ public class FastHierarchy
                     resolved.add( concreteType );
                     if( concreteType.declaresMethod( methodSig ) ) {
                         SootMethod method = concreteType.getMethod( methodSig );
-                        if( method.isAbstract() )
-                            throw new RuntimeException("abstract dispatch resolved to abstract method!\nAbstract Type: "+abstractType+"\nConcrete Type: "+savedConcreteType+"\nMethod: "+m);
-
-                        if( isVisible( concreteType, m ) ) {
-                            ret.add( concreteType.getMethod( methodSig ) );
-                            break;
-                        }
+                        if ( isVisible(concreteType, m) ) {
+							if (method.isAbstract())
+								throw new RuntimeException("abstract dispatch resolved to abstract method!\nAbstract Type: "+abstractType+"\nConcrete Type: "+savedConcreteType+"\nMethod: "+m);
+							else {
+							    ret.add( concreteType.getMethod( methodSig ) );
+							    break;
+							}								
+						}
                     }
                     if( !concreteType.hasSuperclass() ) 
                         throw new RuntimeException("could not resolve abstract dispatch!\nAbstract Type: "+abstractType+"\nConcrete Type: "+savedConcreteType+"\nMethod: "+m);

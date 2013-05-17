@@ -116,6 +116,8 @@ public class Scene  //extends AbstractHost
     public static Scene  v() { return G.v().soot_Scene (); }
     
     Chain<SootClass> classes = new HashChain<SootClass>();
+    List<SootClass> generatedClasses = new ArrayList<SootClass>();
+    List<SootClass> remappedClasses = new ArrayList<SootClass>();
     Chain<SootClass> applicationClasses = new HashChain<SootClass>();
     Chain<SootClass> libraryClasses = new HashChain<SootClass>();
     Chain<SootClass> phantomClasses = new HashChain<SootClass>();
@@ -443,6 +445,23 @@ public class Scene  //extends AbstractHost
         activePointsToAnalysis = null;
     }
 
+    public void addGeneratedClass(SootClass c){
+      addClass(c);
+      generatedClasses.add(c);
+    }
+
+    public void addRemappedClass(SootClass c){
+      remappedClasses.add(c);
+    }
+
+    public List<SootClass> getGeneratedClasses(){
+      return generatedClasses;
+    }
+
+    public List<SootClass> getRemappedClasses(){
+      return remappedClasses;
+    }
+
     public void addClass(SootClass c) 
     {
         if(c.isInScene())
@@ -768,7 +787,6 @@ public class Scene  //extends AbstractHost
         if(!hasPointsToAnalysis()) {
 	    return DumbPointerAnalysis.v();
 	}
-            
         return activePointsToAnalysis;
     }
     

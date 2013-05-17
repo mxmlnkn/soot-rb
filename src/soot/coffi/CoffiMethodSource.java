@@ -36,7 +36,7 @@ public class CoffiMethodSource implements MethodSource
     public ClassFile coffiClass;
     public method_info coffiMethod;
 
-    CoffiMethodSource(soot.coffi.ClassFile coffiClass, soot.coffi.method_info coffiMethod)
+    public CoffiMethodSource(soot.coffi.ClassFile coffiClass, soot.coffi.method_info coffiMethod)
     {
         this.coffiClass = coffiClass;
         this.coffiMethod = coffiMethod;
@@ -113,7 +113,7 @@ public class CoffiMethodSource implements MethodSource
 
          coffiMethod = null;
          coffiClass = null;
-         
+
          PackManager.v().getPack("jb").apply(jb);
          return jb;
     }

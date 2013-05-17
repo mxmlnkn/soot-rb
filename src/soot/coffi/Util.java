@@ -36,6 +36,9 @@ import java.io.*;
 import soot.tagkit.*;
 import soot.*;
 
+import soot.rbclassload.References;
+import soot.rbclassload.MethodReference;
+
 
 public class Util
 {
@@ -59,7 +62,7 @@ public class Util
         useFaithfulNaming = v;
     }    
 
-    public void resolveFromClassFile(SootClass aClass, InputStream is, List references)
+    public void resolveFromClassFile(SootClass aClass, InputStream is, References references)
     {
         SootClass bclass = aClass;                
         String className = bclass.getName();
@@ -107,7 +110,7 @@ public class Util
                     String superName = ((CONSTANT_Utf8_info) (coffiClass.constant_pool[c.name_index])).convert();
                     superName = superName.replace('/', '.');
     
-                    references.add(superName);
+                    references.setSuperClass(superName);
                     bclass.setSuperclass(SootResolver.v().makeClassRef(superName));
                 }
         }
@@ -123,7 +126,7 @@ public class Util
     
                     interfaceName = interfaceName.replace('/', '.');
     
-                    references.add(interfaceName);
+                    references.addInterface(interfaceName);
                     SootClass interfaceClass = SootResolver.v().makeClassRef(interfaceName);
                     bclass.addInterface(interfaceClass);
                 }
@@ -146,7 +149,7 @@ public class Util
             SootField field = new SootField(fieldName, fieldType, modifiers);
             bclass.addField(field);
                 
-            references.add(fieldType);
+            references.addField(fieldType);
 
             // add initialization constant, if any
 		    for(int j = 0; j < fieldInfo.attributes_count; j++) {
@@ -228,6 +231,11 @@ public class Util
 
             String methodName = ((CONSTANT_Utf8_info)(coffiClass.constant_pool[methodInfo.name_index])).convert();
 		    String methodDescriptor = ((CONSTANT_Utf8_info)(coffiClass.constant_pool[methodInfo.descriptor_index])).convert();
+
+            MethodReference method_ref = new MethodReference();
+            method_ref.setName(methodName);
+
+            references.addMethod(method_ref);
     
             List parameterTypes;
             Type returnType;
@@ -238,12 +246,12 @@ public class Util
     
                 parameterTypes = new ArrayList();
                 for(int j = 0; j < types.length - 1; j++){
-                    references.add(types[j]);
+                    method_ref.addParamType(types[j]);
                     parameterTypes.add(types[j]);
                 }
                         
                 returnType = types[types.length - 1];
-                references.add(returnType);
+                method_ref.setReturnType(returnType);
             }
     
             int modifiers = methodInfo.access_flags;
@@ -271,7 +279,7 @@ public class Util
 
                             exceptionName = exceptionName.replace('/', '.');
 
-                            references.add(exceptionName);
+                            method_ref.addException(exceptionName);
                             method.addExceptionIfAbsent(SootResolver.v().makeClassRef(exceptionName));
                         }
                     }
@@ -321,9 +329,9 @@ public class Util
                                 String name = desc.replace('/', '.');
 
                                 if(name.startsWith("["))
-                                    references.add(jimpleTypeOfFieldDescriptor(desc));
+                                    references.addOther(jimpleTypeOfFieldDescriptor(desc));
                                 else
-                                    references.add(name);
+                                    references.addOther(name);
                             }
                         if(coffiClass.constant_pool[k] instanceof CONSTANT_Fieldref_info
                         || coffiClass.constant_pool[k] instanceof CONSTANT_Methodref_info
@@ -331,7 +339,7 @@ public class Util
                             Type[] types = jimpleTypesOfFieldOrMethodDescriptor(
                                 cp_info.getTypeDescr(coffiClass.constant_pool,k));
                             for (Type element : types) {
-                                references.add(element);
+                                references.addOther(element);
                             }
                         }
 
@@ -938,7 +946,7 @@ swtch:
 	return true;
     }
 
-    private void addAnnotationVisibilityAttribute(Host host, attribute_info attribute, ClassFile coffiClass, List references){
+    private void addAnnotationVisibilityAttribute(Host host, attribute_info attribute, ClassFile coffiClass, References references){
         VisibilityAnnotationTag tag;
         if (attribute instanceof RuntimeVisibleAnnotations_attribute){
             tag = new VisibilityAnnotationTag(AnnotationConstants.RUNTIME_VISIBLE);         
@@ -953,7 +961,7 @@ swtch:
         host.addTag(tag); 
     }
     
-    private void addAnnotationVisibilityParameterAttribute(Host host, attribute_info attribute, ClassFile coffiClass, List references){
+    private void addAnnotationVisibilityParameterAttribute(Host host, attribute_info attribute, ClassFile coffiClass, References references){
         VisibilityParameterAnnotationTag tag;
         if (attribute instanceof RuntimeVisibleParameterAnnotations_attribute){
             RuntimeVisibleParameterAnnotations_attribute attr = (RuntimeVisibleParameterAnnotations_attribute)attribute;
@@ -978,16 +986,15 @@ swtch:
         host.addTag(tag); 
     }
 
-    private void addAnnotations(int numAnnots, annotation [] annotations, ClassFile coffiClass, VisibilityAnnotationTag tag, List references){
+    private void addAnnotations(int numAnnots, annotation [] annotations, ClassFile coffiClass, VisibilityAnnotationTag tag, References references){
         for (int i = 0; i < numAnnots; i++){
             annotation annot = annotations[i];
             String annotType = ((CONSTANT_Utf8_info)coffiClass.constant_pool[annot.type_index]).convert();
             String ref = annotType.substring(1, annotType.length()-1);
             ref = ref.replace('/', '.');
-            references.add(ref);
-            int numElems = annot.num_element_value_pairs;
-            AnnotationTag annotTag = new AnnotationTag(annotType, numElems);
-            annotTag.setElems(createElementTags(numElems, coffiClass, annot.element_value_pairs));
+            references.addAnnotation(ref);
+            AnnotationTag annotTag = new AnnotationTag(annotType, 
+                createElementTags(annot.num_element_value_pairs, coffiClass, annot.element_value_pairs));
             tag.addAnnotation(annotTag);
         }
     }
@@ -1068,9 +1075,8 @@ swtch:
                 annotation_element_value aev = (annotation_element_value)ev;
                 annotation annot = aev.annotation_value;
                 String annotType = ((CONSTANT_Utf8_info)coffiClass.constant_pool[annot.type_index]).convert();
-                int numElems = annot.num_element_value_pairs;
-                AnnotationTag annotTag = new AnnotationTag(annotType, numElems);
-                annotTag.setElems(createElementTags(numElems, coffiClass, annot.element_value_pairs));
+                AnnotationTag annotTag = new AnnotationTag(annotType, 
+                    createElementTags(annot.num_element_value_pairs, coffiClass, annot.element_value_pairs));
                 
                 AnnotationAnnotationElem elem = new AnnotationAnnotationElem(annotTag, kind, elemName);
                 list.add(elem);

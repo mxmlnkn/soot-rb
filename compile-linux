@@ -2,4 +2,4 @@
 
 ant classesjar
 
-cp lib/sootclasses-trunk.jar ../rootbeer1/lib/sootclasses-rbclassload.jar
+'cp' lib/sootclasses-trunk.jar ../lib/sootclasses-rbclassload.jar
